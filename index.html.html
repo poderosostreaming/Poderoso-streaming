@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poderoso Streaming — Página de Vendas</title>
+<style>
+:root{
+  --bg:#020812; --panel:#07111d; --panel2:#0a1624; --line:#17304a;
+  --blue:#087cff; --cyan:#00cfff; --text:#f5f8ff; --muted:#91a1b4;
+  --green:#16c784; --yellow:#ffc400; --danger:#ff3b45;
+}
+*{box-sizing:border-box}
+body{margin:0;background:
+radial-gradient(circle at 18% 18%,rgba(0,132,255,.16),transparent 24%),
+radial-gradient(circle at 82% 34%,rgba(0,83,180,.13),transparent 27%),
+linear-gradient(rgba(1,7,14,.91),rgba(1,7,14,.96)),
+url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=2200&q=85");
+background-size:auto,auto,auto,cover;background-position:center;background-attachment:fixed;
+color:var(--text);font-family:Inter,Arial,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr) 285px;min-height:100vh}
+.sidebar,.rightbar{background:rgba(2,9,17,.91);border-color:#10243a;backdrop-filter:blur(12px)}
+.sidebar{border-right:1px solid var(--line);padding:20px 14px;position:sticky;top:0;height:100vh}
+.rightbar{border-left:1px solid var(--line);padding:18px 14px}
+.logo{height:95px;border:1px solid #17446b;border-radius:22px;background:radial-gradient(circle,#123c68,#030b15 65%);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:27px;letter-spacing:2px;color:#fff;text-shadow:0 0 18px #168cff}
+.logo small{display:block;font-size:10px;letter-spacing:5px;color:#00bfff;text-align:center;margin-top:3px}
+.brand{text-align:center;margin:15px 0 18px}.brand h2{margin:0;font-size:21px}.brand p{margin:6px 0;color:#dce7f3;font-size:14px;line-height:1.45}
+.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#d7e2ef;padding:13px 14px;border-radius:12px;text-align:left;display:flex;gap:12px;align-items:center}.nav button:hover,.nav button.active{background:linear-gradient(90deg,#096ee9,#0750ad);box-shadow:0 0 18px #075ed855}.nav button{font-size:13px}.nav .badge{margin-left:auto;background:#0868dc;padding:2px 8px;border-radius:8px;font-size:12px}
+.admin-trigger{display:block;margin:8px auto 0;background:transparent;border:0;color:#25394d;font-size:9px;cursor:pointer}.admin-trigger:hover{color:#5c7790}.security{margin-top:20px;border:1px solid #154166;border-radius:14px;padding:16px;background:#061321;color:#dce7f3}.security strong{display:block;margin-bottom:6px}.security span{font-size:12px;color:var(--muted)}
+.main{padding:16px 18px 30px;min-width:0}
+.top{height:62px;display:flex;gap:18px;align-items:center;margin-bottom:14px}.mobile-menu{display:none}.top .mini-logo{font-size:25px;font-weight:900;white-space:nowrap}.mini-logo span{color:#00bfff}.search{flex:1;max-width:520px;margin:auto;position:relative}.search input{width:100%;padding:13px 45px 13px 18px;border-radius:30px;border:1px solid #21374e;background:#050c15;color:#fff;outline:none}.search input:focus{border-color:#0788ff;box-shadow:0 0 15px #0788ff33}.search button{position:absolute;right:7px;top:5px;height:34px;width:38px;border:0;border-radius:20px;background:#086edc;color:#fff;font-size:18px}.whats{border:1px solid #18c96d;background:#075c2d;color:white;border-radius:12px;padding:10px 16px;text-align:center;font-weight:700}
+.hero{border:1px solid #174c7b;border-radius:16px;min-height:255px;padding:36px 40px;position:relative;overflow:hidden;
+background:linear-gradient(90deg,rgba(2,9,17,.98) 0%,rgba(4,23,45,.84) 52%,rgba(1,7,13,.70) 100%),
+url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=85") center/cover}.hero:before{content:"🎬";position:absolute;right:42px;bottom:18px;font-size:112px;opacity:.12;filter:drop-shadow(0 0 20px #008cff)}.hero:after{content:"";position:absolute;width:420px;height:420px;right:-80px;top:-100px;border-radius:50%;background:radial-gradient(circle,#0b65bd66,transparent 68%)}.hero h1{font-size:34px;margin:0 0 5px}.hero h1 span{color:#009dff}.hero p{max-width:520px;color:#dbe6f0;font-size:16px}.checks{display:flex;gap:24px;flex-wrap:wrap;margin-top:25px;color:#bdeeff;font-size:13px}.actions{display:flex;gap:10px;margin:16px 0}.action{border:1px solid #167bc0;background:#061625;color:#fff;padding:11px 16px;border-radius:9px}.action.primary{border-color:#00a9ff;color:#00cfff;background:#052b47}.action:hover{transform:translateY(-1px);filter:brightness(1.15)}
+.section{border:1px solid #17314b;background:rgba(4,13,23,.7);border-radius:15px;padding:14px;margin-top:14px}.section-title{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.filter{border:1px solid #213b54;background:#06101b;color:#d7e4ef;border-radius:9px;padding:8px 13px}.filter.active{background:#0869dc;border-color:#0a8aff}
+.grid{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:8px;margin-top:10px}.card{border:1px solid #214563;border-radius:11px;padding:12px 9px;background:linear-gradient(180deg,#09131f,#050b12);text-align:center;min-width:0;position:relative}.card-menu{position:absolute;right:7px;top:7px;width:24px;height:24px;border:1px solid #334b60;background:#07111b;color:#e9f2fa;border-radius:6px;font-size:16px;line-height:18px;z-index:2}.admin-only{display:none!important}.admin-only.show-admin{display:block!important}.customer-only{display:block}.account-name{color:#8fe6ff;font-size:12px}.account-actions{display:flex;gap:7px}.account-actions button{flex:1}.card-menu:hover{background:#0a75db;border-color:#18a5ff}.card:hover{border-color:#008cff;box-shadow:0 0 18px #008cff25}.service-logo{height:58px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:900;letter-spacing:-.4px}.red{color:#ef202d}.blue{color:#12a7ff}.purple{color:#b15cff}.orange{color:#ff9414}.green{color:#16d16e}.card h3{margin:4px 0;font-size:12px;font-weight:700}.card small{font-size:10px}.card small{color:#9caabb}.price{font-size:16px;font-weight:900;margin:7px 0}.buy{width:100%;border:0;border-radius:7px;padding:8px;color:white;background:#096edc}.buy:hover{filter:brightness(1.2)}
+.more{width:100%;margin-top:10px;background:#06111d;border:1px solid #1a3852;color:#fff;padding:10px;border-radius:9px}.wa-btn{background:#0b8f4d!important;border-color:#19d875!important}.danger{background:#681b25!important;border-color:#b72d3d!important}.admin-panel{display:none}.admin-panel.show{display:block}.show-admin{display:block!important}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.color-input{height:42px;width:100%;padding:2px}.file-label{display:block;padding:12px;border:1px dashed #168cff;border-radius:9px;text-align:center;color:#7fd8ff;cursor:pointer}.admin-note{font-size:11px;color:#8296aa;line-height:1.5}
+.screen-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:12px}.screen{border:1px solid #203b54;background:#07121f;border-radius:11px;padding:13px;position:relative}.screen-menu{position:absolute;right:7px;top:7px;border:1px solid #334b60;background:#07111b;color:#fff;border-radius:6px;width:24px;height:24px}.screen strong{display:block;margin-bottom:6px}.status{font-size:12px}.active-status{color:#16db77}.expired{color:#ffc400}.inactive{color:#ff4b55}.add-screen{border:1px dashed #00a8ff;display:flex;align-items:center;justify-content:center;color:#00cfff;text-align:center}
+.side-card{border:1px solid #19324a;border-radius:14px;background:#06101b;padding:16px;margin-bottom:14px}.side-card h3{font-size:14px;margin:0 0 10px}.login{display:flex;gap:10px;align-items:center}.avatar{width:44px;height:44px;border-radius:50%;background:#152333;display:grid;place-items:center;font-size:22px}.full{width:100%;border:0;border-radius:8px;padding:10px;background:#096edc;color:#fff;margin-top:12px}.rating{font-size:38px}.stars{color:#ffc400;letter-spacing:2px}.bar{height:6px;background:#172230;border-radius:10px;overflow:hidden;margin:5px 0 9px}.bar i{display:block;height:100%;background:#ffc400}.benefit{display:flex;gap:9px;margin:10px 0;color:#d9e4ee;font-size:13px}.benefit b{color:#18d884}
+.profile-square{width:52px;height:52px;min-width:52px;border-radius:14px;overflow:hidden;background:#152333;display:grid;place-items:center}.profile-square img{width:100%;height:100%;object-fit:cover}.file-preview{margin-top:10px;display:none;width:100%;height:150px;object-fit:cover;border-radius:12px;border:1px solid #214563}.avatar-preview{margin-top:10px;display:none;width:82px;height:82px;object-fit:cover;border-radius:18px;border:1px solid #214563}.modal-close{position:absolute;right:12px;top:10px;width:32px;height:32px;border-radius:9px;background:#0b1723;border:1px solid #29445d;color:#fff;font-size:20px;line-height:1}.modal-box{position:relative}.auth-tabs{display:flex;gap:8px;margin:8px 0 16px}.auth-tabs button{flex:1;border:1px solid #27445e;background:#07121e;color:#cfe0ef;padding:10px;border-radius:8px}.auth-tabs button.active{background:#096edc;border-color:#0a8dff;color:#fff}.auth-note{font-size:11px;color:#8296aa;margin-top:8px}.service-logo{height:58px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:900;letter-spacing:-.4px}.service-logo.netflix{font-family:Arial Black,Arial;font-size:24px;color:#e50914}.service-logo.disney{font-family:cursive;font-size:20px;color:#20a4ff}.service-logo.hbo{font-size:27px;color:#fff}.service-logo.prime{font-size:19px;color:#20a4ff}.service-logo.spotify{font-size:21px;color:#1ed760}.service-logo.youtube{font-size:19px;color:#fff}.service-logo.youtube:before{content:"▶";background:#ff0033;border-radius:7px;padding:4px 7px;margin-right:5px;font-size:13px}.service-logo.paramount{font-size:17px;color:#9ac9ff}.service-logo.globoplay{font-size:18px;color:#fff}.service-logo.apple{font-size:22px;color:#fff}.service-logo.deezer{font-size:18px;color:#fff}.service-logo.crunchyroll{font-size:16px;color:#ff8a00}.service-logo.telecine{font-size:19px;color:#fff}position:absolute;z-index:50;width:160px;background:#07111d;border:1px solid #1e4d73;border-radius:9px;padding:5px;box-shadow:0 12px 35px #000b}.dropdown button{width:100%;background:transparent;color:#dce8f2;border:0;text-align:left;padding:9px;border-radius:6px;font-size:12px}.dropdown button:hover{background:#0b6bd1}.modal{display:none;position:fixed;inset:0;background:#000b;z-index:20;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modal-box{width:min(500px,100%);background:#07111d;border:1px solid #1c5b89;border-radius:16px;padding:22px;box-shadow:0 20px 80px #000}.modal-box h2{margin-top:0}.modal-box input,.modal-box select{width:100%;padding:12px;margin:7px 0 12px;background:#030a12;color:#fff;border:1px solid #29435a;border-radius:8px}.modal-actions{display:flex;gap:10px}.modal-actions button{flex:1;padding:11px;border-radius:8px;border:1px solid #24425d;background:#071522;color:#fff}.modal-actions .save{background:#086edc;border-color:#0a8dff}
+@media(max-width:1150px){.layout{grid-template-columns:225px minmax(0,1fr)}.rightbar{display:none}.grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:760px){.layout{display:block}.sidebar{display:none}.main{padding:10px}.mobile-menu{display:block;border:1px solid #23415b;background:#071421;color:#fff;border-radius:8px;padding:8px}.top .mini-logo{font-size:18px}.search{display:none}.whats{margin-left:auto;font-size:12px}.hero{padding:25px 20px;min-height:260px}.hero h1{font-size:27px}.actions{overflow:auto}.grid{grid-template-columns:repeat(2,1fr)}.screen-grid{grid-template-columns:repeat(2,1fr)}}
+
+.trust-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.trust-strip>div{border:1px solid #173a59;background:rgba(4,15,26,.88);border-radius:11px;padding:12px;text-align:center}.trust-strip strong{display:block;color:#25baff;font-size:20px}.trust-strip span{font-size:10px;color:#8da1b4}.sales-ticker{margin-top:12px;border:1px solid #173a59;border-radius:10px;background:#050e18;overflow:hidden;display:flex;align-items:center;height:40px}.ticker-label{padding:0 13px;color:#22d77b;font-size:10px;font-weight:800;white-space:nowrap;border-right:1px solid #173a59}.ticker-track{display:flex;gap:40px;white-space:nowrap;animation:ticker 30s linear infinite;padding-left:25px;font-size:11px;color:#c5d4e1}@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}.timer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.timer-card{border:1px solid #1a4668;background:#061321;border-radius:10px;padding:12px}.timer-card strong{display:block}.timer{font-size:20px;color:#22cfff;font-weight:900;letter-spacing:1px;margin-top:6px}.timer-card small{color:#91a4b5}.close-x{position:absolute;right:16px;top:12px;width:30px;height:30px;border-radius:50%;border:1px solid #294a64;background:#07131f;color:#fff;font-size:22px;line-height:24px;cursor:pointer;z-index:5}.close-x:hover{background:#0a70d8;border-color:#20b5ff}.modal-box{position:relative}.price-row{display:grid;grid-template-columns:1fr 1fr 110px;gap:8px;margin:7px 0}.price-row input{margin:0!important}.search input{padding-right:60px}@media(max-width:760px){.trust-strip{grid-template-columns:repeat(2,1fr)}.timer-grid{grid-template-columns:1fr}.price-row{grid-template-columns:1fr 1fr}.ticker-label{display:none}}
+
+.brand-avatar{width:54px;height:54px;min-width:54px;border-radius:14px;border:1px solid #1b6ba5;background:radial-gradient(circle,#123d68,#020a12 70%);display:grid;place-items:center;font-weight:1000;font-size:25px;color:#fff;box-shadow:0 0 18px #008cff33;overflow:hidden}.brand-avatar img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.admin-custom-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.custom-card{border:1px solid #1b3c59;border-radius:11px;background:#06111d;padding:12px}.custom-card h4{margin:0 0 8px}.custom-card label{font-size:11px;color:#91a5b7;display:block;margin:7px 0 4px}.custom-card select,.custom-card input[type=text],.custom-card input[type=number]{width:100%;padding:9px;border:1px solid #29465e;border-radius:8px;background:#030a12;color:#fff}.custom-card input[type=color]{width:100%;height:40px;border:1px solid #29465e;background:#030a12;border-radius:8px;padding:2px}.upload-preview{width:100%;height:80px;border-radius:12px;border:1px dashed #167fc2;object-fit:cover;background:#030a12;display:block;margin-top:8px}.upload-btn{display:block;width:100%;padding:10px;border:1px dashed #167fc2;border-radius:8px;text-align:center;color:#81d9ff;cursor:pointer;margin-top:7px}.upload-btn input{display:none}.custom-actions{display:flex;gap:8px;margin-top:10px}.custom-actions button{flex:1}.live-preview{border:1px solid #17415f;border-radius:10px;padding:10px;background:#040d16;color:#c8d9e7;font-size:12px}
+</style>
+<style>
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.auth-tabs button{border:1px solid #24425d;background:#06111d;color:#a9bdcf;padding:10px;border-radius:8px;cursor:pointer}.auth-tabs button.active{background:#087cff;color:#fff;border-color:#20b5ff}.modal-close{cursor:pointer}.modal-close:hover{background:#0a70d8!important}.admin-custom-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.custom-card{border:1px solid #1b3c59;border-radius:11px;background:#06111d;padding:12px}.custom-card h4{margin:0 0 8px}.custom-card label{display:block;font-size:11px;color:#91a5b7;margin:7px 0 4px}.custom-card select,.custom-card input[type=text]{width:100%;padding:9px;border:1px solid #29465e;border-radius:8px;background:#030a12;color:#fff}.upload-preview{width:100%;height:85px;border-radius:12px;border:1px dashed #167fc2;object-fit:cover;background:#030a12;display:block;margin-top:8px}.upload-btn{display:block;width:100%;padding:10px;border:1px dashed #167fc2;border-radius:8px;text-align:center;color:#81d9ff;cursor:pointer}.upload-btn input{display:none}.custom-actions{display:flex;gap:8px;margin-top:10px}.custom-actions button{flex:1}@media(max-width:760px){.admin-custom-grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="logo">P<div><small>STREAMING</small></div></div>
+  <div class="brand"><h2>PODEROSO</h2><p>Entretenimento sem limites<br>com o melhor preço!</p></div>
+  <nav class="nav">
+    <button class="active" onclick="goHome()">⌂ <span>Início</span></button>
+    <button>▣ <span>Produtos</span></button>
+    <button onclick="scrollToScreens()">▤ <span>Telas de Streams</span></button>
+    <button onclick="requireAccountAndShowScreens()">▤ <span>Minhas Telas</span></button>
+    <button class="admin-only" onclick="openModal()">⊞ <span>Adicionar Nova Tela</span></button>
+    <button onclick="openReviews()">☆ <span>Avaliações</span></button>
+    <button onclick="openOrders()">🛒 <span>Meus Pedidos</span><span class="badge" id="orderBadge">0</span></button>
+    <button onclick="openSupport()">♧ <span>Suporte</span></button>
+    <button class="admin-only" onclick="openAdminPanel()">◉ <span>Personalizar</span></button>
+    <button onclick="logoutAccount()">↪ <span>Sair</span></button>
+  </nav>
+  <div class="security"><strong>🛡 COMPRA 100% SEGURA</strong><span>Seus dados protegidos com criptografia SSL.</span></div>
+  <button class="admin-trigger" onclick="openAdminLogin()">Área do proprietário</button>
+</aside>
+
+<main class="main">
+  <header class="top">
+    <button class="mobile-menu">☰</button>
+    <div class="mini-logo">PODEROSO <span>STREAMING</span></div>
+    <div class="search"><input placeholder="Buscar produtos..." id="search"><button type="button" id="searchBtn" aria-label="Pesquisar">⌕</button></div>
+    <div class="whats">◉ WhatsApp<br>27 99241-0060</div>
+  </header>
+
+  <section class="hero">
+    <h1>ENTRETENIMENTO <span>SEM LIMITES!</span></h1>
+    <p>Os melhores serviços de streaming com o melhor preço estão aqui.</p>
+    <div class="checks"><span>♢ CONFIANÇA</span><span>♢ SEGURANÇA</span><span>♢ QUALIDADE</span><span>♧ SUPORTE 24H</span></div>
+  </section>
+
+  <section class="trust-strip">
+    <div><strong>+5.000</strong><span>contas vendidas</span></div>
+    <div><strong>24H</strong><span>suporte</span></div>
+    <div><strong>100%</strong><span>atendimento direto</span></div>
+    <div><strong>★ 4,9/5</strong><span>avaliação média</span></div>
+  </section>
+
+  <div class="sales-ticker"><div class="ticker-label">● COMPRAS RECENTES</div><div class="ticker-track" id="tickerTrack"></div></div>
+
+  <div class="actions customer-only">
+    <button class="action" onclick="scrollToScreens()">▤ Minhas Telas</button>
+    <button class="action" onclick="scrollToScreens()">⚙ Minhas assinaturas</button>
+    <button class="action" onclick="document.getElementById('support').scrollIntoView({behavior:'smooth'})">▣ Suporte</button>
+  </div>
+  <div class="actions admin-only" id="adminQuickActions">
+    <button class="action primary" onclick="openModal()">⊕ Adicionar Nova Tela</button>
+    <button class="action" onclick="scrollToScreens()">▤ Gerenciar Telas</button>
+    <button class="action" onclick="openAdminPanel()">⚙ Personalizar página</button>
+  </div>
+
+  <section class="section">
+    <div class="section-title">👑 PRODUTOS EM DESTAQUE</div>
+    <div class="filters">
+      <button class="filter active" onclick="filterCards('all',this)">TODOS</button>
+      <button class="filter" onclick="filterCards('streaming',this)">▣ STREAMINGS</button>
+      <button class="filter" onclick="filterCards('canais',this)">◉ CANAIS AO VIVO</button>
+      <button class="filter" onclick="filterCards('combo',this)">▱ COMBOS</button>
+      <button class="filter" onclick="filterCards('premium',this)">👑 PREMIUM</button>
+      <button class="filter" onclick="filterCards('oferta',this)">◇ OFERTAS</button>
+    </div>
+    <div class="grid" id="products"></div>
+    <button class="more" id="moreBtn">Ver todos os produtos⌄</button>
+  </section>
+
+  
+  <section class="section admin-panel" id="adminPanel">
+    <div class="section" style="margin-top:12px;background:#040c15">
+      <div class="section-title">⏱ CONTROLE DE TELAS VENDIDAS</div>
+      <div class="admin-note" style="margin:8px 0">Cadastre o cliente, serviço, tipo de tela, duração e acompanhe o tempo restante em tempo real.</div>
+      <div class="form-row">
+        <input id="saleClient" placeholder="Nome do cliente">
+        <input id="saleDays" type="number" min="1" value="30" placeholder="Dias">
+      </div>
+      <div class="form-row">
+        <select id="saleService"><option>Netflix</option><option>Disney+</option><option>HBO Max</option><option>Prime Video</option><option>Paramount+</option><option>Spotify</option><option>Combo</option></select>
+        <select id="saleType"><option>Privada</option><option>Compartilhada</option></select>
+      </div>
+      <button class="action primary" onclick="addSaleTimer()">＋ Iniciar cronômetro da venda</button>
+      <div id="salesTimers" class="timer-grid"></div>
+    </div>
+    <div class="section" style="margin-top:12px;background:#040c15">
+      <div class="section-title">💰 PREÇOS EDITÁVEIS</div>
+      <div class="admin-note" style="margin:8px 0">Defina o preço de cada tipo de tela. Os valores usados pelo cliente serão estes. Ordem: serviço • privada • compartilhada.</div>
+      <div id="priceEditor"></div>
+      <button class="action primary" onclick="savePrices()">Salvar preços</button>
+    </div>
+
+    <div class="section-title">⚙ PAINEL DO PROPRIETÁRIO</div>
+    <div style="color:#8799ad;font-size:12px;margin-top:4px">Somente você pode acessar estas ferramentas.</div>
+    <div class="actions" style="margin-bottom:0">
+      <button class="action primary" onclick="openAdminPanel()">Editar cores e plano de fundo</button>
+      <button class="action" onclick="openModal()">Adicionar tela</button>
+    </div>
+  </section>
+
+  <section class="section" id="screens">
+    <div class="section-title">▣ MINHAS TELAS</div>
+    <div style="color:#8799ad;font-size:12px;margin-top:4px">Aqui aparecem somente as telas compradas pela sua conta.</div>
+    <div class="screen-grid" id="screenGrid"></div>
+    <button class="more customer-only" onclick="openSupport()">Preciso de suporte</button>
+    <button class="more admin-only" onclick="openModal()">＋ Adicionar nova tela</button>
+  </section>
+</main>
+
+<aside class="rightbar">
+  <div class="side-card" id="accountCard">
+    <div class="login"><div class="profile-square" id="profileAvatar">●</div><div><strong id="accountTitle">Bem-vindo!</strong><br><small id="accountText">Entre ou crie sua conta para guardar suas compras.</small></div></div>
+    <div id="accountButtons"><button class="full" onclick="openAccount()">Entrar / Criar conta</button></div>
+  </div>
+  <div class="side-card">
+    <h3>⭐ AVALIAÇÕES DOS CLIENTES</h3>
+    <div class="rating">4,9 <span class="stars">★★★★★</span></div>
+    <small>Baseado em 532 avaliações</small>
+    <p style="font-size:12px">5 estrelas <span style="float:right">94%</span></p><div class="bar"><i style="width:94%"></i></div>
+    <p style="font-size:12px">4 estrelas <span style="float:right">4%</span></p><div class="bar"><i style="width:4%"></i></div>
+    <p style="font-size:12px">3 estrelas <span style="float:right">1%</span></p><div class="bar"><i style="width:1%"></i></div>
+    <p style="font-size:12px">2 estrelas <span style="float:right">1%</span></p><div class="bar"><i style="width:1%"></i></div>
+    <p style="font-size:12px">1 estrela <span style="float:right">0%</span></p><div class="bar"><i style="width:0%"></i></div>
+    <button class="full" style="background:transparent;border:1px solid #24425d">Ver todas avaliações</button>
+  </div>
+  <div class="side-card"><h3>🟡 AVALIE SUA EXPERIÊNCIA</h3><small>Sua opinião é muito importante!</small><div class="stars" style="font-size:28px;margin:16px 0">☆ ☆ ☆ ☆ ☆</div><button class="full" style="background:transparent;border:1px solid #24425d">Deixar avaliação</button></div>
+  <div class="side-card"><h3>🛡 POR QUE COMPRAR COM A <span style="color:#00aaff">PODEROSO STREAMING?</span></h3>
+    <div class="benefit"><b>✓</b> Entrega rápida e automática</div>
+    <div class="benefit"><b>✓</b> Ativação 100% segura</div>
+    <div class="benefit"><b>✓</b> Suporte 24 horas todos os dias</div>
+    <div class="benefit"><b>✓</b> Preços justos e acessíveis</div>
+    <div class="benefit"><b>✓</b> Clientes satisfeitos todos os dias</div>
+  </div>
+
+  <div class="side-card" id="support">
+    <h3>💬 SUPORTE E COMPRAS</h3>
+    <small>Fale diretamente pelo WhatsApp.</small>
+    <button class="full wa-btn" onclick="openSupport()">Preciso de suporte</button>
+    <button class="full wa-btn" onclick="openPurchase()">Quero adquirir telas</button>
+  </div>
+</aside>
+</div>
+
+<div class="dropdown" id="dropdown"><button>Editar produto</button><button>Duplicar produto</button><button>Desativar</button><button>Excluir</button></div>
+
+
+
+<div class="modal" id="ordersModal">
+ <div class="modal-box"><button class="close-x" onclick="closeModalById('ordersModal')">×</button><h2>Meus pedidos</h2><div id="ordersList"></div></div>
+</div>
+<div class="modal" id="reviewsModal">
+ <div class="modal-box"><button class="close-x" onclick="closeModalById('reviewsModal')">×</button><h2>Avaliações</h2><div class="rating" style="font-size:28px">4,9 <span class="stars">★★★★★</span></div><p>Confira avaliações de clientes e deixe a sua.</p><div id="reviewList"></div><button class="full" onclick="alert('Formulário de avaliação aberto')">Deixar avaliação</button></div>
+</div>
+<div class="modal" id="accountModal">
+ <div class="modal-box">
+  <button class="close-x" onclick="closeAccount()" aria-label="Fechar">×</button>
+  <h2 id="accountModalTitle">Minha conta</h2>
+  <div class="auth-tabs">
+   <button id="tabLogin" class="active" type="button" onclick="setAuthMode('login')">Entrar</button>
+   <button id="tabCreate" type="button" onclick="setAuthMode('create')">Criar uma conta</button>
+  </div>
+  <div id="loginFields">
+   <input id="loginEmail" type="email" placeholder="Seu e-mail" autocomplete="email">
+   <input id="loginPass" type="password" placeholder="Senha" autocomplete="current-password">
+  </div>
+  <div id="createFields" style="display:none">
+   <input id="accountName" placeholder="Seu nome" autocomplete="name">
+   <input id="accountEmail" type="email" placeholder="Seu e-mail" autocomplete="email">
+   <input id="accountPass" type="password" placeholder="Crie uma senha" autocomplete="new-password">
+  </div>
+  <div class="modal-actions">
+   <button type="button" onclick="closeAccount()">Fechar</button>
+   <button class="save" type="button" onclick="submitAccount()">Continuar</button>
+  </div>
+  <p class="auth-note" id="authNote">Já tem uma conta? Entre. Ainda não tem? Crie sua conta.</p>
+ </div>
+</div>
+
+<div class="modal" id="adminLoginModal">
+ <div class="modal-box">
+  <h2>Acesso do proprietário</h2>
+  <input id="adminPass" type="password" placeholder="Senha do proprietário">
+  <div class="modal-actions"><button onclick="closeAdminLogin()">Cancelar</button><button class="save" onclick="loginAdmin()">Entrar</button></div>
+  <p class="admin-note">Esta área não aparece para clientes.</p>
+ </div>
+</div>
+
+<div class="modal" id="productModal">
+ <div class="modal-box"><h2 id="productModalTitle">Produto</h2><p id="productModalText"></p><div class="modal-actions"><button onclick="closeProductInfo()">Fechar</button><button class="save" onclick="openPurchase()">Comprar</button></div></div>
+</div>
+
+<div class="modal" id="supportModal">
+ <div class="modal-box"><button class="modal-close" onclick="closeSupport()">×</button><h2>Falar com o suporte</h2><p>Escolha o assunto para abrir o WhatsApp com a mensagem pronta.</p><div class="modal-actions"><button onclick="openSupportWhatsApp('support')">Preciso de suporte</button><button class="save" onclick="openSupportWhatsApp('purchase')">Quero comprar telas</button></div></div>
+</div>
+
+<div class="modal" id="adminPanelModal">
+ <div class="modal-box">
+  <h2>Personalizar página</h2>
+  <div class="form-row"><div><label>Cor principal</label><input class="color-input" id="accentColor" type="color" value="#087cff"></div><div><label>Cor de destaque</label><input class="color-input" id="accent2" type="color" value="#00cfff"></div></div>
+  <p class="admin-note">Escolha uma imagem do seu aparelho para usar como plano de fundo.</p>
+  <label class="file-label">📷 Escolher plano de fundo<input id="bgUpload" type="file" accept="image/*"></label><img id="bgPreview" class="file-preview" alt="Prévia do plano de fundo">
+  <p class="admin-note">Você também pode escolher seu ícone de perfil.</p>
+  <label class="file-label">👤 Escolher ícone de perfil<input id="avatarUpload" type="file" accept="image/*"></label><img id="avatarPreview" class="avatar-preview" alt="Prévia do ícone">
+  <div class="modal-actions" style="margin-top:12px"><button onclick="closeAdminPanel()">Fechar</button><button class="save" onclick="saveCustomization()">Salvar alterações</button></div>
+  <p class="admin-note">Importante: em uma hospedagem real, o controle de proprietário deve ser protegido por autenticação no servidor; este arquivo é uma versão estática funcional para protótipo.</p>
+ </div>
+</div>
+
+<div class="modal" id="modal">
+ <div class="modal-box">
+  <h2>Adicionar nova tela</h2>
+  <label>Nome da tela</label><input id="screenName" placeholder="Ex.: Tela 06">
+  <label>Serviço</label><select id="screenService"><option>Netflix</option><option>Disney+</option><option>HBO Max</option><option>Prime Video</option><option>Spotify</option><option>Outro</option></select>
+  <div class="modal-actions"><button onclick="closeModal()">Cancelar</button><button class="save" onclick="addScreen()">Adicionar tela</button></div>
+ </div>
+</div>
+
+
+
+<script>
+const ADMIN_PASSWORD = "32942186";
+const WA_NUMBER = "5527992410060";
+const supportMessage = "Oi, preciso de suporte.";
+const purchaseMessage = "Oi vim pela página poderoso streaming, gostaria de adquirir as telas";
+
+const defaultPrices = {
+ Netflix:{private:16.90,shared:11.90}, Disney:{private:14.90,shared:10.90},
+ "Disney+":{private:14.90,shared:10.90}, "HBO Max":{private:17.90,shared:12.90},
+ "Prime Video":{private:13.90,shared:9.90}, Telecine:{private:12.90,shared:9.90},
+ Crunchyroll:{private:11.90,shared:8.90}, Spotify:{private:9.90,shared:7.90},
+ "YouTube Premium":{private:12.90,shared:8.90}, "Paramount+":{private:14.90,shared:10.90},
+ Globoplay:{private:12.90,shared:9.90}, "Apple TV+":{private:14.90,shared:10.90},
+ Deezer:{private:9.90,shared:7.90}, Combo:{private:29.90,shared:19.90}
+};
+let prices=JSON.parse(localStorage.getItem("ps_prices")||"null")||defaultPrices;
+
+const products=[
+ ['Netflix','Tela Premium','red','streaming'],['Disney+','Tela Premium','blue','streaming'],
+ ['HBO Max','Tela Premium','purple','streaming'],['Prime Video','Tela Premium','blue','streaming'],
+ ['Telecine','Tela Premium','red','premium'],['Crunchyroll','Conta Premium','orange','premium'],
+ ['Spotify','Conta Premium','green','premium'],['YouTube Premium','Conta Premium','red','premium'],
+ ['Paramount+','Tela Premium','blue','streaming'],['Globoplay','Tela Premium','red','streaming'],
+ ['Apple TV+','Tela Premium','white','streaming'],['Deezer','Conta Premium','purple','premium'],
+ ['Combo','Pacote especial','blue','combo']
+];
+
+const logoMap={
+ Netflix:"N", "Disney+":"D+", "HBO Max":"MAX", "Prime Video":"▶",
+ Telecine:"T", Crunchyroll:"CR", Spotify:"●", "YouTube Premium":"▶",
+ "Paramount+":"P+", Globoplay:"G", "Apple TV+":"", Deezer:"D", Combo:"★"
+};
+
+function money(v){return "R$ "+Number(v).toFixed(2).replace(".",",")}
+function renderProducts(list=products){
+ const el=document.getElementById('products');
+ el.innerHTML=list.map(p=>`
+ <article class="card" data-cat="${p[3]}">
+  <button class="card-menu" aria-label="Mais opções" onclick="showProductInfo('${p[0]}');event.stopPropagation()">⋮</button>
+  <div class="service-logo ${p[2]}">${logoMap[p[0]]||p[0]}</div>
+  <h3>${p[0]}</h3><small>${p[1]}</small>
+  <div class="price">a partir de ${money(prices[p[0]]?.shared ?? 0)}</div>
+  <button class="buy" onclick="showPurchaseOptions('${p[0]}')">Ver opções</button>
+ </article>`).join('');
+}
+function filterCards(cat,btn){
+ document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+ renderProducts(cat==='all'?products:products.filter(p=>p[3]===cat));
+}
+function searchProducts(){
+ const q=document.getElementById('search').value.trim().toLowerCase();
+ renderProducts(q?products.filter(p=>p[0].toLowerCase().includes(q)||p[1].toLowerCase().includes(q)):products);
+}
+document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchProducts()}});
+document.getElementById('searchBtn').addEventListener('click',searchProducts);
+document.getElementById('moreBtn').onclick=()=>{renderProducts(products);document.getElementById('moreBtn').textContent='Todos os produtos exibidos'};
+
+function goHome(){window.scrollTo({top:0,left:0,behavior:'smooth'});history.replaceState(null,'','#top')}
+function scrollToScreens(){document.getElementById('screens').scrollIntoView({behavior:'smooth'})}
+
+let screens=JSON.parse(localStorage.getItem("ps_screens")||"null")||[
+ ['Tela 01','Netflix','Ativa','active-status'],['Tela 02','Disney+','Ativa','active-status'],['Tela 03','HBO Max','Expira em 5 dias','expired']
+];
+function renderScreens(){
+ document.getElementById('screenGrid').innerHTML=screens.map(s=>`
+ <div class="screen"><button class="screen-menu customer-only" onclick="showProductInfo('${s[1]}')">⋮</button>
+ <strong>▣ ${s[0]}</strong><small>${s[1]}</small><div class="status ${s[3]}">● ${s[2]}</div></div>`).join('')+
+ `<div class="screen add-screen admin-only">＋<br>Adicionar<br>Nova Tela</div>`;
+}
+function saveScreens(){localStorage.setItem("ps_screens",JSON.stringify(screens))}
+function openModal(){if(!isAdmin())return openAdminLogin();document.getElementById('modal').classList.add('show')}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function closeModalById(id){document.getElementById(id).classList.remove('show')}
+
+function showPurchaseOptions(service){
+ const pr=prices[service]||{private:0,shared:0};
+ document.getElementById('productModalTitle').textContent=service;
+ document.getElementById('productModalText').innerHTML=`
+ <strong>Escolha sua tela:</strong>
+ <button class="full" onclick="purchaseViaWhatsApp('${service}','privada',${pr.private})">Tela privada — ${money(pr.private)}</button>
+ <button class="full" onclick="purchaseViaWhatsApp('${service}','compartilhada',${pr.shared})">Tela compartilhada — ${money(pr.shared)}</button>`;
+ document.getElementById('productModal').classList.add('show');
+}
+function showProductInfo(service){showPurchaseOptions(service)}
+function closeProductInfo(){closeModalById('productModal')}
+function purchaseViaWhatsApp(service,type,value){
+ const msg=`Veio através da página, quero adquirir a tela ${service}. Tipo: ${type}. Valor anunciado: ${money(value)}.`;
+ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
+ saveOrder(service,type,value);
+}
+function openPurchase(){window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(purchaseMessage)}`,'_blank')}
+function openSupport(){document.getElementById('supportModal').classList.add('show')}
+function openSupportWhatsApp(kind){
+ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(kind==='purchase'?purchaseMessage:supportMessage)}`,'_blank');
+ closeModalById('supportModal');
+}
+
+function openAccount(){document.getElementById('accountModal').classList.add('show')}
+function closeAccount(){closeModalById('accountModal')}
+function showLogin(){document.getElementById('accountModalTitle').textContent='Entrar';document.getElementById('accountModeHint').textContent='Já tem uma conta? Entre para acessar suas compras.';document.getElementById('accountModal').classList.add('show')}
+function showRegister(){document.getElementById('accountModalTitle').textContent='Criar uma conta';document.getElementById('accountModeHint').textContent='Crie sua conta para manter acesso às compras.';document.getElementById('accountModal').classList.add('show')}
+function saveAccount(){
+ const name=document.getElementById('accountName').value.trim(),email=document.getElementById('accountEmail').value.trim(),pass=document.getElementById('accountPass').value;
+ if(!name||!email||!pass){alert('Preencha nome, e-mail e senha.');return}
+ localStorage.setItem('ps_account',JSON.stringify({name,email}));
+ updateAccount();closeAccount();
+}
+function updateAccount(){
+ const a=JSON.parse(localStorage.getItem('ps_account')||'null');
+ const title=document.getElementById('accountTitle'),text=document.getElementById('accountText'),buttons=document.getElementById('accountButtons');
+ if(a){title.textContent=`Olá, ${a.name}`;text.innerHTML=`<span class="account-name">${a.email}</span>`;buttons.innerHTML=`<div class="account-actions"><button class="full" onclick="scrollToScreens()">Minhas telas</button><button class="full" onclick="logoutAccount()">Sair</button></div>`}
+ else{title.textContent='Bem-vindo!';text.textContent='Acesse suas compras ou crie sua conta.';buttons.innerHTML='<div class="account-actions"><button class="full" onclick="showLogin()">Entrar</button><button class="full" onclick="showRegister()">Criar conta</button></div>'}
+}
+function logoutAccount(){localStorage.removeItem('ps_account');updateAccount()}
+
+function saveOrder(service,type,value){
+ let orders=JSON.parse(localStorage.getItem('ps_orders')||'[]');
+ orders.unshift({service,type,value,date:new Date().toLocaleString('pt-BR')});
+ localStorage.setItem('ps_orders',JSON.stringify(orders));renderOrders();
+}
+function openOrders(){
+ if(!localStorage.getItem('ps_account')){showLogin();return}
+ renderOrders();document.getElementById('ordersModal').classList.add('show')
+}
+function renderOrders(){
+ const orders=JSON.parse(localStorage.getItem('ps_orders')||'[]');
+ document.getElementById('orderBadge').textContent=orders.length;
+ document.getElementById('ordersList').innerHTML=orders.length?orders.map(o=>`<div class="side-card"><strong>${o.service}</strong><br><small>${o.type} • ${money(o.value)} • ${o.date}</small></div>`).join(''):'<p>Nenhum pedido registrado ainda.</p>';
+}
+function openReviews(){document.getElementById('reviewsModal').classList.add('show')}
+function renderTicker(){
+ const names=['Lucas','Mariana','João','Ana','Gabriel','Beatriz','Rafael','Camila','Pedro','Juliana'];
+ const services=['Netflix','Paramount+','Disney+','HBO Max','Spotify','Combo'];
+ const items=[...Array(10)].map((_,i)=>`${names[i]} acabou de adquirir uma tela ${services[i%services.length]}`);
+ document.getElementById('tickerTrack').innerHTML=items.concat(items).map(x=>`<span>✓ ${x}</span>`).join('');
+}
+
+function openAdminLogin(){document.getElementById('adminLoginModal').classList.add('show');document.getElementById('adminPass').focus()}
+function closeAdminLogin(){closeModalById('adminLoginModal')}
+function loginAdmin(){if(document.getElementById('adminPass').value!==ADMIN_PASSWORD){alert('Senha inválida.');return}sessionStorage.setItem('ps_admin','1');closeAdminLogin();setAdminMode(true)}
+function isAdmin(){return sessionStorage.getItem('ps_admin')==='1'}
+function setAdminMode(on){
+ document.querySelectorAll('.admin-only').forEach(x=>x.style.display=on?'block':'none');
+ document.getElementById('adminPanel').classList.toggle('show',on);
+ renderPriceEditor();renderSalesTimers();
+}
+function openAdminPanel(){if(!isAdmin())return openAdminLogin();document.getElementById('adminPanelModal').classList.add('show')}
+function closeAdminPanel(){closeModalById('adminPanelModal')}
+
+function renderPriceEditor(){
+ const el=document.getElementById('priceEditor');if(!el)return;
+ el.innerHTML=products.map(p=>`<div class="price-row"><input value="${p[0]}" disabled><input type="number" step="0.01" id="price-${CSS.escape(p[0])}-private" value="${prices[p[0]]?.private??0}"><input type="number" step="0.01" id="price-${CSS.escape(p[0])}-shared" value="${prices[p[0]]?.shared??0}"></div>`).join('');
+}
+function savePrices(){
+ products.forEach(p=>{
+   const a=document.getElementById(`price-${CSS.escape(p[0])}-private`),b=document.getElementById(`price-${CSS.escape(p[0])}-shared`);
+   if(a&&b)prices[p[0]]={private:Number(a.value),shared:Number(b.value)};
+ });
+ localStorage.setItem('ps_prices',JSON.stringify(prices));renderProducts();alert('Preços salvos.');
+}
+
+let sales=JSON.parse(localStorage.getItem('ps_sales')||'[]');
+function addSaleTimer(){
+ if(!isAdmin())return;
+ const client=document.getElementById('saleClient').value.trim()||'Cliente';
+ const service=document.getElementById('saleService').value,type=document.getElementById('saleType').value;
+ const days=Math.max(1,Number(document.getElementById('saleDays').value)||30);
+ sales.push({id:Date.now(),client,service,type,start:Date.now(),end:Date.now()+days*86400000});
+ localStorage.setItem('ps_sales',JSON.stringify(sales));renderSalesTimers();
+}
+function renderSalesTimers(){
+ const el=document.getElementById('salesTimers');if(!el)return;
+ el.innerHTML=sales.map(s=>`<div class="timer-card"><strong>${s.client}</strong><small>${s.service} • ${s.type}</small><div class="timer" id="timer-${s.id}">--:--:--</div><small id="days-${s.id}"></small></div>`).join('');
+}
+function tickTimers(){
+ sales.forEach(s=>{
+  const remain=Math.max(0,s.end-Date.now()),total=Math.floor(remain/1000),d=Math.floor(total/86400),h=Math.floor(total%86400/3600),m=Math.floor(total%3600/60),sec=total%60;
+  const t=document.getElementById(`timer-${s.id}`),day=document.getElementById(`days-${s.id}`);
+  if(t)t.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+  if(day)day.textContent=remain>0?`${d} dia(s) restantes • renovação em ${new Date(s.end).toLocaleDateString('pt-BR')}`:'EXPIRADA • renovar cliente';
+ });
+}
+setInterval(tickTimers,1000);
+
+
+function fileToDataURL(file){
+ return new Promise((resolve,reject)=>{
+  const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file);
+ });
+}
+function openAdminPanel(){
+ if(!isAdmin())return openAdminLogin();
+ loadCustomizationEditor();
+ document.getElementById('adminPanelModal').classList.add('show');
+}
+function closeAdminPanel(){closeModalById('adminPanelModal')}
+
+function loadCustomizationEditor(){
+ const colors=JSON.parse(localStorage.getItem('ps_colors')||'null')||{c:'#087cff',c2:'#00cfff',text:'#f5f8ff'};
+ document.getElementById('accentColor').value=colors.c;
+ document.getElementById('accent2').value=colors.c2;
+ document.getElementById('textColor').value=colors.text||'#f5f8ff';
+ document.getElementById('fontFamily').value=localStorage.getItem('ps_font')||'Inter,Arial,sans-serif';
+ document.getElementById('fontScale').value=localStorage.getItem('ps_fontScale')||100;
+ document.getElementById('brandName').value=localStorage.getItem('ps_brandName')||'PODEROSO STREAMING';
+ document.getElementById('brandSubtitle').value=localStorage.getItem('ps_brandSubtitle')||'Entretenimento sem limites';
+ const bg=localStorage.getItem('ps_bg'),av=localStorage.getItem('ps_avatar');
+ document.getElementById('bgPreview').src=bg||'';
+ document.getElementById('avatarPreview').src=av||'';
+ updateCustomizationPreview();
+}
+function updateCustomizationPreview(){
+ document.getElementById('previewBrand').textContent=document.getElementById('brandName').value||'PODEROSO STREAMING';
+ document.getElementById('previewSubtitle').textContent=document.getElementById('brandSubtitle').value||'Entretenimento sem limites';
+}
+document.addEventListener('input',e=>{
+ if(['brandName','brandSubtitle'].includes(e.target.id))updateCustomizationPreview();
+ if(e.target.id==='bgUpload'&&e.target.files[0]){
+  const r=new FileReader();r.onload=x=>document.getElementById('bgPreview').src=x.target.result;r.readAsDataURL(e.target.files[0]);
+ }
+ if(e.target.id==='avatarUpload'&&e.target.files[0]){
+  const r=new FileReader();r.onload=x=>document.getElementById('avatarPreview').src=x.target.result;r.readAsDataURL(e.target.files[0]);
+ }
+});
+async function saveCustomization(){
+ const c=document.getElementById('accentColor').value,c2=document.getElementById('accent2').value,text=document.getElementById('textColor').value;
+ localStorage.setItem('ps_colors',JSON.stringify({c,c2,text}));
+ localStorage.setItem('ps_font',document.getElementById('fontFamily').value);
+ localStorage.setItem('ps_fontScale',document.getElementById('fontScale').value);
+ localStorage.setItem('ps_brandName',document.getElementById('brandName').value||'PODEROSO STREAMING');
+ localStorage.setItem('ps_brandSubtitle',document.getElementById('brandSubtitle').value||'Entretenimento sem limites');
+ const bg=document.getElementById('bgUpload').files[0],av=document.getElementById('avatarUpload').files[0];
+ if(bg)localStorage.setItem('ps_bg',await fileToDataURL(bg));
+ if(av)localStorage.setItem('ps_avatar',await fileToDataURL(av));
+ applyCustomization();closeAdminPanel();alert('Personalização salva e aplicada.');
+}
+function resetCustomization(){
+ ['ps_colors','ps_font','ps_fontScale','ps_bg','ps_avatar','ps_brandName','ps_brandSubtitle'].forEach(k=>localStorage.removeItem(k));
+ applyCustomization();loadCustomizationEditor();
+}
+function applyCustomization(){
+ const colors=JSON.parse(localStorage.getItem('ps_colors')||'null');
+ const c=colors?.c||'#087cff',c2=colors?.c2||'#00cfff',text=colors?.text||'#f5f8ff';
+ document.documentElement.style.setProperty('--blue',c);
+ document.documentElement.style.setProperty('--cyan',c2);
+ document.documentElement.style.setProperty('--text',text);
+ document.body.style.fontFamily=localStorage.getItem('ps_font')||'Inter,Arial,sans-serif';
+ document.body.style.fontSize=(localStorage.getItem('ps_fontScale')||100)+'%';
+ const bg=localStorage.getItem('ps_bg');
+ if(bg)document.body.style.backgroundImage=`linear-gradient(rgba(1,7,14,.86),rgba(1,7,14,.95)),url("${bg}")`;
+ else document.body.style.backgroundImage='';
+ const av=localStorage.getItem('ps_avatar');
+ const brandAvatar=document.getElementById('brandAvatar');
+ if(av)brandAvatar.innerHTML=`<img src="${av}" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`;
+ else brandAvatar.textContent='P';
+ const name=localStorage.getItem('ps_brandName')||'PODEROSO STREAMING';
+ const subtitle=localStorage.getItem('ps_brandSubtitle')||'Entretenimento sem limites';
+ document.querySelector('.mini-logo').innerHTML=name.replace(/(STREAMING)/i,'<span>$1</span>');
+ document.querySelector('.brand h2').textContent=name.replace(/STREAMING/i,'').trim()||name;
+ document.querySelector('.brand p').innerHTML=subtitle+'<br>com o melhor preço!';
+ document.title=name;
+}
+
+renderProducts();renderScreens();updateAccount();renderOrders();renderTicker();applyCustomization();setAdminMode(isAdmin());
+
+// ===== Correções v5: conta + personalização =====
+let authMode = 'login';
+
+function openAccount(){
+  const modal=document.getElementById('accountModal');
+  if(!modal)return;
+  const a=JSON.parse(localStorage.getItem('ps_account')||'null');
+  setAuthMode(a?'login':'create');
+  modal.classList.add('show');
+}
+function closeAccount(){document.getElementById('accountModal')?.classList.remove('show')}
+function setAuthMode(mode){
+  authMode=mode;
+  const login=document.getElementById('loginFields'),create=document.getElementById('createFields');
+  const tabL=document.getElementById('tabLogin'),tabC=document.getElementById('tabCreate');
+  const title=document.getElementById('accountModalTitle'),note=document.getElementById('authNote');
+  if(!login||!create)return;
+  const isLogin=mode==='login';
+  login.style.display=isLogin?'block':'none';
+  create.style.display=isLogin?'none':'block';
+  tabL.classList.toggle('active',isLogin);tabC.classList.toggle('active',!isLogin);
+  title.textContent=isLogin?'Entrar na sua conta':'Criar uma conta';
+  note.textContent=isLogin?'Já tem uma conta? Informe seu e-mail e senha para acessar suas compras.':'Ainda não tem uma conta? Cadastre seus dados para acompanhar suas compras.';
+}
+function submitAccount(){
+  if(authMode==='create'){
+    const name=document.getElementById('accountName').value.trim();
+    const email=document.getElementById('accountEmail').value.trim().toLowerCase();
+    const pass=document.getElementById('accountPass').value;
+    if(!name||!email||!pass){alert('Preencha nome, e-mail e senha.');return}
+    if(pass.length<4){alert('A senha precisa ter pelo menos 4 caracteres.');return}
+    localStorage.setItem('ps_account',JSON.stringify({name,email,pass}));
+    updateAccount();closeAccount();alert('Conta criada com sucesso!');
+  }else{
+    const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+    const pass=document.getElementById('loginPass').value;
+    const a=JSON.parse(localStorage.getItem('ps_account')||'null');
+    if(!a){alert('Você ainda não possui uma conta. Clique em “Criar uma conta”.');setAuthMode('create');return}
+    if(email!==a.email||pass!==a.pass){alert('E-mail ou senha incorretos.');return}
+    updateAccount();closeAccount();alert('Login realizado com sucesso!');
+  }
+}
+function updateAccount(){
+  const a=JSON.parse(localStorage.getItem('ps_account')||'null');
+  const title=document.getElementById('accountTitle'),text=document.getElementById('accountText'),buttons=document.getElementById('accountButtons');
+  if(!title||!text||!buttons)return;
+  if(a){
+    title.textContent=`Olá, ${a.name}`;
+    text.textContent=a.email;
+    buttons.innerHTML='<div class="account-actions"><button class="full" onclick="requireAccountAndShowScreens()">Minhas telas</button><button class="full" onclick="openOrders()">Meus pedidos</button><button class="full danger" onclick="logoutAccount()">Sair</button></div>';
+  }else{
+    title.textContent='Bem-vindo!';
+    text.textContent='Entre ou crie sua conta para guardar suas compras.';
+    buttons.innerHTML='<button class="full" onclick="openAccount()">Entrar / Criar conta</button>';
+  }
+}
+function logoutAccount(){localStorage.removeItem('ps_account');updateAccount();alert('Você saiu da conta.')}
+function requireAccountAndShowScreens(){
+  if(!localStorage.getItem('ps_account')){openAccount();return}
+  scrollToScreens();
+}
+
+function closeSupport(){closeModalById('supportModal')}
+function openSupport(){document.getElementById('supportModal')?.classList.add('show')}
+
+function setAdminMode(on){
+  document.querySelectorAll('.admin-only').forEach(x=>x.classList.toggle('show-admin',!!on));
+  document.getElementById('adminPanel')?.classList.toggle('show',!!on);
+  if(on){renderPriceEditor?.();renderSalesTimers?.();}
+}
+function openAdminPanel(){
+  if(!isAdmin()){openAdminLogin();return}
+  loadCustomizationEditor();
+  document.getElementById('adminPanelModal')?.classList.add('show');
+}
+function closeAdminPanel(){closeModalById('adminPanelModal')}
+function loadCustomizationEditor(){
+  const colors=JSON.parse(localStorage.getItem('ps_colors')||'null')||{c:'#087cff',c2:'#00cfff',text:'#f5f8ff'};
+  const q=id=>document.getElementById(id);
+  if(q('accentColor'))q('accentColor').value=colors.c;
+  if(q('accent2'))q('accent2').value=colors.c2;
+  if(q('textColor'))q('textColor').value=colors.text||'#f5f8ff';
+  if(q('fontFamily'))q('fontFamily').value=localStorage.getItem('ps_font')||'Inter,Arial,sans-serif';
+  if(q('fontScale'))q('fontScale').value=localStorage.getItem('ps_fontScale')||100;
+  if(q('brandName'))q('brandName').value=localStorage.getItem('ps_brandName')||'PODEROSO STREAMING';
+  if(q('brandSubtitle'))q('brandSubtitle').value=localStorage.getItem('ps_brandSubtitle')||'Entretenimento sem limites';
+  if(q('bgPreview'))q('bgPreview').src=localStorage.getItem('ps_bg')||'';
+  if(q('avatarPreview'))q('avatarPreview').src=localStorage.getItem('ps_avatar')||'';
+}
+function readFile(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
+async function saveCustomization(){
+  const q=id=>document.getElementById(id);
+  localStorage.setItem('ps_colors',JSON.stringify({c:q('accentColor').value,c2:q('accent2').value,text:q('textColor').value}));
+  localStorage.setItem('ps_font',q('fontFamily').value);
+  localStorage.setItem('ps_fontScale',q('fontScale').value);
+  localStorage.setItem('ps_brandName',q('brandName').value||'PODEROSO STREAMING');
+  localStorage.setItem('ps_brandSubtitle',q('brandSubtitle').value||'Entretenimento sem limites');
+  if(q('bgUpload').files[0])localStorage.setItem('ps_bg',await readFile(q('bgUpload').files[0]));
+  if(q('avatarUpload').files[0])localStorage.setItem('ps_avatar',await readFile(q('avatarUpload').files[0]));
+  applyCustomization();closeAdminPanel();alert('Personalização salva e aplicada com sucesso!');
+}
+function resetCustomization(){
+  ['ps_colors','ps_font','ps_fontScale','ps_bg','ps_avatar','ps_brandName','ps_brandSubtitle'].forEach(k=>localStorage.removeItem(k));
+  applyCustomization();loadCustomizationEditor();
+}
+function applyCustomization(){
+  const colors=JSON.parse(localStorage.getItem('ps_colors')||'null')||{c:'#087cff',c2:'#00cfff',text:'#f5f8ff'};
+  document.documentElement.style.setProperty('--blue',colors.c);
+  document.documentElement.style.setProperty('--cyan',colors.c2);
+  document.documentElement.style.setProperty('--text',colors.text||'#f5f8ff');
+  document.body.style.fontFamily=localStorage.getItem('ps_font')||'Inter,Arial,sans-serif';
+  document.body.style.fontSize=(localStorage.getItem('ps_fontScale')||100)+'%';
+  const bg=localStorage.getItem('ps_bg');
+  document.body.style.backgroundImage=bg?`linear-gradient(rgba(1,7,14,.86),rgba(1,7,14,.95)),url("${bg}")`:'';
+  const av=localStorage.getItem('ps_avatar'),pa=document.getElementById('profileAvatar');
+  if(pa)pa.innerHTML=av?`<img src="${av}" alt="Perfil" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`:'P';
+  const name=localStorage.getItem('ps_brandName')||'PODEROSO STREAMING';
+  const sub=localStorage.getItem('ps_brandSubtitle')||'Entretenimento sem limites';
+  const logo=document.querySelector('.mini-logo');if(logo)logo.innerHTML=name.replace(/STREAMING/i,'<span>STREAMING</span>');
+  const brandTitle=document.querySelector('.brand h2');if(brandTitle)brandTitle.textContent=name;
+  const brandP=document.querySelector('.brand p');if(brandP)brandP.innerHTML=sub+'<br>com o melhor preço!';
+  document.title=name;
+}
+document.addEventListener('change',e=>{
+  if(e.target.id==='bgUpload'&&e.target.files[0]){const r=new FileReader();r.onload=x=>document.getElementById('bgPreview').src=x.target.result;r.readAsDataURL(e.target.files[0])}
+  if(e.target.id==='avatarUpload'&&e.target.files[0]){const r=new FileReader();r.onload=x=>document.getElementById('avatarPreview').src=x.target.result;r.readAsDataURL(e.target.files[0])}
+});
+document.addEventListener('DOMContentLoaded',()=>{updateAccount();applyCustomization();setAdminMode(isAdmin())});
+
+</script>
+
+
+</body>
+</html>
