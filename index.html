@@ -1,1305 +1,373 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Poderoso Streaming</title>
+<!-- COLE ESTE BLOCO ANTES DO </main> DA PÁGINA PRINCIPAL, NO FINAL DO CONTEÚDO DA LOJA -->
+
+<section class="customer-feedback">
+
+  <div class="feedback-header">
+    <span class="feedback-tag">AVALIAÇÕES</span>
+    <h2>O que nossos clientes dizem</h2>
+    <p>Experiências de clientes com o Poderoso Streaming.</p>
+  </div>
+
+  <div class="sales-highlight">
+    <div class="sales-number">+5.000</div>
+    <div>
+      <strong>contas vendidas</strong>
+      <span>Milhares de clientes já compraram conosco.</span>
+    </div>
+  </div>
+
+  <div class="feedback-grid">
+
+    <article class="feedback-card">
+      <div class="customer">
+        <div class="avatar">JS</div>
+        <div>
+          <strong>João S.</strong>
+          <span>Cliente verificado</span>
+        </div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <p>“Atendimento rápido e tudo explicado direitinho. Fiz minha compra e gostei bastante do serviço.”</p>
+    </article>
+
+    <article class="feedback-card">
+      <div class="customer">
+        <div class="avatar">MA</div>
+        <div>
+          <strong>Marcos A.</strong>
+          <span>Cliente verificado</span>
+        </div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <p>“Gostei muito da praticidade. O atendimento foi tranquilo e consegui tirar minhas dúvidas antes da compra.”</p>
+    </article>
+
+    <article class="feedback-card">
+      <div class="customer">
+        <div class="avatar">RC</div>
+        <div>
+          <strong>Rafael C.</strong>
+          <span>Cliente verificado</span>
+        </div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <p>“Preço bom, atendimento rápido e processo simples. Voltaria a comprar.”</p>
+    </article>
+
+    <article class="feedback-card">
+      <div class="customer">
+        <div class="avatar">LF</div>
+        <div>
+          <strong>Lucas F.</strong>
+          <span>Cliente verificado</span>
+        </div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <p>“Gostei da organização da loja e principalmente do suporte. Recomendo.”</p>
+    </article>
+
+  </div>
+
+  <div class="rating-box">
+    <div>
+      <strong>Avalie sua experiência</strong>
+      <p>Sua opinião ajuda a melhorar nosso atendimento.</p>
+    </div>
+
+    <div class="rating-stars" id="ratingStars">
+      <button onclick="setRating(1)">★</button>
+      <button onclick="setRating(2)">★</button>
+      <button onclick="setRating(3)">★</button>
+      <button onclick="setRating(4)">★</button>
+      <button onclick="setRating(5)">★</button>
+    </div>
+
+    <input
+      id="ratingName"
+      type="text"
+      placeholder="Seu nome"
+      maxlength="40"
+    >
+
+    <textarea
+      id="ratingText"
+      placeholder="Escreva seu comentário..."
+      maxlength="250"
+    ></textarea>
+
+    <button class="buy" onclick="sendRating()">
+      Enviar avaliação
+    </button>
+
+    <div id="ratingMessage"></div>
+  </div>
+
+</section>
 
 <style>
-:root{
- --p:#7c3aed;
- --s:#ec4899;
- --bg:#07070b;
- --card:#12121a;
- --card2:#191923;
- --txt:#fff;
- --muted:#9999a6;
- --border:rgba(255,255,255,.1);
- --green:#22c55e;
- --red:#ef4444;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
- background:
- radial-gradient(circle at 10% 0%,rgba(124,58,237,.22),transparent 30%),
- radial-gradient(circle at 90% 0%,rgba(236,72,153,.15),transparent 30%),
- var(--bg);
- color:var(--txt);
- font-family:Arial,Helvetica,sans-serif;
- min-height:100vh
-}
-button,input{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
 
-/* HEADER */
-header{
- position:sticky;top:0;z-index:1000;
- background:rgba(7,7,11,.94);
- backdrop-filter:blur(15px);
- border-bottom:1px solid var(--border)
-}
-.nav{
- max-width:1300px;margin:auto;padding:11px 16px;
- display:flex;align-items:center;gap:12px;flex-wrap:wrap
-}
-.brand{display:flex;align-items:center;gap:9px;font-weight:900;white-space:nowrap}
-.logo{
- width:42px;height:42px;border-radius:13px;
- display:grid;place-items:center;
- background:linear-gradient(135deg,var(--p),var(--s));
-}
-.links{display:flex;gap:3px;flex:1;overflow-x:auto}
-.links button{
- border:0;background:transparent;color:#bbb;padding:10px;
- border-radius:9px;white-space:nowrap
-}
-.links button:hover{background:#ffffff0d;color:#fff}
-.owner{
- border:0;border-radius:10px;padding:11px 14px;
- background:linear-gradient(135deg,var(--p),var(--s));
- color:#fff;font-weight:800
+.customer-feedback{
+  margin:50px 0 20px;
+  padding:30px 0 50px;
 }
 
-/* MAIN */
-.container{max-width:1300px;margin:auto;padding:20px 16px}
-.hero{
- min-height:330px;border:1px solid var(--border);border-radius:24px;
- padding:45px;position:relative;overflow:hidden;
- background:linear-gradient(120deg,#171222,#101017)
-}
-.hero:after{
- content:"";position:absolute;width:400px;height:400px;
- right:-150px;top:-170px;border-radius:50%;
- background:#7c3aed33;filter:blur(50px)
-}
-.hero-content{position:relative;z-index:2;max-width:720px}
-.badge{
- display:inline-block;padding:8px 12px;border:1px solid var(--border);
- border-radius:99px;background:#ffffff08;color:#ddd;font-size:12px;
- margin-bottom:15px
-}
-.hero h1{font-size:clamp(43px,7vw,72px);line-height:.95;margin-bottom:18px}
-.gradient{
- background:linear-gradient(90deg,var(--p),var(--s));
- -webkit-background-clip:text;background-clip:text;color:transparent
-}
-.hero p{color:#b5b5c0;line-height:1.6;margin-bottom:22px}
-.actions{display:flex;gap:9px;flex-wrap:wrap}
-.btn{
- border:0;border-radius:10px;padding:12px 17px;font-weight:800
-}
-.primary{background:linear-gradient(135deg,var(--p),var(--s));color:#fff}
-.dark{background:#20202b;color:#fff;border:1px solid var(--border)}
-
-/* TICKER */
-.ticker{max-width:1300px;margin:auto;padding:14px 16px}
-.ticker-box{overflow:hidden;background:#0e0e15;border:1px solid var(--border);border-radius:11px;padding:10px}
-.track{display:flex;width:max-content;animation:move 30s linear infinite}
-.tick{margin-right:55px;color:#bbb;font-size:13px}
-.tick strong{color:var(--green)}
-@keyframes move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* SEARCH */
-.search{
- width:100%;background:#101017;border:1px solid var(--border);
- color:#fff;border-radius:11px;padding:14px 15px;
- outline:0;margin-bottom:14px
-}
-.search:focus{border-color:var(--p)}
-.categories{display:flex;gap:7px;overflow-x:auto;margin-bottom:22px}
-.cat{
- border:1px solid var(--border);background:#12121a;color:#aaa;
- padding:9px 14px;border-radius:99px;white-space:nowrap
-}
-.cat.active{background:linear-gradient(135deg,var(--p),var(--s));color:#fff}
-
-/* PRODUCTS */
-.title{margin-bottom:15px}
-.title h2{margin-bottom:4px}
-.title p{font-size:12px;color:var(--muted)}
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.card{
- background:linear-gradient(#15151f,#101017);
- border:1px solid var(--border);border-radius:17px;
- padding:13px;overflow:hidden;transition:.2s
-}
-.card:hover{transform:translateY(-3px);border-color:#7c3aed88}
-.banner{
- width:100%;height:155px;border-radius:12px;
- background:#24242e center/cover no-repeat;
- display:grid;place-items:center;overflow:hidden;margin-bottom:12px
-}
-.banner span{font-size:35px;font-weight:900;text-shadow:0 2px 8px #000}
-.tag{
- display:inline-block;background:#22c55e1c;color:#4ade80;
- padding:5px 8px;border-radius:99px;font-size:10px;margin-bottom:7px
-}
-.card h3{font-size:17px;margin-bottom:6px}
-.desc{color:#92929e;font-size:12px;min-height:32px;line-height:1.4}
-.price{font-size:23px;font-weight:900;margin:13px 0}
-.price small{font-size:10px;color:#777;font-weight:normal}
-.buy{
- width:100%;padding:11px;border:0;border-radius:10px;
- color:#fff;font-weight:900;background:linear-gradient(135deg,var(--p),var(--s))
-}
-.empty{grid-column:1/-1;text-align:center;padding:45px;color:#777}
-
-/* FIXED */
-.whatsapp{
- position:fixed;right:17px;bottom:17px;width:57px;height:57px;
- border-radius:50%;background:#25d366;color:#fff;
- display:grid;place-items:center;text-decoration:none;font-size:28px;
- z-index:1500;box-shadow:0 8px 30px #25d36644
-}
-.top{
- position:fixed;right:25px;bottom:84px;width:39px;height:39px;
- border-radius:50%;border:1px solid var(--border);
- background:#20202a;color:#fff;z-index:1500
+.feedback-header{
+  text-align:center;
+  margin-bottom:25px;
 }
 
-/* MODALS */
-.modal{
- position:fixed;inset:0;z-index:3000;background:#000c;
- backdrop-filter:blur(7px);display:flex;
- align-items:center;justify-content:center;padding:17px
+.feedback-tag{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  background:var(--p);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1px;
 }
-.modalbox{
- position:relative;width:100%;max-width:470px;
- background:#12121a;border:1px solid var(--border);
- border-radius:18px;padding:23px
-}
-.modalbox h2{margin-bottom:8px}
-.modalbox p{color:#999;font-size:13px;line-height:1.5;margin-bottom:14px}
-.close{
- position:absolute;right:12px;top:12px;width:34px;height:34px;
- border:0;border-radius:9px;background:#252531;color:#fff;font-size:20px
-}
-.input{
- width:100%;padding:12px;margin:5px 0;
- background:#0b0b11;color:#fff;border:1px solid var(--border);
- border-radius:10px;outline:0
-}
-.input:focus{border-color:var(--p)}
 
-/* ADMIN */
-.admin{max-width:1300px;margin:auto;padding:23px 16px 70px}
-.adminhead,.abox,.stat{
- background:#111119;border:1px solid var(--border);border-radius:16px
+.feedback-header h2{
+  font-size:30px;
+  margin:12px 0 7px;
 }
-.adminhead,.abox{padding:18px;margin-bottom:14px}
-.adminhead p{color:#999;font-size:13px;margin:7px 0 13px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:14px}
-.stat{padding:17px}
-.stat span{font-size:12px;color:#999}
-.stat strong{display:block;font-size:25px;margin-top:5px}
-.agrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.abox h3{margin-bottom:13px}
-.row{display:flex;gap:7px}
-.row>*{flex:1}
-.adminproduct{
- padding:13px 0;border-bottom:1px solid var(--border);
- display:grid;grid-template-columns:72px 1fr auto auto;gap:9px;align-items:center
-}
-.preview{
- width:72px;height:49px;border-radius:8px;background:#24242e center/cover no-repeat;
- display:grid;place-items:center;font-weight:900;overflow:hidden
-}
-.preview span{font-size:16px}
-.ainfo strong{display:block}
-.ainfo small{color:#888}
-.small,.danger{
- border:0;border-radius:8px;padding:8px 10px;color:#fff;background:#24242d
-}
-.danger{background:#ef44441c;color:#f87171}
-.bannerbuttons{grid-column:1/-1;display:flex;gap:7px;flex-wrap:wrap}
-.timer{
- background:#0c0c12;border:1px solid var(--border);
- border-radius:11px;padding:13px;margin-top:9px
-}
-.timerTop{display:flex;justify-content:space-between;gap:10px}
-.timer small{color:#888}
-.clock{font-size:18px;font-weight:900}
-.warning{color:#f59e0b}
-.expired{color:#ef4444}
-.timerActions{display:flex;gap:7px;margin-top:10px}
-.order{
- padding:11px 0;border-bottom:1px solid var(--border);
- display:flex;justify-content:space-between;gap:10px
-}
-.order small{color:#888}
 
-/* FOOTER */
-footer{text-align:center;padding:28px;border-top:1px solid var(--border);color:#777;font-size:12px}
-
-/* RESPONSIVE */
-@media(max-width:1050px){.products{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:800px){
- .products{grid-template-columns:repeat(2,1fr)}
- .stats{grid-template-columns:repeat(2,1fr)}
- .agrid{grid-template-columns:1fr}
+.feedback-header p{
+  color:#999;
 }
+
+.sales-highlight{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  padding:22px;
+  margin:25px auto;
+  max-width:620px;
+  border:1px solid #292929;
+  border-radius:18px;
+  background:#101010;
+}
+
+.sales-number{
+  font-size:38px;
+  font-weight:1000;
+  color:var(--p);
+}
+
+.sales-highlight strong{
+  display:block;
+  font-size:18px;
+}
+
+.sales-highlight span{
+  display:block;
+  color:#999;
+  margin-top:4px;
+  font-size:13px;
+}
+
+.feedback-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:15px;
+}
+
+.feedback-card{
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:17px;
+}
+
+.customer{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.avatar{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--s);
+  border:1px solid #333;
+  font-weight:900;
+}
+
+.customer strong{
+  display:block;
+}
+
+.customer span{
+  display:block;
+  color:#777;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.stars{
+  margin-left:auto;
+  color:#ffc400;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.feedback-card p{
+  color:#ccc;
+  line-height:1.55;
+  font-size:14px;
+  margin:15px 0 0;
+}
+
+.rating-box{
+  max-width:650px;
+  margin:30px auto 0;
+  padding:22px;
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:18px;
+}
+
+.rating-box>div:first-child strong{
+  font-size:20px;
+}
+
+.rating-box p{
+  color:#888;
+  font-size:13px;
+}
+
+.rating-stars{
+  display:flex;
+  gap:5px;
+  margin:15px 0;
+}
+
+.rating-stars button{
+  border:0;
+  background:transparent;
+  color:#555;
+  font-size:31px;
+  cursor:pointer;
+  padding:0 3px;
+}
+
+.rating-stars button.selected{
+  color:#ffc400;
+}
+
+.rating-box input,
+.rating-box textarea{
+  width:100%;
+  margin-top:10px;
+  padding:13px;
+  border-radius:11px;
+  border:1px solid #292929;
+  background:#181818;
+  color:white;
+  outline:none;
+  font:inherit;
+}
+
+.rating-box textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+#ratingMessage{
+  margin-top:12px;
+  color:#aaa;
+  font-size:13px;
+}
+
 @media(max-width:600px){
- .nav{padding:9px}
- .links{order:3;width:100%}
- .hero{padding:32px 21px}
- .hero h1{font-size:43px}
- .products{grid-template-columns:1fr}
- .row{flex-direction:column}
- .adminproduct{grid-template-columns:60px 1fr}
- .banner{height:175px}
+
+  .sales-highlight{
+    justify-content:flex-start;
+  }
+
+  .sales-number{
+    font-size:30px;
+  }
+
+  .stars{
+    display:none;
+  }
+
 }
+
 </style>
-</head>
-
-<body>
-
-<header>
-<div class="nav">
-
- <div class="brand">
-  <div class="logo">PS</div>
-  <span>Poderoso Streaming</span>
- </div>
-
- <div class="links">
-  <button onclick="showAll()">Ofertas</button>
-  <button onclick="best()">Mais vendidos</button>
-  <button onclick="goCat('Streaming')">Streaming</button>
-  <button onclick="goCat('Combos')">Combos</button>
-  <button onclick="goCat('Jogos')">Jogos</button>
-  <button onclick="goCat('Free Fire')">Free Fire</button>
-  <button onclick="goCat('Área feminina')">Área feminina</button>
- </div>
-
- <button class="owner" onclick="openLogin()">⚙ Proprietário</button>
-</div>
-</header>
-
-<main id="client">
-
-<div class="container">
-<section class="hero">
-<div class="hero-content">
-
- <div class="badge">🔥 OFERTAS DISPONÍVEIS</div>
-
- <h1>
-  Poderoso
-  <span class="gradient">Streaming</span>
- </h1>
-
- <p>
-  Encontre suas plataformas e serviços favoritos em um só lugar.
-  Escolha seu produto e fale diretamente conosco.
- </p>
-
- <div class="actions">
-  <button class="btn primary" onclick="scrollProducts()">Ver ofertas</button>
-  <button class="btn dark" onclick="support()">Falar com suporte</button>
- </div>
-
-</div>
-</section>
-</div>
-
-<div class="ticker">
- <div class="ticker-box">
-  <div class="track" id="ticker"></div>
- </div>
-</div>
-
-<div class="container">
-
-<input
- id="search"
- class="search"
- placeholder="🔎 Pesquisar plataforma, combo ou produto..."
- oninput="render()"
- onkeydown="enterSearch(event)"
->
-
-<div class="categories">
-
-<button class="cat active" onclick="category('Todos',this)">Todos</button>
-<button class="cat" onclick="category('Streaming',this)">Streaming</button>
-<button class="cat" onclick="category('Combos',this)">Combos</button>
-<button class="cat" onclick="category('Jogos',this)">Jogos</button>
-<button class="cat" onclick="category('Free Fire',this)">Free Fire</button>
-<button class="cat" onclick="category('Área feminina',this)">Área feminina</button>
-
-</div>
-
-<div class="title">
- <h2>Catálogo de produtos</h2>
- <p>Escolha uma plataforma ou combo para continuar.</p>
-</div>
-
-<div class="products" id="products"></div>
-
-</div>
-</main>
-
-<section id="admin" class="admin hidden">
-
-<div class="adminhead">
- <h1>⚙ Área do Proprietário</h1>
- <p>
-  Gerencie produtos, preços, banners, vendas,
-  cronômetros e personalização.
- </p>
- <button class="btn dark" onclick="logout()">Sair</button>
-</div>
-
-<div class="stats">
- <div class="stat"><span>Produtos</span><strong id="nproducts">0</strong></div>
- <div class="stat"><span>Vendas</span><strong id="nsales">0</strong></div>
- <div class="stat"><span>Renovações</span><strong id="ntimers">0</strong></div>
- <div class="stat"><span>Total vendido</span><strong id="nmoney">R$ 0,00</strong></div>
-</div>
-
-<div class="agrid">
-
-<div class="abox">
-<h3>➕ Adicionar produto</h3>
-
-<input id="newname" class="input" placeholder="Nome da plataforma">
-
-<input id="newprice" class="input" type="number" step="0.01" placeholder="Preço">
-
-<input id="newcat" class="input" placeholder="Categoria" value="Streaming">
-
-<input id="newdesc" class="input" placeholder="Descrição">
-
-<label style="color:#999;font-size:12px">
- Banner do produto
-</label>
-
-<input id="newbanner" class="input" type="file" accept="image/*">
-
-<button class="btn primary" style="width:100%;margin-top:7px" onclick="addProduct()">
-Adicionar produto
-</button>
-</div>
-
-<div class="abox">
-<h3>🎨 Personalização</h3>
-
-<label style="color:#999;font-size:12px">Cor principal</label>
-<input id="color1" class="input" type="color">
-
-<label style="color:#999;font-size:12px">Cor secundária</label>
-<input id="color2" class="input" type="color">
-
-<button class="btn primary" style="width:100%;margin-top:7px" onclick="theme()">
-Salvar personalização
-</button>
-</div>
-
-</div>
-
-<div class="abox">
-<h3>🖼️ Plataformas, preços e banners</h3>
-
-<p style="color:#999;font-size:12px;line-height:1.5;margin-bottom:10px">
-Cada produto possui seu próprio banner. Use
-<strong>Escolher banner</strong> para selecionar uma imagem
-do seu celular e substituir o banner daquele produto.
-</p>
-
-<div id="adminproducts"></div>
-</div>
-
-<div class="abox">
-<h3>⏱️ Cronômetros de renovação</h3>
-
-<div class="row">
-<input id="timerclient" class="input" placeholder="Nome do cliente">
-<input id="timerproduct" class="input" placeholder="Produto / tela">
-<input id="timerdays" class="input" type="number" min="1" placeholder="Dias">
-<button class="btn primary" onclick="createTimer()">Criar</button>
-</div>
-
-<div id="timers"></div>
-</div>
-
-<div class="abox">
-<h3>🛒 Vendas registradas</h3>
-<div id="orders"></div>
-</div>
-
-</section>
-
-<a id="wa" class="whatsapp" target="_blank">✆</a>
-
-<button class="top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-<footer>
-© <span id="year"></span> Poderoso Streaming
-</footer>
-
-<!-- LOGIN -->
-<div id="loginModal" class="modal hidden">
-<div class="modalbox">
-
-<button class="close" onclick="closeModal('loginModal')">×</button>
-
-<h2>Área do Proprietário</h2>
-
-<p>Digite a senha administrativa.</p>
-
-<input
- id="password"
- class="input"
- type="password"
- placeholder="Senha"
- onkeydown="if(event.key==='Enter')login()"
->
-
-<button class="btn primary" style="width:100%;margin-top:7px" onclick="login()">
-Entrar
-</button>
-
-<p id="error" style="color:#f87171;margin-top:9px"></p>
-
-</div>
-</div>
-
-<!-- COMPRA -->
-<div id="buyModal" class="modal hidden">
-<div class="modalbox">
-
-<button class="close" onclick="closeModal('buyModal')">×</button>
-
-<h2 id="buyname">Produto</h2>
-
-<p id="buydesc"></p>
-
-<input id="buyer" class="input" placeholder="Seu nome">
-
-<button class="btn primary" style="width:100%;margin-top:7px" onclick="finishBuy()">
-Continuar pelo WhatsApp
-</button>
-
-</div>
-</div>
-
-<!-- SUPORTE -->
-<div id="supportModal" class="modal hidden">
-<div class="modalbox">
-
-<button class="close" onclick="closeModal('supportModal')">×</button>
-
-<h2>💬 Suporte</h2>
-
-<p>Clique abaixo para falar diretamente pelo WhatsApp.</p>
-
-<button class="btn primary" style="width:100%" onclick="openWhatsApp('Olá! Gostaria de atendimento no Poderoso Streaming.')">
-Abrir WhatsApp
-</button>
-
-</div>
-</div>
 
 <script>
 
-/* =====================================================
-   CONFIGURAÇÕES
-===================================================== */
+let selectedRating=0;
 
-const ADMIN_PASSWORD="32942186";
-const WHATSAPP="5527992410060";
+function setRating(number){
 
-const INITIAL=[
+  selectedRating=number;
 
-{id:1,name:"Netflix",price:20,category:"Streaming",icon:"N",description:"Filmes e séries.",banner:""},
-{id:2,name:"Spotify",price:20,category:"Streaming",icon:"S",description:"Música e podcasts.",banner:""},
-{id:3,name:"Canva",price:20,category:"Área feminina",icon:"C",description:"Design e criação.",banner:""},
-{id:4,name:"HBO Max",price:20,category:"Streaming",icon:"HBO",description:"Filmes e séries.",banner:""},
-{id:5,name:"Premiere",price:28,category:"Streaming",icon:"P",description:"Conteúdo esportivo.",banner:""},
-{id:6,name:"Paramount+",price:24,category:"Streaming",icon:"P+",description:"Filmes e séries.",banner:""},
-{id:7,name:"YouTube Premium",price:34,category:"Streaming",icon:"▶",description:"YouTube Premium.",banner:""},
-{id:8,name:"Crunchyroll",price:20,category:"Streaming",icon:"CR",description:"Anime e entretenimento.",banner:""},
-{id:9,name:"Globoplay",price:16,category:"Streaming",icon:"G",description:"Conteúdo brasileiro.",banner:""},
-{id:10,name:"Claro TV Mais",price:32,category:"Streaming",icon:"C",description:"TV e entretenimento.",banner:""},
-{id:11,name:"Sky Mais",price:52,category:"Streaming",icon:"SKY",description:"TV e entretenimento.",banner:""},
-{id:12,name:"Apple TV",price:36,category:"Streaming",icon:"",description:"Filmes e séries.",banner:""},
-{id:13,name:"Riocine",price:32,category:"Streaming",icon:"R",description:"Entretenimento.",banner:""},
-{id:14,name:"Conta compartilhada privada",price:52,category:"Streaming",icon:"🔐",description:"Conta compartilhada privada.",banner:""},
-{id:15,name:"Roku",price:24,category:"Streaming",icon:"ROKU",description:"Entretenimento.",banner:""},
-{id:16,name:"Viking",price:24,category:"Streaming",icon:"V",description:"Entretenimento.",banner:""},
-{id:17,name:"Telecine",price:32,category:"Streaming",icon:"T",description:"Filmes.",banner:""},
-{id:18,name:"Look",price:32,category:"Streaming",icon:"L",description:"Entretenimento.",banner:""},
-{id:19,name:"Combate",price:32,category:"Streaming",icon:"🥊",description:"Conteúdo esportivo.",banner:""},
-{id:20,name:"Claro Mais + Sky",price:60,category:"Combos",icon:"⚡",description:"Combo de serviços.",banner:""},
-{id:21,name:"Globoplay + Telecine",price:40,category:"Combos",icon:"🔥",description:"Combo de entretenimento.",banner:""},
-{id:22,name:"Premiere + Combate",price:40,category:"Combos",icon:"🏆",description:"Combo esportivo.",banner:""},
-{id:23,name:"Prime Video + Crunchyroll",price:36,category:"Combos",icon:"🎬",description:"Combo de entretenimento.",banner:""},
-{id:24,name:"HBO Max + Paramount",price:60,category:"Combos",icon:"⭐",description:"Combo de streaming.",banner:""},
-{id:25,name:"Prime Video + HBO Max",price:36,category:"Combos",icon:"🎥",description:"Combo de streaming.",banner:""},
-{id:26,name:"Prime Video + Paramount",price:38,category:"Combos",icon:"🍿",description:"Combo de streaming.",banner:""},
-{id:27,name:"HBO Max + Crunchyroll",price:36,category:"Combos",icon:"🔥",description:"Combo de entretenimento.",banner:""},
-{id:28,name:"Crunchyroll + Paramount",price:36,category:"Combos",icon:"🎞️",description:"Combo de streaming.",banner:""},
-{id:29,name:"Prime Video — Conta completa",price:52,category:"Streaming",icon:"PRIME",description:"Conta completa.",banner:""}
+  document
+    .querySelectorAll('#ratingStars button')
+    .forEach((button,index)=>{
 
-];
+      button.classList.toggle(
+        'selected',
+        index < number
+      );
 
-let products=JSON.parse(localStorage.getItem("ps_products"))||INITIAL;
-let orders=JSON.parse(localStorage.getItem("ps_orders"))||[];
-let timers=JSON.parse(localStorage.getItem("ps_timers"))||[];
-let current="Todos";
-let selected=null;
+    });
 
-
-/* =====================================================
-   SALVAR
-===================================================== */
-
-function save(){
- localStorage.setItem("ps_products",JSON.stringify(products));
- localStorage.setItem("ps_orders",JSON.stringify(orders));
- localStorage.setItem("ps_timers",JSON.stringify(timers));
 }
 
+function sendRating(){
 
-/* =====================================================
-   SEGURANÇA DE TEXTO
-===================================================== */
+  const name=
+    document
+      .getElementById('ratingName')
+      .value
+      .trim();
 
-function esc(x){
- return String(x??"")
- .replace(/&/g,"&amp;")
- .replace(/</g,"&lt;")
- .replace(/>/g,"&gt;")
- .replace(/"/g,"&quot;")
- .replace(/'/g,"&#039;");
+  const text=
+    document
+      .getElementById('ratingText')
+      .value
+      .trim();
+
+  if(!selectedRating){
+
+    alert('Escolha uma avaliação de 1 a 5 estrelas.');
+
+    return;
+
+  }
+
+  if(!name){
+
+    alert('Digite seu nome.');
+
+    return;
+
+  }
+
+  if(!text){
+
+    alert('Digite seu comentário.');
+
+    return;
+
+  }
+
+  document.getElementById('ratingMessage').textContent=
+    'Obrigado, '+name+'! Sua avaliação foi registrada.';
+
+  document.getElementById('ratingName').value='';
+  document.getElementById('ratingText').value='';
+
+  setRating(0);
+
 }
-
-function money(x){
- return Number(x).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
-}
-
-function bg(img){
- return img?'background-image:url("'+img.replace(/"/g,"%22")+'")':"";
-}
-
-
-/* =====================================================
-   PRODUTOS
-===================================================== */
-
-function render(){
-
- const box=document.getElementById("products");
- const q=document.getElementById("search").value.toLowerCase().trim();
-
- const list=products.filter(p=>{
-  const c=current==="Todos"||p.category===current;
-  const s=!q||(p.name+" "+p.category+" "+p.description).toLowerCase().includes(q);
-  return c&&s;
- });
-
- if(!list.length){
-  box.innerHTML='<div class="empty">Nenhum produto encontrado.</div>';
-  return;
- }
-
- box.innerHTML=list.map(p=>{
-
-  const banner=p.banner
-   ?'<div class="banner" style="'+bg(p.banner)+'"></div>'
-   :'<div class="banner"><span>'+esc(p.icon||"▶")+'</span></div>';
-
-  return `
-  <article class="card">
-
-   ${p.category==="Combos"?'<div class="tag">🔥 OFERTA</div>':""}
-
-   ${banner}
-
-   <h3>${esc(p.name)}</h3>
-
-   <div class="desc">${esc(p.description)}</div>
-
-   <div class="price">
-    ${money(p.price)}
-    <small>/ unidade</small>
-   </div>
-
-   <button class="buy" onclick="buy(${p.id})">
-    Comprar
-   </button>
-
-  </article>
-  `;
-
- }).join("");
-}
-
-
-/* =====================================================
-   CATEGORIAS
-===================================================== */
-
-function category(c,el){
-
- current=c;
-
- document.querySelectorAll(".cat")
- .forEach(x=>x.classList.remove("active"));
-
- if(el)el.classList.add("active");
-
- render();
-}
-
-function goCat(c){
-
- current=c;
-
- document.querySelectorAll(".cat")
- .forEach(x=>x.classList.toggle("active",x.textContent.trim()===c));
-
- render();
- scrollProducts();
-}
-
-function showAll(){
-
- current="Todos";
- document.getElementById("search").value="";
-
- document.querySelectorAll(".cat")
- .forEach(x=>x.classList.remove("active"));
-
- document.querySelector(".cat").classList.add("active");
-
- render();
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function best(){
-
- const sales={};
-
- orders.forEach(o=>{
-  sales[o.product]=(sales[o.product]||0)+1;
- });
-
- products.sort((a,b)=>(sales[b.name]||0)-(sales[a.name]||0));
-
- current="Todos";
- render();
- scrollProducts();
-}
-
-function scrollProducts(){
- document.getElementById("products").scrollIntoView({
-  behavior:"smooth",
-  block:"start"
- });
-}
-
-function enterSearch(e){
- if(e.key==="Enter")scrollProducts();
-}
-
-
-/* =====================================================
-   COMPRA
-===================================================== */
-
-function buy(id){
-
- selected=products.find(p=>p.id===id);
-
- if(!selected)return;
-
- document.getElementById("buyname").textContent=selected.name;
-
- document.getElementById("buydesc").textContent=
- money(selected.price)+" — "+selected.description;
-
- document.getElementById("buyer").value="";
-
- document.getElementById("buyModal").classList.remove("hidden");
-}
-
-function finishBuy(){
-
- if(!selected)return;
-
- const client=document.getElementById("buyer").value.trim()||"Cliente";
-
- orders.unshift({
-  id:Date.now(),
-  product:selected.name,
-  price:selected.price,
-  client:client,
-  date:new Date().toLocaleString("pt-BR")
- });
-
- save();
- ticker();
- stats();
-
- closeModal("buyModal");
-
- openWhatsApp(
-  "Olá! Quero comprar "+selected.name+
-  " por "+money(selected.price)+
-  ". Meu nome é "+client+"."
- );
-}
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
-
-function openWhatsApp(text){
- window.open(
-  "https://wa.me/"+WHATSAPP+
-  "?text="+encodeURIComponent(text),
-  "_blank"
- );
-}
-
-function support(){
- document.getElementById("supportModal").classList.remove("hidden");
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-function openLogin(){
- document.getElementById("loginModal").classList.remove("hidden");
- document.getElementById("password").value="";
- document.getElementById("error").textContent="";
- setTimeout(()=>document.getElementById("password").focus(),100);
-}
-
-function login(){
-
- const p=document.getElementById("password").value;
-
- if(p===ADMIN_PASSWORD){
-
-  closeModal("loginModal");
-
-  document.getElementById("client").classList.add("hidden");
-  document.getElementById("admin").classList.remove("hidden");
-
-  renderAdmin();
-
-  window.scrollTo({top:0,behavior:"smooth"});
-
- }else{
-
-  document.getElementById("error").textContent="Senha incorreta.";
-
- }
-}
-
-function logout(){
-
- document.getElementById("admin").classList.add("hidden");
- document.getElementById("client").classList.remove("hidden");
-
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-
-/* =====================================================
-   MODAIS
-===================================================== */
-
-function closeModal(id){
- document.getElementById(id).classList.add("hidden");
-}
-
-
-/* =====================================================
-   ADMIN — ADICIONAR
-===================================================== */
-
-function addProduct(){
-
- const name=document.getElementById("newname").value.trim();
- const price=Number(document.getElementById("newprice").value);
- const category=document.getElementById("newcat").value.trim()||"Streaming";
- const description=document.getElementById("newdesc").value.trim()||"Produto disponível.";
- const file=document.getElementById("newbanner").files[0];
-
- if(!name||!price){
-  alert("Informe o nome e um preço válido.");
-  return;
- }
-
- function finish(banner){
-
-  products.push({
-   id:Date.now(),
-   name,
-   price,
-   category,
-   icon:"▶",
-   description,
-   banner:banner||""
-  });
-
-  save();
-  render();
-  renderAdmin();
-
-  document.getElementById("newname").value="";
-  document.getElementById("newprice").value="";
-  document.getElementById("newcat").value="Streaming";
-  document.getElementById("newdesc").value="";
-  document.getElementById("newbanner").value="";
- }
-
- if(file){
-
-  const reader=new FileReader();
-
-  reader.onload=()=>finish(reader.result);
-
-  reader.readAsDataURL(file);
-
- }else finish("");
-}
-
-
-/* =====================================================
-   ADMIN — EDITAR
-===================================================== */
-
-function editProduct(id){
-
- const p=products.find(x=>x.id===id);
-
- if(!p)return;
-
- const name=prompt("Nome do produto:",p.name);
- if(name===null)return;
-
- const price=prompt("Preço:",p.price);
- if(price===null)return;
-
- const category=prompt("Categoria:",p.category);
- if(category===null)return;
-
- const description=prompt("Descrição:",p.description);
- if(description===null)return;
-
- p.name=name.trim()||p.name;
- p.price=Number(price)||p.price;
- p.category=category.trim()||p.category;
- p.description=description.trim()||p.description;
-
- save();
- render();
- renderAdmin();
-}
-
-
-/* =====================================================
-   ADMIN — EXCLUIR
-===================================================== */
-
-function deleteProduct(id){
-
- if(!confirm("Tem certeza que deseja excluir este produto?"))return;
-
- products=products.filter(p=>p.id!==id);
-
- save();
- render();
- renderAdmin();
-}
-
-
-/* =====================================================
-   ADMIN — TROCAR BANNER
-===================================================== */
-
-function changeBanner(id){
-
- const p=products.find(x=>x.id===id);
-
- if(!p)return;
-
- const input=document.createElement("input");
-
- input.type="file";
- input.accept="image/*";
-
- input.onchange=()=>{
-
-  const file=input.files[0];
-
-  if(!file)return;
-
-  const reader=new FileReader();
-
-  reader.onload=()=>{
-
-   p.banner=reader.result;
-
-   save();
-   render();
-   renderAdmin();
-
-  };
-
-  reader.readAsDataURL(file);
- };
-
- input.click();
-}
-
-
-/* =====================================================
-   ADMIN — REMOVER BANNER
-===================================================== */
-
-function removeBanner(id){
-
- const p=products.find(x=>x.id===id);
-
- if(!p)return;
-
- p.banner="";
-
- save();
- render();
- renderAdmin();
-}
-
-
-/* =====================================================
-   ADMIN — CRONÔMETROS
-===================================================== */
-
-function createTimer(){
-
- const client=document.getElementById("timerclient").value.trim();
- const product=document.getElementById("timerproduct").value.trim();
- const days=Number(document.getElementById("timerdays").value);
-
- if(!client||!product||!days){
-
-  alert("Preencha cliente, produto e dias.");
-
-  return;
- }
-
- timers.push({
-  id:Date.now(),
-  client,
-  product,
-  expires:Date.now()+days*86400000
- });
-
- save();
- renderAdmin();
-
- document.getElementById("timerclient").value="";
- document.getElementById("timerproduct").value="";
- document.getElementById("timerdays").value="";
-}
-
-function renewTimer(id){
-
- const t=timers.find(x=>x.id===id);
-
- if(!t)return;
-
- const days=Number(prompt("Quantos dias deseja adicionar?","30"));
-
- if(!days||days<=0)return;
-
- t.expires=Math.max(Date.now(),t.expires)+days*86400000;
-
- save();
- renderAdmin();
-}
-
-function deleteTimer(id){
-
- timers=timers.filter(t=>t.id!==id);
-
- save();
- renderAdmin();
-}
-
-function clock(ms){
-
- if(ms<=0)return ["VENCIDO","expired"];
-
- let s=Math.floor(ms/1000);
-
- const d=Math.floor(s/86400);
- const h=Math.floor((s%86400)/3600);
- const m=Math.floor((s%3600)/60);
- const sec=s%60;
-
- return [
-  d+"d "+
-  String(h).padStart(2,"0")+"h "+
-  String(m).padStart(2,"0")+"m "+
-  String(sec).padStart(2,"0")+"s",
-  d<=2?"warning":""
- ];
-}
-
-function updateClocks(){
-
- document.querySelectorAll("[data-expire]").forEach(el=>{
-
-  const r=clock(Number(el.dataset.expire)-Date.now());
-
-  el.textContent=r[0];
-
-  el.classList.remove("warning","expired");
-
-  if(r[1])el.classList.add(r[1]);
- });
-}
-
-
-/* =====================================================
-   ADMIN — RENDER
-===================================================== */
-
-function renderAdmin(){
-
- const box=document.getElementById("adminproducts");
-
- box.innerHTML=products.map(p=>{
-
-  const preview=p.banner
-   ?'<div class="preview" style="'+bg(p.banner)+'"></div>'
-   :'<div class="preview"><span>'+esc(p.icon||"▶")+'</span></div>';
-
-  return `
-  <div class="adminproduct">
-
-   ${preview}
-
-   <div class="ainfo">
-    <strong>${esc(p.name)}</strong>
-    <small>${money(p.price)} • ${esc(p.category)}</small>
-   </div>
-
-   <button class="small" onclick="editProduct(${p.id})">
-    Editar
-   </button>
-
-   <button class="danger" onclick="deleteProduct(${p.id})">
-    Excluir
-   </button>
-
-   <div class="bannerbuttons">
-
-    <button class="small" onclick="changeBanner(${p.id})">
-     📷 Escolher banner
-    </button>
-
-    <button class="danger" onclick="removeBanner(${p.id})">
-     🗑 Remover banner
-    </button>
-
-   </div>
-
-  </div>
-  `;
- }).join("");
-
-
- const tb=document.getElementById("timers");
-
- if(!timers.length){
-
-  tb.innerHTML='<div class="empty">Nenhum cronômetro cadastrado.</div>';
-
- }else{
-
-  tb.innerHTML=timers.map(t=>{
-
-   const r=clock(t.expires-Date.now());
-
-   return `
-   <div class="timer">
-
-    <div class="timerTop">
-
-     <div>
-      <strong>${esc(t.client)}</strong><br>
-      <small>${esc(t.product)}</small>
-     </div>
-
-     <div class="clock ${r[1]}" data-expire="${t.expires}">
-      ${r[0]}
-     </div>
-
-    </div>
-
-    <div class="timerActions">
-
-     <button class="small" onclick="renewTimer(${t.id})">
-      + Renovar
-     </button>
-
-     <button class="danger" onclick="deleteTimer(${t.id})">
-      Excluir
-     </button>
-
-    </div>
-
-   </div>
-   `;
-
-  }).join("");
- }
-
-
- const ob=document.getElementById("orders");
-
- if(!orders.length){
-
-  ob.innerHTML='<div class="empty">Nenhuma venda registrada.</div>';
-
- }else{
-
-  ob.innerHTML=orders.slice(0,100).map(o=>`
-
-   <div class="order">
-
-    <div>
-     <strong>${esc(o.product)}</strong><br>
-     <small>${esc(o.client)} • ${esc(o.date)}</small>
-    </div>
-
-    <strong>${money(o.price)}</strong>
-
-   </div>
-
-  `).join("");
- }
-
- stats();
- loadTheme();
-}
-
-
-/* =====================================================
-   ESTATÍSTICAS
-===================================================== */
-
-function stats(){
-
- document.getElementById("nproducts").textContent=products.length;
- document.getElementById("nsales").textContent=orders.length;
- document.getElementById("ntimers").textContent=timers.length;
-
- const total=orders.reduce(
-  (sum,o)=>sum+Number(o.price||0),0
- );
-
- document.getElementById("nmoney").textContent=money(total);
-}
-
-
-/* =====================================================
-   TEMA
-===================================================== */
-
-function theme(){
-
- const c1=document.getElementById("color1").value;
- const c2=document.getElementById("color2").value;
-
- localStorage.setItem("ps_color1",c1);
- localStorage.setItem("ps_color2",c2);
-
- applyTheme();
-}
-
-function applyTheme(){
-
- const c1=localStorage.getItem("ps_color1")||"#7c3aed";
- const c2=localStorage.getItem("ps_color2")||"#ec4899";
-
- document.documentElement.style.setProperty("--p",c1);
- document.documentElement.style.setProperty("--s",c2);
-}
-
-function loadTheme(){
-
- document.getElementById("color1").value=
- localStorage.getItem("ps_color1")||"#7c3aed";
-
- document.getElementById("color2").value=
- localStorage.getItem("ps_color2")||"#ec4899";
-}
-
-
-/* =====================================================
-   TICKER
-===================================================== */
-
-function ticker(){
-
- const el=document.getElementById("ticker");
-
- let list=orders.slice(0,8);
-
- if(!list.length){
-
-  list=[
-   {client:"Cliente",product:"uma oferta"},
-   {client:"Cliente",product:"um produto"}
-  ];
- }
-
- list=[...list,...list];
-
- el.innerHTML=list.map(o=>`
-
-  <div class="tick">
-   ✓ <strong>${esc(o.client)}</strong>
-   acabou de comprar ${esc(o.product)}
-  </div>
-
- `).join("");
-}
-
-
-/* =====================================================
-   INICIALIZAÇÃO
-===================================================== */
-
-document.getElementById("year").textContent=new Date().getFullYear();
-
-document.getElementById("wa").href=
- "https://wa.me/"+WHATSAPP+
- "?text="+encodeURIComponent(
- "Olá! Gostaria de atendimento no Poderoso Streaming."
- );
-
-applyTheme();
-render();
-ticker();
-stats();
-
-setInterval(updateClocks,1000);
 
 </script>
-
-</body>
-</html>
