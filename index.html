@@ -6,772 +6,477 @@
 <title>Poderoso Streaming</title>
 
 <style>
-:root{
-  --primary:#7c3aed;
-  --secondary:#ec4899;
-  --bg:#07070b;
-  --card:#12121a;
-  --card2:#191923;
-  --text:#fff;
-  --muted:#a1a1aa;
-  --border:rgba(255,255,255,.1);
-  --green:#22c55e;
-  --red:#ef4444;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  background:
-  radial-gradient(circle at 10% 0%,rgba(124,58,237,.22),transparent 30%),
-  radial-gradient(circle at 90% 0%,rgba(236,72,153,.14),transparent 30%),
-  var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-  min-height:100vh;
-}
-
-button,input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
-
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(7,7,11,.95);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid var(--border);
-}
-
-.nav{
-  max-width:1350px;
-  margin:auto;
-  padding:12px 16px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:900;
-  white-space:nowrap;
-}
-
-.logo{
-  width:42px;
-  height:42px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-}
-
-.links{
-  display:flex;
-  gap:3px;
-  flex:1;
-  overflow-x:auto;
-}
-
-.links button{
-  border:0;
-  background:transparent;
-  color:#aaa;
-  padding:10px;
-  border-radius:9px;
-  white-space:nowrap;
-}
-
-.links button:hover{
-  background:#ffffff0d;
-  color:#fff;
-}
-
-.nav-buttons{
-  display:flex;
-  gap:7px;
-}
-
-.nav-btn{
-  border:1px solid var(--border);
-  background:#181820;
-  color:#fff;
-  padding:10px 13px;
-  border-radius:10px;
-}
-
-.owner{
-  border:0;
-  border-radius:10px;
-  padding:11px 14px;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:#fff;
-  font-weight:800;
-}
-
-.container{
-  max-width:1350px;
-  margin:auto;
-  padding:20px 16px;
-}
-
-.hero{
-  min-height:350px;
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:45px;
-  position:relative;
-  overflow:hidden;
-  background:
-  linear-gradient(120deg,#171222,#101017);
-}
-
-.hero:after{
-  content:"";
-  position:absolute;
-  width:450px;
-  height:450px;
-  right:-180px;
-  top:-190px;
-  border-radius:50%;
-  background:#7c3aed33;
-  filter:blur(50px);
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-  max-width:720px;
-}
-
-.badge{
-  display:inline-block;
-  padding:8px 12px;
-  border:1px solid var(--border);
-  border-radius:99px;
-  background:#ffffff08;
-  color:#ddd;
-  font-size:12px;
-  margin-bottom:15px;
-}
-
-.hero h1{
-  font-size:clamp(43px,7vw,72px);
-  line-height:.95;
-  margin-bottom:18px;
-}
-
-.gradient{
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  color:#b5b5c0;
-  line-height:1.6;
-  margin-bottom:22px;
-}
-
-.actions{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-}
-
-.btn{
-  border:0;
-  border-radius:10px;
-  padding:12px 17px;
-  font-weight:800;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        linear-gradient(rgba(5,5,12,.82), rgba(5,5,12,.94)),
+        radial-gradient(circle at top, #25254a, #07070d 65%);
+    color: #fff;
+    min-height: 100vh;
 }
 
-.primary{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:#fff;
+button,
+input,
+select {
+    font: inherit;
 }
 
-.dark{
-  background:#20202b;
-  color:#fff;
-  border:1px solid var(--border);
+button {
+    cursor: pointer;
 }
 
-.ticker{
-  max-width:1350px;
-  margin:auto;
-  padding:14px 16px;
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(8,8,15,.94);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-.ticker-box{
-  overflow:hidden;
-  background:#0e0e15;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:10px;
+.header-inner {
+    max-width: 1250px;
+    margin: auto;
+    min-height: 72px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
-.track{
-  display:flex;
-  width:max-content;
-  animation:move 30s linear infinite;
+.logo {
+    font-size: 21px;
+    font-weight: 900;
+    white-space: nowrap;
 }
 
-.tick{
-  margin-right:55px;
-  color:#bbb;
-  font-size:13px;
+.logo span {
+    color: #9b5cff;
 }
 
-.tick strong{
-  color:var(--green);
+.nav {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
 }
 
-@keyframes move{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
+.nav button,
+.login-btn,
+.more-btn {
+    border: 0;
+    background: transparent;
+    color: #ddd;
+    padding: 10px 12px;
+    border-radius: 10px;
+    transition: .2s;
 }
 
-.search{
-  width:100%;
-  background:#101017;
-  border:1px solid var(--border);
-  color:#fff;
-  border-radius:11px;
-  padding:14px 15px;
-  outline:0;
-  margin-bottom:14px;
+.nav button:hover,
+.login-btn:hover,
+.more-btn:hover {
+    background: rgba(255,255,255,.08);
+    color: #fff;
 }
 
-.search:focus{
-  border-color:var(--primary);
+.login-btn {
+    background: #8b4dff;
+    color: white;
+    font-weight: 700;
 }
 
-.categories{
-  display:flex;
-  gap:7px;
-  overflow-x:auto;
-  margin-bottom:22px;
+.more-wrapper {
+    position: relative;
 }
 
-.cat{
-  border:1px solid var(--border);
-  background:#12121a;
-  color:#aaa;
-  padding:9px 14px;
-  border-radius:99px;
-  white-space:nowrap;
+.more-btn {
+    font-size: 25px;
+    line-height: 1;
 }
 
-.cat.active{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:#fff;
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 48px;
+    width: 230px;
+    background: #15151f;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 15px 50px rgba(0,0,0,.45);
 }
 
-.title{
-  margin-bottom:15px;
+.dropdown.show {
+    display: block;
 }
 
-.title h2{
-  margin-bottom:4px;
+.dropdown button {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    text-align: left;
+    padding: 13px;
+    border-radius: 9px;
 }
 
-.title p{
-  font-size:12px;
-  color:var(--muted);
+.dropdown button:hover {
+    background: rgba(255,255,255,.08);
 }
 
-.products{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
+.hero {
+    max-width: 1250px;
+    margin: auto;
+    padding: 65px 18px 35px;
+    text-align: center;
 }
 
-.card{
-  background:linear-gradient(#15151f,#101017);
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:13px;
-  overflow:hidden;
-  transition:.2s;
+.hero h1 {
+    font-size: clamp(35px, 6vw, 65px);
+    margin-bottom: 12px;
 }
 
-.card:hover{
-  transform:translateY(-3px);
-  border-color:#7c3aed88;
+.hero h1 span {
+    color: #9b5cff;
 }
 
-.banner{
-  width:100%;
-  height:155px;
-  border-radius:12px;
-  background:#24242e center/cover no-repeat;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  margin-bottom:12px;
+.hero p {
+    color: #aaa;
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.6;
 }
 
-.banner span{
-  font-size:35px;
-  font-weight:900;
-  text-shadow:0 2px 8px #000;
+.search-box {
+    max-width: 650px;
+    margin: 30px auto;
+    display: flex;
+    gap: 10px;
 }
 
-.tag{
-  display:inline-block;
-  background:#22c55e1c;
-  color:#4ade80;
-  padding:5px 8px;
-  border-radius:99px;
-  font-size:10px;
-  margin-bottom:7px;
+.search-box input {
+    flex: 1;
+    background: #14141e;
+    border: 1px solid #292936;
+    color: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    outline: none;
 }
 
-.card h3{
-  font-size:17px;
-  margin-bottom:6px;
+.search-box button {
+    border: 0;
+    border-radius: 12px;
+    padding: 0 22px;
+    background: #8b4dff;
+    color: #fff;
+    font-weight: 700;
 }
 
-.desc{
-  color:#92929e;
-  font-size:12px;
-  min-height:32px;
-  line-height:1.4;
+.tabs {
+    max-width: 1250px;
+    margin: 10px auto 25px;
+    padding: 0 18px;
+    display: flex;
+    gap: 9px;
+    overflow-x: auto;
 }
 
-.price{
-  font-size:23px;
-  font-weight:900;
-  margin:13px 0;
+.tabs button {
+    white-space: nowrap;
+    border: 1px solid #292936;
+    background: #13131c;
+    color: #bbb;
+    padding: 11px 16px;
+    border-radius: 999px;
 }
 
-.price small{
-  font-size:10px;
-  color:#777;
-  font-weight:normal;
+.tabs button.active,
+.tabs button:hover {
+    background: #8b4dff;
+    color: white;
+    border-color: #8b4dff;
 }
 
-.buy{
-  width:100%;
-  padding:11px;
-  border:0;
-  border-radius:10px;
-  color:#fff;
-  font-weight:900;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
+.products {
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 18px 70px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
 }
 
-.empty{
-  grid-column:1/-1;
-  text-align:center;
-  padding:45px;
-  color:#777;
+.product {
+    background: linear-gradient(145deg, #181822, #101018);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px;
+    padding: 20px;
+    transition: .2s;
 }
 
-.section{
-  max-width:1350px;
-  margin:auto;
-  padding:20px 16px 50px;
+.product:hover {
+    transform: translateY(-4px);
+    border-color: rgba(155,92,255,.5);
 }
 
-.reviews{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
+.product-logo {
+    width: 65px;
+    height: 65px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #252532;
+    font-size: 28px;
+    margin-bottom: 15px;
 }
 
-.review{
-  background:#12121a;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:18px;
+.product h3 {
+    margin-bottom: 8px;
 }
 
-.stars{
-  color:#facc15;
-  margin-bottom:9px;
+.product .type {
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 14px;
 }
 
-.review p{
-  color:#aaa;
-  line-height:1.5;
-  font-size:13px;
-  margin-bottom:12px;
+.price {
+    font-size: 25px;
+    font-weight: 900;
+    margin-bottom: 15px;
 }
 
-.review strong{
-  font-size:13px;
+.price small {
+    font-size: 13px;
+    color: #999;
+    font-weight: normal;
 }
 
-.whatsapp{
-  position:fixed;
-  right:17px;
-  bottom:17px;
-  width:57px;
-  height:57px;
-  border-radius:50%;
-  background:#25d366;
-  color:#fff;
-  display:grid;
-  place-items:center;
-  text-decoration:none;
-  font-size:28px;
-  z-index:1500;
-  box-shadow:0 8px 30px #25d36644;
+.buy {
+    width: 100%;
+    border: 0;
+    border-radius: 11px;
+    padding: 13px;
+    background: #8b4dff;
+    color: white;
+    font-weight: 800;
 }
 
-.top{
-  position:fixed;
-  right:25px;
-  bottom:84px;
-  width:39px;
-  height:39px;
-  border-radius:50%;
-  border:1px solid var(--border);
-  background:#20202a;
-  color:#fff;
-  z-index:1500;
+.buy:hover {
+    background: #a16cff;
 }
 
-footer{
-  text-align:center;
-  padding:28px;
-  border-top:1px solid var(--border);
-  color:#777;
-  font-size:12px;
+.empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 50px;
+    color: #888;
 }
 
-/* MODAIS */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:3000;
-  background:#000c;
-  backdrop-filter:blur(7px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:17px;
-}
-
-.modalbox{
-  position:relative;
-  width:100%;
-  max-width:470px;
-  max-height:90vh;
-  overflow:auto;
-  background:#12121a;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:23px;
-}
-
-.modalbox h2{
-  margin-bottom:8px;
-}
-
-.modalbox p{
-  color:#999;
-  font-size:13px;
-  line-height:1.5;
-  margin-bottom:14px;
-}
-
-.close{
-  position:absolute;
-  right:12px;
-  top:12px;
-  width:34px;
-  height:34px;
-  border:0;
-  border-radius:9px;
-  background:#252531;
-  color:#fff;
-  font-size:20px;
-}
-
-.input{
-  width:100%;
-  padding:12px;
-  margin:5px 0;
-  background:#0b0b11;
-  color:#fff;
-  border:1px solid var(--border);
-  border-radius:10px;
-  outline:0;
-}
-
-.input:focus{
-  border-color:var(--primary);
-}
-
-.switch{
-  display:flex;
-  gap:5px;
-  margin-bottom:15px;
-}
-
-.switch button{
-  flex:1;
-}
-
-.user-info{
-  background:#191923;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:13px;
-  margin-bottom:12px;
-}
-
-.user-info strong{
-  display:block;
-  margin-bottom:4px;
-}
-
-.user-info small{
-  color:#999;
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    overflow-y: auto;
 }
 
-/* ADMIN */
-
-.admin{
-  max-width:1350px;
-  margin:auto;
-  padding:23px 16px 70px;
-}
-
-.adminhead,
-.abox,
-.stat{
-  background:#111119;
-  border:1px solid var(--border);
-  border-radius:16px;
-}
-
-.adminhead,
-.abox{
-  padding:18px;
-  margin-bottom:14px;
-}
-
-.adminhead p{
-  color:#999;
-  font-size:13px;
-  margin:7px 0 13px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:11px;
-  margin-bottom:14px;
-}
-
-.stat{
-  padding:17px;
-}
-
-.stat span{
-  font-size:12px;
-  color:#999;
-}
-
-.stat strong{
-  display:block;
-  font-size:25px;
-  margin-top:5px;
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.agrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
+.modal-box {
+    width: min(700px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #15151f;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    padding: 24px;
 }
 
-.abox h3{
-  margin-bottom:13px;
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
 }
 
-.row{
-  display:flex;
-  gap:7px;
+.close {
+    border: 0;
+    background: transparent;
+    color: #aaa;
+    font-size: 28px;
 }
 
-.row>*{
-  flex:1;
+.form {
+    display: grid;
+    gap: 12px;
 }
 
-.adminproduct{
-  padding:13px 0;
-  border-bottom:1px solid var(--border);
-  display:grid;
-  grid-template-columns:72px 1fr auto auto;
-  gap:9px;
-  align-items:center;
+.form label {
+    color: #bbb;
+    font-size: 13px;
 }
 
-.preview{
-  width:72px;
-  height:49px;
-  border-radius:8px;
-  background:#24242e center/cover no-repeat;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  overflow:hidden;
+.form input,
+.form select {
+    width: 100%;
+    background: #0e0e15;
+    border: 1px solid #30303d;
+    color: white;
+    border-radius: 10px;
+    padding: 13px;
+    outline: none;
 }
 
-.ainfo strong{
-  display:block;
+.primary {
+    border: 0;
+    border-radius: 11px;
+    padding: 13px;
+    background: #8b4dff;
+    color: #fff;
+    font-weight: 800;
 }
 
-.ainfo small{
-  color:#888;
+.secondary {
+    border: 1px solid #30303d;
+    border-radius: 11px;
+    padding: 12px;
+    background: transparent;
+    color: #fff;
 }
 
-.small,
-.danger{
-  border:0;
-  border-radius:8px;
-  padding:8px 10px;
-  color:#fff;
-  background:#24242d;
+.danger {
+    border: 0;
+    border-radius: 9px;
+    padding: 9px 12px;
+    background: #b83232;
+    color: white;
 }
 
-.danger{
-  background:#ef44441c;
-  color:#f87171;
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
-.bannerbuttons{
-  grid-column:1/-1;
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
+.stat {
+    background: #0e0e15;
+    border: 1px solid #292936;
+    border-radius: 14px;
+    padding: 18px;
 }
 
-.timer{
-  background:#0c0c12;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:13px;
-  margin-top:9px;
+.stat strong {
+    display: block;
+    font-size: 28px;
+    margin-top: 7px;
 }
 
-.timerTop{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
+.admin-product {
+    background: #0e0e15;
+    border: 1px solid #292936;
+    border-radius: 13px;
+    padding: 14px;
+    margin-bottom: 10px;
 }
 
-.timer small{
-  color:#888;
+.admin-product-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.clock{
-  font-size:18px;
-  font-weight:900;
+.actions {
+    display: flex;
+    gap: 7px;
+    margin-top: 12px;
 }
 
-.warning{
-  color:#f59e0b;
+.customer-screen {
+    background: #0e0e15;
+    border: 1px solid #292936;
+    border-radius: 15px;
+    padding: 17px;
+    margin-bottom: 12px;
 }
 
-.expired{
-  color:#ef4444;
+.timer {
+    font-size: 23px;
+    font-weight: 900;
+    margin: 12px 0;
+    color: #b996ff;
 }
 
-.timerActions{
-  display:flex;
-  gap:7px;
-  margin-top:10px;
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    background: #193d27;
+    color: #75e49a;
 }
 
-.order{
-  padding:11px 0;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
+footer {
+    border-top: 1px solid rgba(255,255,255,.08);
+    text-align: center;
+    padding: 30px 18px;
+    color: #777;
 }
 
-.order small{
-  color:#888;
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #fff;
+    color: #111;
+    padding: 13px 20px;
+    border-radius: 999px;
+    z-index: 5000;
+    transition: .3s;
+    font-weight: 700;
 }
-
-@media(max-width:1050px){
-  .products{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-@media(max-width:800px){
-  .products{
-    grid-template-columns:repeat(2,1fr);
-  }
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .agrid{
-    grid-template-columns:1fr;
-  }
-
-  .reviews{
-    grid-template-columns:1fr;
-  }
+.toast.show {
+    transform: translateX(-50%) translateY(0);
 }
-
-@media(max-width:600px){
-  .nav{
-    padding:9px;
-  }
-
-  .links{
-    order:3;
-    width:100%;
-  }
-
-  .hero{
-    padding:32px 21px;
-  }
-
-  .hero h1{
-    font-size:43px;
-  }
 
-  .products{
-    grid-template-columns:1fr;
-  }
+@media (max-width: 800px) {
+    .header-inner {
+        flex-wrap: wrap;
+    }
 
-  .row{
-    flex-direction:column;
-  }
+    .nav {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
 
-  .adminproduct{
-    grid-template-columns:60px 1fr;
-  }
+    .logo {
+        flex: 1;
+    }
 
-  .banner{
-    height:175px;
-  }
+    .hero {
+        padding-top: 40px;
+    }
 }
 </style>
 </head>
@@ -779,413 +484,1315 @@ footer{
 <body>
 
 <header>
-<div class="nav">
+    <div class="header-inner">
 
-  <div class="brand">
-    <div class="logo">PS</div>
-    <span>Poderoso Streaming</span>
-  </div>
+        <div class="logo">
+            Poderoso <span>Streaming</span>
+        </div>
 
-  <div class="links">
-    <button onclick="showAll()">Ofertas</button>
-    <button onclick="best()">Mais vendidos</button>
-    <button onclick="goCat('Streaming')">Streaming</button>
-    <button onclick="goCat('Combos')">Combos</button>
-    <button onclick="goCat('Jogos')">Jogos</button>
-    <button onclick="goCat('Free Fire')">Free Fire</button>
-    <button onclick="goCat('Área feminina')">Área feminina</button>
-  </div>
+        <nav class="nav">
+            <button onclick="setCategory('todos')">Início</button>
+            <button onclick="setCategory('ofertas')">Ofertas</button>
+            <button onclick="setCategory('streaming')">Streaming</button>
+            <button onclick="setCategory('mais')">Mais vendidos</button>
+            <button onclick="setCategory('jogos')">Jogos</button>
+            <button onclick="setCategory('freefire')">Free Fire</button>
+        </nav>
 
-  <div class="nav-buttons">
-    <button class="nav-btn" onclick="openClient()">👤 Cliente</button>
-    <button class="owner" onclick="openOwner()">⚙ Proprietário</button>
-  </div>
+        <button class="login-btn" onclick="openLogin()">
+            Entrar ou se cadastrar
+        </button>
 
-</div>
+        <div class="more-wrapper">
+            <button class="more-btn" onclick="toggleMenu()">⋮</button>
+
+            <div class="dropdown" id="moreMenu">
+                <button onclick="openLogin(); closeMenu();">
+                    👤 Entrar ou se cadastrar
+                </button>
+
+                <button onclick="openOwner(); closeMenu();">
+                    🔐 Área do Proprietário
+                </button>
+
+                <button onclick="showToast('Bem-vindo ao Poderoso Streaming!'); closeMenu();">
+                    ℹ️ Informações
+                </button>
+            </div>
+        </div>
+
+    </div>
 </header>
 
-<main id="clientPage">
-
-<div class="container">
 <section class="hero">
+    <h1>Seu entretenimento em um só <span>lugar</span></h1>
+    <p>
+        Escolha sua tela, confira o preço e faça seu pedido.
+        Produtos compartilhados ou privados, conforme disponibilidade.
+    </p>
 
-<div class="hero-content">
-
-  <div class="badge">🔥 OFERTAS DISPONÍVEIS</div>
-
-  <h1>
-    Poderoso
-    <span class="gradient">Streaming</span>
-  </h1>
-
-  <p>
-    Suas plataformas favoritas em um só lugar.
-    Escolha seu produto e fale diretamente conosco.
-  </p>
-
-  <div class="actions">
-    <button class="btn primary" onclick="scrollProducts()">
-      Ver ofertas
-    </button>
-
-    <button class="btn dark" onclick="support()">
-      Falar com suporte
-    </button>
-  </div>
-
-</div>
-
-</section>
-</div>
-
-<div class="ticker">
-<div class="ticker-box">
-<div class="track" id="ticker"></div>
-</div>
-</div>
-
-<div class="container">
-
-<input
-id="search"
-class="search"
-placeholder="🔎 Pesquisar plataforma, combo ou produto..."
-oninput="render()"
-onkeydown="enterSearch(event)"
->
-
-<div class="categories">
-
-<button class="cat active" onclick="category('Todos',this)">Todos</button>
-<button class="cat" onclick="category('Streaming',this)">Streaming</button>
-<button class="cat" onclick="category('Combos',this)">Combos</button>
-<button class="cat" onclick="category('Jogos',this)">Jogos</button>
-<button class="cat" onclick="category('Free Fire',this)">Free Fire</button>
-<button class="cat" onclick="category('Área feminina',this)">Área feminina</button>
-
-</div>
-
-<div class="title">
-<h2>Catálogo de produtos</h2>
-<p>Escolha uma plataforma ou combo para continuar.</p>
-</div>
-
-<div class="products" id="products"></div>
-
-</div>
-
-<section class="section">
-
-<div class="title">
-<h2>⭐ Avaliações de clientes</h2>
-<p>Confira alguns comentários sobre nossa loja.</p>
-</div>
-
-<div class="reviews">
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>
-“Atendimento rápido e tudo explicado direitinho.
-Gostei bastante da experiência.”
-</p>
-<strong>Cliente Poderoso</strong>
-</div>
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>
-“Foi fácil escolher o produto e entrar em contato.
-Atendimento muito bom.”
-</p>
-<strong>Cliente verificado</strong>
-</div>
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>
-“Gostei da organização da página e do atendimento.
-Voltarei a comprar.”
-</p>
-<strong>Cliente Poderoso</strong>
-</div>
-
-</div>
-
+    <div class="search-box">
+        <input
+            id="search"
+            type="search"
+            placeholder="Pesquisar streaming, jogo ou produto..."
+            onkeydown="searchEnter(event)"
+        >
+        <button onclick="searchProducts()">Pesquisar</button>
+    </div>
 </section>
 
-</main>
-
-<!-- ADMIN -->
-
-<section id="adminPage" class="admin hidden">
-
-<div class="adminhead">
-
-<h1>⚙ Área do Proprietário</h1>
-
-<p>
-Gerencie produtos, preços, banners, vendas,
-cronômetros e personalização.
-</p>
-
-<button class="btn dark" onclick="logoutOwner()">Sair</button>
-
+<div class="tabs">
+    <button class="active" onclick="setCategory('todos', this)">Todos</button>
+    <button onclick="setCategory('streaming', this)">Streaming</button>
+    <button onclick="setCategory('ofertas', this)">Ofertas</button>
+    <button onclick="setCategory('mais', this)">Mais vendidos</button>
+    <button onclick="setCategory('jogos', this)">Jogos</button>
 </div>
 
-<div class="stats">
-
-<div class="stat">
-<span>Produtos</span>
-<strong id="nproducts">0</strong>
-</div>
-
-<div class="stat">
-<span>Vendas</span>
-<strong id="nsales">0</strong>
-</div>
-
-<div class="stat">
-<span>Renovações</span>
-<strong id="ntimers">0</strong>
-</div>
-
-<div class="stat">
-<span>Total vendido</span>
-<strong id="nmoney">R$ 0,00</strong>
-</div>
-
-</div>
-
-<div class="agrid">
-
-<div class="abox">
-
-<h3>➕ Adicionar produto</h3>
-
-<input id="newname" class="input" placeholder="Nome da plataforma">
-
-<input id="newprice" class="input" type="number" step="0.01" placeholder="Preço">
-
-<input id="newcat" class="input" placeholder="Categoria" value="Streaming">
-
-<input id="newdesc" class="input" placeholder="Descrição">
-
-<label style="color:#999;font-size:12px">
-Banner do produto
-</label>
-
-<input id="newbanner" class="input" type="file" accept="image/*">
-
-<button class="btn primary" style="width:100%;margin-top:7px" onclick="addProduct()">
-Adicionar produto
-</button>
-
-</div>
-
-<div class="abox">
-
-<h3>🎨 Personalização</h3>
-
-<label style="color:#999;font-size:12px">
-Cor principal
-</label>
-
-<input id="color1" class="input" type="color">
-
-<label style="color:#999;font-size:12px">
-Cor secundária
-</label>
-
-<input id="color2" class="input" type="color">
-
-<button class="btn primary" style="width:100%;margin-top:7px" onclick="theme()">
-Salvar personalização
-</button>
-
-</div>
-
-</div>
-
-<div class="abox">
-
-<h3>🖼️ Plataformas, preços e banners</h3>
-
-<p style="color:#999;font-size:12px;line-height:1.5;margin-bottom:10px">
-Cada produto possui seu próprio banner. Use
-<strong>Escolher banner</strong> para selecionar uma imagem
-do seu dispositivo e substituir o banner daquele produto.
-</p>
-
-<div id="adminproducts"></div>
-
-</div>
-
-<div class="abox">
-
-<h3>⏱️ Cronômetros de renovação</h3>
-
-<div class="row">
-
-<input id="timerclient" class="input" placeholder="Nome do cliente">
-
-<input id="timerproduct" class="input" placeholder="Produto / tela">
-
-<input id="timerdays" class="input" type="number" min="1" placeholder="Dias">
-
-<button class="btn primary" onclick="createTimer()">
-Criar
-</button>
-
-</div>
-
-<div id="timers"></div>
-
-</div>
-
-<div class="abox">
-
-<h3>🛒 Vendas registradas</h3>
-
-<div id="orders"></div>
-
-</div>
-
-</section>
-
-<a id="wa" class="whatsapp" target="_blank">✆</a>
-
-<button class="top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-↑
-</button>
+<main class="products" id="products"></main>
 
 <footer>
-© <span id="year"></span> Poderoso Streaming
+    <p>Poderoso Streaming © 2026</p>
+    <p>Atendimento e suporte pelo WhatsApp</p>
 </footer>
 
-<!-- CLIENTE -->
+<!-- LOGIN / CLIENTE -->
+<div class="modal" id="loginModal">
+    <div class="modal-box">
 
-<div id="clientModal" class="modal hidden">
+        <div class="modal-header">
+            <h2>Entrar ou se cadastrar</h2>
+            <button class="close" onclick="closeModal('loginModal')">×</button>
+        </div>
 
-<div class="modalbox">
+        <div id="loginArea">
 
-<button class="close" onclick="closeModal('clientModal')">×</button>
+            <form class="form" onsubmit="loginCustomer(event)">
+                <label>Nome</label>
+                <input id="customerName" required placeholder="Seu nome">
 
-<h2>👤 Área do Cliente</h2>
+                <label>E-mail</label>
+                <input id="customerEmail" type="email" required placeholder="seu@email.com">
 
-<p>Entre na sua conta ou crie uma nova conta.</p>
+                <button class="primary" type="submit">
+                    Entrar
+                </button>
 
-<div class="switch">
+                <button
+                    class="secondary"
+                    type="button"
+                    onclick="registerCustomer()">
+                    Criar minha conta
+                </button>
+            </form>
 
-<button class="btn primary" id="loginTab" onclick="clientMode('login')">
-Entrar
-</button>
+        </div>
 
-<button class="btn dark" id="registerTab" onclick="clientMode('register')">
-Criar conta
-</button>
-
+    </div>
 </div>
 
-<div id="clientForm"></div>
+<!-- ÁREA DO CLIENTE -->
+<div class="modal" id="customerModal">
+    <div class="modal-box">
 
+        <div class="modal-header">
+            <h2>👤 Minhas Telas</h2>
+            <button class="close" onclick="closeModal('customerModal')">×</button>
+        </div>
+
+        <div id="customerContent"></div>
+
+    </div>
 </div>
 
+<!-- PROPRIETÁRIO -->
+<div class="modal" id="ownerModal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>🔐 Área do Proprietário</h2>
+            <button class="close" onclick="closeModal('ownerModal')">×</button>
+        </div>
+
+        <div id="ownerLogin">
+
+            <form class="form" onsubmit="ownerLogin(event)">
+                <label>Senha do proprietário</label>
+                <input id="ownerPassword" type="password" required>
+
+                <button class="primary" type="submit">
+                    Entrar no painel
+                </button>
+            </form>
+
+        </div>
+
+        <div id="ownerPanel" style="display:none">
+
+            <div class="admin-grid">
+
+                <div class="stat">
+                    Produtos
+                    <strong id="statProducts">0</strong>
+                </div>
+
+                <div class="stat">
+                    Clientes
+                    <strong id="statCustomers">0</strong>
+                </div>
+
+                <div class="stat">
+                    Telas ativas
+                    <strong id="statScreens">0</strong>
+                </div>
+
+            </div>
+
+            <button class="primary" style="width:100%;margin-bottom:20px"
+                onclick="openProductEditor()">
+                + Adicionar produto/tela
+            </button>
+
+            <h3 style="margin-bottom:12px">📺 Produtos e telas</h3>
+
+            <div id="adminProducts"></div>
+
+            <hr style="border-color:#292936;margin:25px 0">
+
+            <h3 style="margin-bottom:12px">⏱️ Cronômetros de renovação</h3>
+
+            <div id="adminScreens"></div>
+
+        </div>
+
+    </div>
 </div>
 
-<!-- COMPRA -->
+<!-- EDITAR PRODUTO -->
+<div class="modal" id="productModal">
+    <div class="modal-box">
 
-<div id="buyModal" class="modal hidden">
+        <div class="modal-header">
+            <h2 id="productModalTitle">Adicionar produto</h2>
+            <button class="close" onclick="closeModal('productModal')">×</button>
+        </div>
 
-<div class="modalbox">
+        <form class="form" onsubmit="saveProduct(event)">
 
-<button class="close" onclick="closeModal('buyModal')">×</button>
+            <input type="hidden" id="editProductId">
 
-<h2 id="buyname">Produto</h2>
+            <label>Nome do produto</label>
+            <input id="productName" required placeholder="Ex.: Netflix">
 
-<p id="buydesc"></p>
+            <label>Preço</label>
+            <input id="productPrice" type="number" min="0" step="0.01" required>
 
-<input id="buyer" class="input" placeholder="Seu nome">
+            <label>Tipo de tela</label>
+            <select id="productType">
+                <option value="Compartilhada">Tela Compartilhada</option>
+                <option value="Privada">Tela Privada</option>
+            </select>
 
-<button class="btn primary" style="width:100%;margin-top:7px" onclick="finishBuy()">
-Continuar pelo WhatsApp
-</button>
+            <label>Categoria</label>
+            <select id="productCategory">
+                <option value="streaming">Streaming</option>
+                <option value="ofertas">Ofertas</option>
+                <option value="mais">Mais vendidos</option>
+                <option value="jogos">Jogos</option>
+                <option value="freefire">Free Fire</option>
+            </select>
 
+            <label>Emoji/ícone</label>
+            <input id="productIcon" placeholder="📺">
+
+            <button class="primary" type="submit">
+                Salvar produto
+            </button>
+
+        </form>
+
+    </div>
 </div>
 
+<!-- ADICIONAR TELA PARA CLIENTE -->
+<div class="modal" id="screenModal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>Adicionar tela ao cliente</h2>
+            <button class="close" onclick="closeModal('screenModal')">×</button>
+        </div>
+
+        <form class="form" onsubmit="saveScreen(event)">
+
+            <label>Nome do cliente</label>
+            <input id="screenCustomer" required>
+
+            <label>Produto</label>
+            <select id="screenProduct"></select>
+
+            <label>Data e hora de vencimento</label>
+            <input id="screenExpiration" type="datetime-local" required>
+
+            <button class="primary" type="submit">
+                Criar cronômetro
+            </button>
+
+        </form>
+
+    </div>
 </div>
 
-<!-- SUPORTE -->
-
-<div id="supportModal" class="modal hidden">
-
-<div class="modalbox">
-
-<button class="close" onclick="closeModal('supportModal')">×</button>
-
-<h2>💬 Suporte</h2>
-
-<p>
-Clique abaixo para falar diretamente pelo WhatsApp.
-</p>
-
-<button class="btn primary" style="width:100%" onclick="openWhatsApp('Olá! Gostaria de atendimento no Poderoso Streaming.')">
-Abrir WhatsApp
-</button>
-
-</div>
-
-</div>
-
-<!-- SENHA PROPRIETÁRIO -->
-
-<div id="ownerModal" class="modal hidden">
-
-<div class="modalbox">
-
-<button class="close" onclick="closeModal('ownerModal')">×</button>
-
-<h2>⚙ Área do Proprietário</h2>
-
-<p>Digite a senha administrativa.</p>
-
-<input
-id="password"
-class="input"
-type="password"
-placeholder="Senha"
-onkeydown="if(event.key==='Enter')loginOwner()"
->
-
-<button class="btn primary" style="width:100%;margin-top:7px" onclick="loginOwner()">
-Entrar
-</button>
-
-<p id="error" style="color:#f87171;margin-top:9px"></p>
-
-</div>
-
-</div>
+<div class="toast" id="toast"></div>
 
 <script>
+/* =========================================================
+   CONFIGURAÇÃO
+   ========================================================= */
 
-const ADMIN_PASSWORD="32942186";
-const WHATSAPP="5527992410060";
+/*
+   TROQUE ESTA SENHA PELA SENHA QUE VOCÊ QUISER.
+   Ela serve apenas para proteger a interface administrativa
+   desta versão.
+*/
+const OWNER_PASSWORD = "ALTERE-SUA-SENHA-AQUI";
 
-const INITIAL=[
 
-{id:1,name:"Netflix",price:20,category:"Streaming",icon:"N",description:"Filmes e séries.",banner:""},
-{id:2,name:"Spotify",price:20,category:"Streaming",icon:"S",description:"Música e podcasts.",banner:""},
-{id:3,name:"Canva",price:20,category:"Área feminina",icon:"C",description:"Design e criação.",banner:""},
-{id:4,name:"HBO Max",price:20,category:"Streaming",icon:"HBO",description:"Filmes e séries.",banner:""},
-{id:5,name:"Premiere",price:28,category:"Streaming",icon:"P",description:"Conteúdo esportivo.",banner:""},
-{id:6,name:"Paramount+",price:24,category:"Streaming",icon:"P+",description:"Filmes e séries.",banner:""},
-{id:7,name:"YouTube Premium",price:34,category:"Streaming",icon:"▶",description:"YouTube Premium.",banner:""},
-{id:8,name:"Crunchyroll",price:20,category:"Streaming",icon:"CR",description:"Anime e entretenimento.",banner:""},
-{id:9,name:"Globoplay",price:16,category:"Streaming",icon:"G",description:"Conteúdo brasileiro.",banner:""},
-{id:10,name:"Claro TV Mais",price:32,category:"Streaming",icon:"C",description:"TV e entretenimento.",banner:""},
-{id:11,name:"Sky Mais",price:52,category:"Streaming",icon:"SKY",description:"TV e entretenimento.",banner:""},
-{id:12,name:"Apple TV",price:36,category:"Streaming",icon:"",description:"Filmes e séries.",banner:""},
-{id:13,name:"Riocine",price:32,category:"Streaming",icon:"R",description:"Entretenimento.",banner:""},
-{id:14,name:"Conta compartilhada privada",price:52,category:"Streaming",icon:"🔐",description:"Conta compartilhada privada.",banner:""},
-{id:15
+/* =========================================================
+   BANCO LOCAL
+   ========================================================= */
+
+const defaultProducts = [
+    {
+        id: crypto.randomUUID(),
+        name: "Netflix",
+        price: 20,
+        type: "Compartilhada",
+        category: "streaming",
+        icon: "🎬"
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Spotify",
+        price: 20,
+        type: "Privada",
+        category: "streaming",
+        icon: "🎵"
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Canva",
+        price: 20,
+        type: "Privada",
+        category: "streaming",
+        icon: "🎨"
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "HBO Max",
+        price: 20,
+        type: "Compartilhada",
+        category: "streaming",
+        icon: "🎞️"
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Xaxerol",
+        price: 20,
+        type: "Compartilhada",
+        category: "streaming",
+        icon: "📺"
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Telecine",
+        price: 20,
+        type: "Privada",
+        category: "streaming",
+        icon: "🍿"
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Premiere",
+        price: 20,
+        type: "Compartilhada",
+        category: "streaming",
+        icon: "⚽"
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Paramount+",
+        price: 20,
+        type: "Compartilhada",
+        category: "streaming",
+        icon: "⭐"
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "YouTube Premium",
+        price: 20,
+        type: "Privada",
+        category: "streaming",
+        icon: "▶️"
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Crunchyroll",
+        price: 20,
+        type: "Compartilhada",
+        category: "streaming",
+        icon: "🍥"
+    }
+];
+
+let products = JSON.parse(localStorage.getItem("ps_products"));
+
+if (!products || !Array.isArray(products)) {
+    products = defaultProducts;
+    saveProducts();
+}
+
+let customers =
+    JSON.parse(localStorage.getItem("ps_customers")) || [];
+
+let screens =
+    JSON.parse(localStorage.getItem("ps_screens")) || [];
+
+let currentCategory = "todos";
+let currentCustomer = null;
+
+
+/* =========================================================
+   LOCAL STORAGE
+   ========================================================= */
+
+function saveProducts() {
+    localStorage.setItem(
+        "ps_products",
+        JSON.stringify(products)
+    );
+}
+
+function saveCustomers() {
+    localStorage.setItem(
+        "ps_customers",
+        JSON.stringify(customers)
+    );
+}
+
+function saveScreens() {
+    localStorage.setItem(
+        "ps_screens",
+        JSON.stringify(screens)
+    );
+}
+
+
+/* =========================================================
+   PRODUTOS
+   ========================================================= */
+
+function renderProducts(list = null) {
+
+    const container = document.getElementById("products");
+
+    let data = list || products;
+
+    if (!list) {
+
+        if (currentCategory !== "todos") {
+            data = products.filter(
+                p => p.category === currentCategory
+            );
+        }
+    }
+
+    if (!data.length) {
+        container.innerHTML =
+            '<div class="empty">Nenhum produto encontrado.</div>';
+        return;
+    }
+
+    container.innerHTML = data.map(product => `
+
+        <article class="product">
+
+            <div class="product-logo">
+                ${escapeHTML(product.icon || "📺")}
+            </div>
+
+            <h3>${escapeHTML(product.name)}</h3>
+
+            <div class="type">
+                ${escapeHTML(product.type)}
+            </div>
+
+            <div class="price">
+                R$ ${Number(product.price).toFixed(2).replace(".", ",")}
+                <small>/tela</small>
+            </div>
+
+            <button class="buy"
+                onclick="buyProduct('${product.id}')">
+                Comprar
+            </button>
+
+        </article>
+
+    `).join("");
+}
+
+function buyProduct(id) {
+
+    const product = products.find(p => p.id === id);
+
+    if (!product) return;
+
+    const message =
+        `Olá! Tenho interesse em comprar ${product.name} - ${product.type} por R$ ${Number(product.price).toFixed(2).replace(".", ",")}.`;
+
+    const whatsappNumber = "5500000000000";
+
+    window.open(
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+        "_blank"
+    );
+}
+
+
+/* =========================================================
+   ABAS
+   ========================================================= */
+
+function setCategory(category, button = null) {
+
+    currentCategory = category;
+
+    document.querySelectorAll(".tabs button")
+        .forEach(btn => btn.classList.remove("active"));
+
+    if (button) {
+        button.classList.add("active");
+    }
+
+    renderProducts();
+}
+
+
+/* =========================================================
+   PESQUISA
+   ========================================================= */
+
+function searchEnter(event) {
+
+    if (event.key === "Enter") {
+        searchProducts();
+    }
+}
+
+function searchProducts() {
+
+    const query =
+        document.getElementById("search").value
+        .trim()
+        .toLowerCase();
+
+    if (!query) {
+        renderProducts();
+        return;
+    }
+
+    const result = products.filter(product =>
+        product.name.toLowerCase().includes(query) ||
+        product.type.toLowerCase().includes(query)
+    );
+
+    renderProducts(result);
+}
+
+
+/* =========================================================
+   MENU ⋮
+   ========================================================= */
+
+function toggleMenu() {
+
+    document
+        .getElementById("moreMenu")
+        .classList.toggle("show");
+}
+
+function closeMenu() {
+
+    document
+        .getElementById("moreMenu")
+        .classList.remove("show");
+}
+
+document.addEventListener("click", function(event) {
+
+    const wrapper =
+        document.querySelector(".more-wrapper");
+
+    if (!wrapper.contains(event.target)) {
+        closeMenu();
+    }
+
+});
+
+
+/* =========================================================
+   MODAIS
+   ========================================================= */
+
+function openModal(id) {
+    document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove("show");
+}
+
+
+/* =========================================================
+   CLIENTE
+   ========================================================= */
+
+function openLogin() {
+
+    const saved =
+        localStorage.getItem("ps_current_customer");
+
+    if (saved) {
+
+        currentCustomer = JSON.parse(saved);
+
+        renderCustomer();
+
+        openModal("customerModal");
+
+    } else {
+
+        openModal("loginModal");
+
+    }
+}
+
+function registerCustomer() {
+
+    const name =
+        document.getElementById("customerName").value.trim();
+
+    const email =
+        document.getElementById("customerEmail").value.trim();
+
+    if (!name || !email) {
+        showToast("Preencha nome e e-mail.");
+        return;
+    }
+
+    const existing =
+        customers.find(
+            c => c.email.toLowerCase() === email.toLowerCase()
+        );
+
+    if (existing) {
+
+        currentCustomer = existing;
+
+    } else {
+
+        currentCustomer = {
+            id: crypto.randomUUID(),
+            name,
+            email
+        };
+
+        customers.push(currentCustomer);
+
+        saveCustomers();
+    }
+
+    localStorage.setItem(
+        "ps_current_customer",
+        JSON.stringify(currentCustomer)
+    );
+
+    closeModal("loginModal");
+
+    renderCustomer();
+
+    openModal("customerModal");
+
+    showToast("Conta criada com sucesso!");
+}
+
+function loginCustomer(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("customerName").value.trim();
+
+    const email =
+        document.getElementById("customerEmail").value.trim();
+
+    const existing =
+        customers.find(
+            c => c.email.toLowerCase() === email.toLowerCase()
+        );
+
+    if (existing) {
+
+        currentCustomer = existing;
+
+    } else {
+
+        currentCustomer = {
+            id: crypto.randomUUID(),
+            name,
+            email
+        };
+
+        customers.push(currentCustomer);
+
+        saveCustomers();
+    }
+
+    localStorage.setItem(
+        "ps_current_customer",
+        JSON.stringify(currentCustomer)
+    );
+
+    closeModal("loginModal");
+
+    renderCustomer();
+
+    openModal("customerModal");
+}
+
+function renderCustomer() {
+
+    const container =
+        document.getElementById("customerContent");
+
+    if (!currentCustomer) {
+        container.innerHTML =
+            "<p>Faça login para visualizar suas telas.</p>";
+        return;
+    }
+
+    const myScreens =
+        screens.filter(
+            screen => screen.customerId === currentCustomer.id
+        );
+
+    let html = `
+        <p style="color:#aaa;margin-bottom:20px">
+            Olá, ${escapeHTML(currentCustomer.name)}.
+        </p>
+    `;
+
+    if (!myScreens.length) {
+
+        html += `
+            <div class="empty">
+                Você ainda não possui telas cadastradas.
+            </div>
+        `;
+
+    } else {
+
+        html += myScreens.map(screen => {
+
+            const product =
+                products.find(p => p.id === screen.productId);
+
+            return `
+
+                <div class="customer-screen">
+
+                    <h3>
+                        ${escapeHTML(
+                            product ? product.name : "Tela"
+                        )}
+                    </h3>
+
+                    <p style="color:#aaa;margin-top:6px">
+                        ${
+                            product
+                            ? escapeHTML(product.type)
+                            : ""
+                        }
+                    </p>
+
+                    <div
+                        class="timer"
+                        data-expiration="${screen.expiration}">
+                        Calculando...
+                    </div>
+
+                    <span class="status">
+                        ● Ativa
+                    </span>
+
+                </div>
+
+            `;
+
+        }).join("");
+    }
+
+    container.innerHTML = html;
+
+    updateTimers();
+}
+
+
+/* =========================================================
+   PROPRIETÁRIO
+   ========================================================= */
+
+function openOwner() {
+
+    document.getElementById("ownerLogin").style.display =
+        "block";
+
+    document.getElementById("ownerPanel").style.display =
+        "none";
+
+    document.getElementById("ownerPassword").value = "";
+
+    openModal("ownerModal");
+}
+
+function ownerLogin(event) {
+
+    event.preventDefault();
+
+    const password =
+        document.getElementById("ownerPassword").value;
+
+    if (password !== OWNER_PASSWORD) {
+
+        showToast("Senha incorreta.");
+
+        return;
+    }
+
+    document.getElementById("ownerLogin").style.display =
+        "none";
+
+    document.getElementById("ownerPanel").style.display =
+        "block";
+
+    renderAdmin();
+
+    showToast("Painel do proprietário aberto.");
+}
+
+
+/* =========================================================
+   PAINEL ADMINISTRATIVO
+   ========================================================= */
+
+function renderAdmin() {
+
+    document.getElementById("statProducts").textContent =
+        products.length;
+
+    document.getElementById("statCustomers").textContent =
+        customers.length;
+
+    document.getElementById("statScreens").textContent =
+        screens.length;
+
+    renderAdminProducts();
+
+    renderAdminScreens();
+
+    fillScreenProducts();
+}
+
+function renderAdminProducts() {
+
+    const container =
+        document.getElementById("adminProducts");
+
+    container.innerHTML = products.map(product => `
+
+        <div class="admin-product">
+
+            <div class="admin-product-top">
+
+                <div>
+                    <strong>
+                        ${escapeHTML(product.name)}
+                    </strong>
+
+                    <div style="color:#999;margin-top:5px">
+                        ${escapeHTML(product.type)}
+                        · R$ ${Number(product.price)
+                            .toFixed(2)
+                            .replace(".", ",")}
+                    </div>
+                </div>
+
+                <div>
+                    ${escapeHTML(product.icon || "📺")}
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="secondary"
+                    onclick="editProduct('${product.id}')">
+                    ✏️ Editar
+                </button>
+
+                <button
+                    class="secondary"
+                    onclick="openScreenForProduct('${product.id}')">
+                    ⏱️ Criar tela
+                </button>
+
+                <button
+                    class="danger"
+                    onclick="deleteProduct('${product.id}')">
+                    Excluir
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function openProductEditor() {
+
+    document.getElementById("productModalTitle")
+        .textContent = "Adicionar produto";
+
+    document.getElementById("editProductId").value = "";
+
+    document.getElementById("productName").value = "";
+
+    document.getElementById("productPrice").value = "";
+
+    document.getElementById("productType").value =
+        "Compartilhada";
+
+    document.getElementById("productCategory").value =
+        "streaming";
+
+    document.getElementById("productIcon").value =
+        "📺";
+
+    openModal("productModal");
+}
+
+function editProduct(id) {
+
+    const product =
+        products.find(p => p.id === id);
+
+    if (!product) return;
+
+    document.getElementById("productModalTitle")
+        .textContent = "Editar produto";
+
+    document.getElementById("editProductId").value =
+        product.id;
+
+    document.getElementById("productName").value =
+        product.name;
+
+    document.getElementById("productPrice").value =
+        product.price;
+
+    document.getElementById("productType").value =
+        product.type;
+
+    document.getElementById("productCategory").value =
+        product.category;
+
+    document.getElementById("productIcon").value =
+        product.icon || "📺";
+
+    openModal("productModal");
+}
+
+function saveProduct(event) {
+
+    event.preventDefault();
+
+    const id =
+        document.getElementById("editProductId").value;
+
+    const data = {
+
+        name:
+            document.getElementById("productName")
+            .value.trim(),
+
+        price:
+            Number(document.getElementById("productPrice").value),
+
+        type:
+            document.getElementById("productType").value,
+
+        category:
+            document.getElementById("productCategory").value,
+
+        icon:
+            document.getElementById("productIcon").value.trim()
+            || "📺"
+
+    };
+
+    if (id) {
+
+        const index =
+            products.findIndex(p => p.id === id);
+
+        if (index !== -1) {
+            products[index] = {
+                ...products[index],
+                ...data
+            };
+        }
+
+    } else {
+
+        products.push({
+            id: crypto.randomUUID(),
+            ...data
+        });
+
+    }
+
+    saveProducts();
+
+    closeModal("productModal");
+
+    renderProducts();
+
+    renderAdmin();
+
+    showToast("Produto salvo com sucesso!");
+}
+
+function deleteProduct(id) {
+
+    if (!confirm("Excluir este produto?")) {
+        return;
+    }
+
+    products =
+        products.filter(p => p.id !== id);
+
+    saveProducts();
+
+    renderProducts();
+
+    renderAdmin();
+
+    showToast("Produto excluído.");
+}
+
+
+/* =========================================================
+   TELAS / CRONÔMETROS
+   ========================================================= */
+
+function fillScreenProducts() {
+
+    const select =
+        document.getElementById("screenProduct");
+
+    select.innerHTML =
+        products.map(product => `
+            <option value="${product.id}">
+                ${escapeHTML(product.name)}
+                - ${escapeHTML(product.type)}
+            </option>
+        `).join("");
+}
+
+function openScreenForProduct(productId) {
+
+    fillScreenProducts();
+
+    document.getElementById("screenProduct").value =
+        productId;
+
+    document.getElementById("screenCustomer").value = "";
+
+    const future =
+        new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
+    document.getElementById("screenExpiration").value =
+        formatDateTimeLocal(future);
+
+    openModal("screenModal");
+}
+
+function saveScreen(event) {
+
+    event.preventDefault();
+
+    const customerName =
+        document.getElementById("screenCustomer")
+        .value.trim();
+
+    const productId =
+        document.getElementById("screenProduct").value;
+
+    const expiration =
+        document.getElementById("screenExpiration").value;
+
+    if (!customerName || !productId || !expiration) {
+        showToast("Preencha todos os campos.");
+        return;
+    }
+
+    let customer =
+        customers.find(
+            c => c.name.toLowerCase() ===
+                 customerName.toLowerCase()
+        );
+
+    if (!customer) {
+
+        customer = {
+            id: crypto.randomUUID(),
+            name: customerName,
+            email: ""
+        };
+
+        customers.push(customer);
+
+        saveCustomers();
+    }
+
+    screens.push({
+        id: crypto.randomUUID(),
+        customerId: customer.id,
+        productId,
+        expiration: new Date(expiration).getTime()
+    });
+
+    saveScreens();
+
+    closeModal("screenModal");
+
+    renderAdmin();
+
+    showToast("Tela e cronômetro criados!");
+}
+
+function renderAdminScreens() {
+
+    const container =
+        document.getElementById("adminScreens");
+
+    if (!screens.length) {
+
+        container.innerHTML =
+            '<div class="empty">Nenhuma tela cadastrada.</div>';
+
+        return;
+    }
+
+    container.innerHTML = screens.map(screen => {
+
+        const customer =
+            customers.find(
+                c => c.id === screen.customerId
+            );
+
+        const product =
+            products.find(
+                p => p.id === screen.productId
+            );
+
+        return `
+
+            <div class="admin-product">
+
+                <strong>
+                    ${escapeHTML(
+                        customer
+                        ? customer.name
+                        : "Cliente"
+                    )}
+                </strong>
+
+                <div style="color:#aaa;margin-top:5px">
+                    ${
+                        product
+                        ? escapeHTML(product.name)
+                        : "Produto removido"
+                    }
+                </div>
+
+                <div
+                    class="timer"
+                    data-expiration="${screen.expiration}">
+                    Calculando...
+                </div>
+
+                <button
+                    class="danger"
+                    onclick="deleteScreen('${screen.id}')">
+                    Excluir tela
+                </button>
+
+            </div>
+
+        `;
+
+    }).join("");
+
+    updateTimers();
+}
+
+function deleteScreen(id) {
+
+    if (!confirm("Excluir esta tela?")) {
+        return;
+    }
+
+    screens =
+        screens.filter(s => s.id !== id);
+
+    saveScreens();
+
+    renderAdmin();
+
+    if (currentCustomer) {
+        renderCustomer();
+    }
+
+    showToast("Tela excluída.");
+}
+
+
+/* =========================================================
+   CRONÔMETRO
+   ========================================================= */
+
+function updateTimers() {
+
+    document.querySelectorAll("[data-expiration]")
+        .forEach(element => {
+
+            const expiration =
+                Number(element.dataset.expiration);
+
+            const difference =
+                expiration - Date.now();
+
+            if (difference <= 0) {
+
+                element.textContent =
+                    "Vencida";
+
+                element.style.color =
+                    "#ff6262";
+
+                return;
+            }
+
+            const totalSeconds =
+                Math.floor(difference / 1000);
+
+            const days =
+                Math.floor(totalSeconds / 86400);
+
+            const hours =
+                Math.floor((totalSeconds % 86400) / 3600);
+
+            const minutes =
+                Math.floor((totalSeconds % 3600) / 60);
+
+            const seconds =
+                totalSeconds % 60;
+
+            element.textContent =
+                `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+
+        });
+}
+
+function pad(number) {
+
+    return String(number).padStart(2, "0");
+}
+
+setInterval(updateTimers, 1000);
+
+
+/* =========================================================
+   UTILITÁRIOS
+   ========================================================= */
+
+function formatDateTimeLocal(date) {
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        String(date.getMonth() + 1).padStart(2, "0");
+
+    const day =
+        String(date.getDate()).padStart(2, "0");
+
+    const hours =
+        String(date.getHours()).padStart(2, "0");
+
+    const minutes =
+        String(date.getMinutes()).padStart(2, "0");
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+}
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+
+renderProducts();
+
+</script>
+
+</body>
+</html>
