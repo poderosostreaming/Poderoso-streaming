@@ -3,24 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Poderoso Streaming</title>
+<title>Alfa Streaming</title>
 
 <style>
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --bg:#07050f;
+    --card:#100c1c;
+    --card2:#151021;
+    --purple:#792cff;
+    --purple2:#a855f7;
+    --text:#fff;
+    --muted:#9992aa;
+    --border:#2b2142;
+    --green:#29d391;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
     background:
-        radial-gradient(circle at top,#25204a 0%,#0b0b12 45%,#060609 100%);
-    color:#fff;
+        radial-gradient(circle at 50% -10%,#281052 0%,transparent 35%),
+        var(--bg);
+    color:var(--text);
     min-height:100vh;
 }
 
-button,input,select{
+button,input{
     font:inherit;
 }
 
@@ -29,629 +42,485 @@ button{
 }
 
 header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(8,8,15,.96);
-    backdrop-filter:blur(16px);
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.header-inner{
-    max-width:1250px;
-    margin:auto;
-    min-height:72px;
-    padding:12px 18px;
+    height:72px;
     display:flex;
     align-items:center;
-    gap:14px;
+    justify-content:space-between;
+    padding:0 20px;
+    border-bottom:1px solid var(--border);
+    background:rgba(7,5,15,.9);
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(15px);
 }
 
 .logo{
-    font-size:21px;
-    font-weight:900;
-    white-space:nowrap;
-}
-
-.logo span{
-    color:#9b5cff;
-}
-
-.nav{
     display:flex;
-    gap:6px;
-    flex:1;
-    justify-content:center;
-    overflow-x:auto;
-}
-
-.nav button,
-.login-btn,
-.more-btn{
-    border:0;
-    background:transparent;
-    color:#ddd;
-    padding:10px 12px;
-    border-radius:10px;
-    transition:.2s;
-    white-space:nowrap;
-}
-
-.nav button:hover,
-.login-btn:hover,
-.more-btn:hover{
-    background:rgba(255,255,255,.08);
-    color:#fff;
-}
-
-.login-btn{
-    background:#8b4dff;
-    color:#fff;
-    font-weight:700;
-}
-
-.more-wrapper{
-    position:relative;
-}
-
-.more-btn{
-    font-size:27px;
-    line-height:1;
-    width:45px;
-}
-
-.dropdown{
-    display:none;
-    position:absolute;
-    right:0;
-    top:50px;
-    width:245px;
-    background:#15151f;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:14px;
-    padding:8px;
-    box-shadow:0 15px 50px rgba(0,0,0,.55);
-}
-
-.dropdown.show{
-    display:block;
-}
-
-.dropdown button{
-    width:100%;
-    border:0;
-    background:transparent;
-    color:#fff;
-    text-align:left;
-    padding:13px;
-    border-radius:9px;
-}
-
-.dropdown button:hover{
-    background:rgba(255,255,255,.08);
-}
-
-.hero{
-    max-width:1250px;
-    margin:auto;
-    padding:58px 18px 25px;
-    text-align:center;
-}
-
-.hero h1{
-    font-size:clamp(36px,6vw,64px);
-    margin-bottom:13px;
-}
-
-.hero h1 span{
-    color:#9b5cff;
-}
-
-.hero p{
-    color:#aaa;
-    max-width:720px;
-    margin:auto;
-    line-height:1.6;
-}
-
-.search-box{
-    max-width:680px;
-    margin:28px auto 20px;
-    display:flex;
+    align-items:center;
     gap:9px;
-}
-
-.search-box input{
-    flex:1;
-    min-width:0;
-    background:#14141e;
-    border:1px solid #30303d;
-    color:#fff;
-    border-radius:12px;
-    padding:15px;
-    outline:none;
-}
-
-.search-box input:focus{
-    border-color:#8b4dff;
-}
-
-.search-box button{
-    border:0;
-    border-radius:12px;
-    padding:0 22px;
-    background:#8b4dff;
-    color:#fff;
+    font-size:21px;
     font-weight:800;
 }
 
-.purchase-ticker{
-    max-width:1100px;
-    margin:10px auto 25px;
-    overflow:hidden;
-    border:1px solid rgba(155,92,255,.3);
-    background:rgba(139,77,255,.08);
-    border-radius:12px;
-    white-space:nowrap;
+.logo span{
+    color:var(--purple2);
 }
 
-.ticker-track{
-    display:inline-block;
-    padding:12px 0;
-    animation:ticker 28s linear infinite;
+.logo-icon{
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#7c2cff,#b45cff);
+    font-weight:900;
 }
 
-.ticker-track span{
-    margin-right:65px;
-    color:#ddd;
-}
-
-.ticker-track b{
-    color:#b996ff;
-}
-
-@keyframes ticker{
-    from{transform:translateX(100%)}
-    to{transform:translateX(-100%)}
-}
-
-.tabs{
-    max-width:1250px;
-    margin:0 auto 25px;
-    padding:0 18px;
+.header-actions{
     display:flex;
     gap:9px;
-    overflow-x:auto;
 }
 
-.tabs button{
-    white-space:nowrap;
-    border:1px solid #292936;
-    background:#13131c;
+.icon-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:#100c1b;
+    color:white;
+    font-size:18px;
+    position:relative;
+}
+
+.badge{
+    position:absolute;
+    top:-3px;
+    right:-3px;
+    background:var(--purple);
+    font-size:10px;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.container{
+    width:min(1200px,94%);
+    margin:auto;
+}
+
+.hero{
+    margin-top:20px;
+    border:1px solid var(--border);
+    border-radius:22px;
+    min-height:300px;
+    padding:35px;
+    display:flex;
+    align-items:center;
+    background:
+        linear-gradient(90deg,rgba(7,5,15,.98),rgba(7,5,15,.45)),
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1400&q=80")
+        center/cover;
+    overflow:hidden;
+}
+
+.hero-content{
+    max-width:560px;
+}
+
+.hero h1{
+    font-size:clamp(34px,6vw,65px);
+    margin-bottom:10px;
+}
+
+.hero h1 span{
+    color:var(--purple2);
+}
+
+.hero p{
+    color:#ddd;
+    font-size:17px;
+    line-height:1.6;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+    flex-wrap:wrap;
+}
+
+.primary{
+    background:linear-gradient(135deg,#7624ff,#9d45ff);
+    border:0;
+    color:white;
+    padding:13px 22px;
+    border-radius:10px;
+    font-weight:bold;
+    box-shadow:0 8px 25px rgba(121,44,255,.25);
+}
+
+.secondary{
+    background:#171122;
+    border:1px solid var(--border);
+    color:white;
+    padding:13px 22px;
+    border-radius:10px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:30px 0 15px;
+}
+
+.section-title h2{
+    font-size:21px;
+}
+
+.section-title a{
+    color:#a85cff;
+    font-size:13px;
+}
+
+.categories{
+    display:flex;
+    gap:10px;
+    overflow:auto;
+    padding-bottom:5px;
+}
+
+.category{
+    min-width:105px;
+    padding:16px 10px;
+    text-align:center;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:13px;
     color:#bbb;
-    padding:11px 17px;
-    border-radius:999px;
 }
 
-.tabs button.active,
-.tabs button:hover{
-    background:#8b4dff;
-    color:#fff;
-    border-color:#8b4dff;
+.category.active{
+    color:white;
+    border-color:var(--purple);
+    background:#211039;
+}
+
+.category div{
+    font-size:22px;
+    margin-bottom:7px;
 }
 
 .products{
-    max-width:1250px;
-    margin:auto;
-    padding:0 18px 70px;
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(235px,1fr));
-    gap:18px;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
 .product{
-    background:linear-gradient(145deg,#181822,#101018);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    padding:20px;
+    background:linear-gradient(180deg,#171022,#0f0b18);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
     transition:.2s;
 }
 
 .product:hover{
     transform:translateY(-4px);
-    border-color:rgba(155,92,255,.55);
+    border-color:#7130d5;
 }
 
-.product-logo{
-    width:65px;
-    height:65px;
-    border-radius:16px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#252532;
-    font-size:28px;
-    margin-bottom:15px;
+.product-img{
+    height:175px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
 }
 
-.product h3{
-    margin-bottom:8px;
+.tag{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#a52cff;
+    padding:5px 8px;
+    border-radius:6px;
+    font-size:9px;
+    font-weight:bold;
 }
 
-.product .type{
-    color:#aaa;
-    font-size:13px;
-    margin-bottom:14px;
+.product-info{
+    padding:14px;
+}
+
+.product-info h3{
+    margin-bottom:6px;
+    font-size:16px;
+}
+
+.stock{
+    color:var(--green);
+    font-size:11px;
+    margin-bottom:10px;
+}
+
+.old-price{
+    text-decoration:line-through;
+    color:#777;
+    font-size:12px;
 }
 
 .price{
-    font-size:25px;
-    font-weight:900;
-    margin-bottom:15px;
-}
-
-.price small{
-    font-size:13px;
-    color:#999;
-    font-weight:normal;
+    font-size:21px;
+    font-weight:bold;
+    margin:3px 0 12px;
 }
 
 .buy{
     width:100%;
     border:0;
-    border-radius:11px;
-    padding:13px;
-    background:#8b4dff;
-    color:#fff;
-    font-weight:800;
+    background:#6821d9;
+    color:white;
+    padding:11px;
+    border-radius:8px;
+    font-weight:bold;
 }
 
-.buy:hover{
-    background:#a16cff;
-}
-
-.empty{
-    grid-column:1/-1;
-    text-align:center;
-    padding:50px;
-    color:#888;
-}
-
-.section-title{
-    max-width:1250px;
-    margin:0 auto 15px;
-    padding:0 18px;
-}
-
-.reviews{
-    max-width:1250px;
-    margin:0 auto;
-    padding:20px 18px 60px;
-}
-
-.review-grid{
+.info-boxes{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin:35px 0;
 }
 
-.review{
-    background:#12121b;
-    border:1px solid rgba(255,255,255,.08);
+.info-box{
+    background:var(--card);
+    border:1px solid var(--border);
     border-radius:15px;
-    padding:18px;
-}
-
-.review .stars{
-    color:#ffd45a;
-    margin-bottom:9px;
-}
-
-.review p{
-    color:#bbb;
-    line-height:1.5;
-}
-
-.review strong{
-    display:block;
-    margin-top:13px;
-}
-
-.trust{
-    max-width:1100px;
-    margin:0 auto 50px;
-    padding:28px 18px;
-    text-align:center;
-    background:linear-gradient(145deg,#171722,#0e0e15);
-    border:1px solid rgba(155,92,255,.25);
-    border-radius:20px;
-}
-
-.trust-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    margin-top:20px;
-}
-
-.trust-item{
-    background:#0d0d14;
-    border-radius:13px;
     padding:20px;
+    text-align:center;
 }
 
-.trust-item strong{
-    display:block;
-    font-size:30px;
-    color:#b996ff;
-    margin-bottom:6px;
+.info-box .ico{
+    font-size:27px;
+    color:#9d4cff;
+    margin-bottom:10px;
 }
 
-.trust-item span{
-    color:#999;
+.info-box p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
 }
 
 footer{
-    border-top:1px solid rgba(255,255,255,.08);
+    border-top:1px solid var(--border);
+    padding:30px 20px;
     text-align:center;
-    padding:32px 18px;
     color:#777;
+    margin-top:40px;
 }
+
+/* MODAIS */
 
 .modal{
     display:none;
     position:fixed;
     inset:0;
-    z-index:2000;
-    background:rgba(0,0,0,.78);
-    backdrop-filter:blur(8px);
+    background:rgba(0,0,0,.75);
+    z-index:100;
     padding:20px;
-    overflow-y:auto;
-}
-
-.modal.show{
-    display:flex;
     align-items:center;
     justify-content:center;
+    backdrop-filter:blur(8px);
+}
+
+.modal.active{
+    display:flex;
 }
 
 .modal-box{
-    width:min(720px,100%);
+    width:min(500px,100%);
     max-height:90vh;
-    overflow-y:auto;
-    background:#15151f;
-    border:1px solid rgba(255,255,255,.1);
+    overflow:auto;
+    background:#100c19;
+    border:1px solid #33214e;
     border-radius:20px;
     padding:24px;
+    box-shadow:0 20px 80px #000;
 }
 
 .modal-header{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    margin-bottom:22px;
-}
-
-.close{
-    border:0;
-    background:transparent;
-    color:#aaa;
-    font-size:29px;
-}
-
-.form{
-    display:grid;
-    gap:12px;
-}
-
-.form label{
-    color:#bbb;
-    font-size:13px;
-}
-
-.form input,
-.form select{
-    width:100%;
-    background:#0e0e15;
-    border:1px solid #30303d;
-    color:#fff;
-    border-radius:10px;
-    padding:13px;
-    outline:none;
-}
-
-.primary{
-    border:0;
-    border-radius:11px;
-    padding:13px;
-    background:#8b4dff;
-    color:#fff;
-    font-weight:800;
-}
-
-.secondary{
-    border:1px solid #30303d;
-    border-radius:11px;
-    padding:12px;
-    background:transparent;
-    color:#fff;
-}
-
-.danger{
-    border:0;
-    border-radius:9px;
-    padding:9px 12px;
-    background:#b83232;
-    color:#fff;
-}
-
-.choice-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.choice{
-    border:1px solid #353543;
-    background:#0e0e15;
-    color:#fff;
-    border-radius:14px;
-    padding:20px;
-    text-align:center;
-}
-
-.choice:hover,
-.choice.selected{
-    border-color:#9b5cff;
-    background:rgba(139,77,255,.14);
-}
-
-.choice strong{
-    display:block;
-    font-size:17px;
-    margin-bottom:7px;
-}
-
-.choice span{
-    color:#999;
-    font-size:13px;
-}
-
-.admin-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:12px;
+    align-items:center;
     margin-bottom:20px;
 }
 
-.stat{
-    background:#0e0e15;
-    border:1px solid #292936;
-    border-radius:14px;
-    padding:18px;
+.close{
+    background:none;
+    border:0;
+    color:white;
+    font-size:25px;
 }
 
-.stat strong{
-    display:block;
-    font-size:28px;
-    margin-top:7px;
+.input{
+    width:100%;
+    background:#0a0711;
+    border:1px solid var(--border);
+    color:white;
+    padding:13px;
+    border-radius:9px;
+    outline:none;
+    margin:7px 0 12px;
 }
 
-.admin-product{
-    background:#0e0e15;
-    border:1px solid #292936;
-    border-radius:13px;
-    padding:14px;
-    margin-bottom:10px;
-}
-
-.admin-product-top{
-    display:flex;
-    justify-content:space-between;
+.menu-list{
+    display:grid;
     gap:10px;
 }
 
-.actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-    margin-top:12px;
-}
-
-.customer-screen{
-    background:#0e0e15;
-    border:1px solid #292936;
-    border-radius:15px;
+.menu-item{
     padding:17px;
-    margin-bottom:12px;
+    border:1px solid var(--border);
+    background:#151020;
+    border-radius:12px;
+    color:white;
+    text-align:left;
 }
 
-.timer{
-    font-size:23px;
-    font-weight:900;
-    margin:12px 0;
-    color:#b996ff;
+.menu-item:hover{
+    border-color:var(--purple);
 }
 
-.status{
-    display:inline-block;
-    padding:5px 9px;
-    border-radius:999px;
-    font-size:12px;
-    background:#193d27;
-    color:#75e49a;
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
 }
 
-.logout{
-    margin-top:15px;
-    width:100%;
+.total{
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    font-weight:bold;
+    padding:20px 0;
+}
+
+.admin-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.admin-tabs button{
+    background:#171021;
+    color:#aaa;
+    border:1px solid var(--border);
+    padding:9px 13px;
+    border-radius:8px;
+}
+
+.admin-tabs button.active{
+    background:#7026e8;
+    color:white;
+}
+
+.admin-product{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:13px;
+    background:#15101f;
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:8px;
+}
+
+.admin-product button{
+    background:#6320d4;
+    border:0;
+    color:white;
+    padding:7px 12px;
+    border-radius:7px;
 }
 
 .toast{
     position:fixed;
     bottom:25px;
     left:50%;
-    transform:translateX(-50%) translateY(120px);
-    background:#fff;
-    color:#111;
+    transform:translateX(-50%) translateY(100px);
+    background:#1b1428;
+    border:1px solid #6031a0;
     padding:13px 20px;
-    border-radius:999px;
-    z-index:5000;
+    border-radius:10px;
+    z-index:300;
     transition:.3s;
-    font-weight:700;
-    max-width:90%;
-    text-align:center;
 }
 
 .toast.show{
     transform:translateX(-50%) translateY(0);
 }
 
+/* RESPONSIVO */
+
 @media(max-width:900px){
-    .header-inner{
-        flex-wrap:wrap;
+    .products{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .nav{
-        order:3;
-        width:100%;
-        justify-content:flex-start;
-    }
-
-    .logo{
-        flex:1;
+    .info-boxes{
+        grid-template-columns:repeat(2,1fr);
     }
 }
 
 @media(max-width:600px){
-    .login-btn{
-        font-size:13px;
-        padding:9px;
+    header{
+        padding:0 12px;
     }
 
     .hero{
-        padding-top:38px;
+        min-height:390px;
+        padding:24px;
     }
 
-    .search-box{
-        flex-direction:column;
-    }
-
-    .search-box button{
-        padding:13px;
-    }
-
-    .choice-grid,
-    .trust-grid{
-        grid-template-columns:1fr;
+    .hero h1{
+        font-size:39px;
     }
 
     .products{
-        grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+        grid-template-columns:repeat(2,1fr);
+        gap:9px;
     }
 
-    .product{
-        padding:15px;
+    .product-img{
+        height:135px;
+    }
+
+    .product-info{
+        padding:10px;
+    }
+
+    .price{
+        font-size:18px;
+    }
+
+    .info-boxes{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .info-box{
+        padding:13px 8px;
+    }
+
+    .logo{
+        font-size:17px;
     }
 }
 </style>
@@ -660,619 +529,453 @@ footer{
 <body>
 
 <header>
-<div class="header-inner">
 
     <div class="logo">
-        Poderoso <span>Streaming</span>
+        <div class="logo-icon">A</div>
+        ALFA <span>STREAMING</span>
     </div>
 
-    <nav class="nav">
-        <button onclick="setCategory('todos')">Início</button>
-        <button onclick="setCategory('streaming')">Streaming</button>
-        <button onclick="setCategory('combos')">Combos</button>
-        <button onclick="setCategory('contas')">Contas</button>
-        <button onclick="setCategory('ofertas')">Ofertas</button>
-        <button onclick="setCategory('mais')">Mais vendidos</button>
-    </nav>
+    <div class="header-actions">
 
-    <button class="login-btn" onclick="openLogin()">
-        Entrar ou se cadastrar
-    </button>
+        <!-- LOGIN -->
+        <button class="icon-btn" onclick="abrir('loginModal')" title="Entrar">
+            👤
+        </button>
 
-    <div class="more-wrapper">
+        <!-- CARRINHO -->
+        <button class="icon-btn" onclick="abrirCarrinho()">
+            🛒
+            <span class="badge" id="cartCount">0</span>
+        </button>
 
-        <button class="more-btn" onclick="toggleMenu(event)">
+        <!-- TRÊS PONTOS -->
+        <button class="icon-btn" onclick="abrir('menuModal')">
             ⋮
         </button>
 
-        <div class="dropdown" id="moreMenu">
-
-            <button onclick="openLogin();closeMenu()">
-                👤 Entrar ou se cadastrar
-            </button>
-
-            <button onclick="openOwner();closeMenu()">
-                🔐 Área do Proprietário
-            </button>
-
-            <button onclick="showToast('Poderoso Streaming - atendimento pelo WhatsApp');closeMenu()">
-                ℹ️ Informações
-            </button>
-
-        </div>
     </div>
-
-</div>
 </header>
 
 
-<section class="hero">
+<main class="container">
 
-    <h1>
-        Seu entretenimento em um só <span>lugar</span>
-    </h1>
+    <section class="hero">
 
-    <p>
-        Escolha sua tela, confira o preço e faça seu pedido.
-        Temos opções compartilhadas e privadas.
-    </p>
+        <div class="hero-content">
 
-    <div class="search-box">
+            <h1>
+                ALFA <span>STREAMING</span>
+            </h1>
 
-        <input
-            id="search"
-            type="search"
-            placeholder="Pesquisar streaming, conta ou combo..."
-            autocomplete="off"
-        >
+            <p>
+                Seu entretenimento em um só lugar.
+                Escolha seu plano, compre de forma rápida
+                e receba atendimento especializado.
+            </p>
 
-        <button onclick="searchProducts()">
-            Pesquisar
-        </button>
+            <div class="hero-buttons">
+                <button class="primary" onclick="scrollProdutos()">
+                    Ver planos
+                </button>
 
-    </div>
+                <button class="secondary" onclick="abrir('loginModal')">
+                    Entrar / Cadastrar
+                </button>
+            </div>
 
-</section>
+        </div>
 
+    </section>
 
-<!-- BARRA DE COMPRAS -->
-<div class="purchase-ticker">
-
-    <div class="ticker-track">
-
-        <span>🛒 <b>Cliente acabou de comprar</b> uma tela Netflix</span>
-        <span>🛒 <b>Cliente acabou de comprar</b> uma tela HBO Max</span>
-        <span>🛒 <b>Cliente acabou de comprar</b> uma tela Premiere</span>
-        <span>🛒 <b>Cliente acabou de comprar</b> uma tela Paramount+</span>
-        <span>🛒 <b>Cliente acabou de comprar</b> uma tela Telecine</span>
-        <span>🛒 <b>Cliente acabou de comprar</b> uma conta Spotify</span>
-
-    </div>
-
-</div>
-
-
-<div class="tabs">
-
-    <button class="active" onclick="setCategory('todos',this)">
-        Todos
-    </button>
-
-    <button onclick="setCategory('streaming',this)">
-        Streaming
-    </button>
-
-    <button onclick="setCategory('combos',this)">
-        Combos
-    </button>
-
-    <button onclick="setCategory('contas',this)">
-        Contas
-    </button>
-
-    <button onclick="setCategory('ofertas',this)">
-        Ofertas
-    </button>
-
-    <button onclick="setCategory('mais',this)">
-        Mais vendidos
-    </button>
-
-</div>
-
-
-<main class="products" id="products"></main>
-
-
-<!-- AVALIAÇÕES -->
-
-<section class="reviews">
 
     <div class="section-title">
-        <h2>⭐ Avaliações dos clientes</h2>
+        <h2>Categorias</h2>
+        <a>Ver tudo</a>
     </div>
 
-    <div class="review-grid">
+    <div class="categories">
 
-        <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>
-                Atendimento rápido e tudo certinho. Recomendo!
-            </p>
-            <strong>Lucas</strong>
+        <div class="category active">
+            <div>▦</div>
+            Todos
         </div>
 
-        <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>
-                Comprei minha tela e recebi atendimento muito rápido.
-            </p>
-            <strong>Gabriel</strong>
+        <div class="category">
+            <div>▣</div>
+            Streaming
         </div>
 
-        <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>
-                Site fácil de usar e atendimento excelente.
-            </p>
-            <strong>Matheus</strong>
+        <div class="category">
+            <div>▤</div>
+            Filmes
         </div>
 
-        <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>
-                Gostei bastante. Compra rápida pelo WhatsApp.
-            </p>
-            <strong>Rafael</strong>
+        <div class="category">
+            <div>⚽</div>
+            Esportes
+        </div>
+
+        <div class="category">
+            <div>♟</div>
+            Infantil
         </div>
 
     </div>
 
-</section>
+
+    <div class="section-title" id="produtos">
+        <h2>Mais vendidos</h2>
+        <a>Ver tudo</a>
+    </div>
 
 
-<!-- CONFIANÇA -->
+    <div class="products">
 
-<section class="trust">
+        <div class="product">
+            <div class="product-img"
+            style="background-image:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80')">
+                <span class="tag">MAIS VENDIDO</span>
+            </div>
 
-    <h2>🔒 Compra com confiança</h2>
-
-    <p style="color:#999;margin-top:8px">
-        Atendimento, suporte e acompanhamento das suas telas.
-    </p>
-
-    <div class="trust-grid">
-
-        <div class="trust-item">
-            <strong>+5.000</strong>
-            <span>contas vendidas</span>
+            <div class="product-info">
+                <h3>Plano Streaming</h3>
+                <div class="stock">25 em estoque</div>
+                <div class="old-price">R$ 30,00</div>
+                <div class="price">R$ 15,00</div>
+                <button class="buy" onclick="adicionar('Plano Streaming',15)">
+                    Comprar
+                </button>
+            </div>
         </div>
 
-        <div class="trust-item">
-            <strong>+1.500</strong>
-            <span>clientes</span>
+
+        <div class="product">
+            <div class="product-img"
+            style="background-image:url('https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=600&q=80')">
+                <span class="tag">OFERTA</span>
+            </div>
+
+            <div class="product-info">
+                <h3>Plano Premium</h3>
+                <div class="stock">18 em estoque</div>
+                <div class="old-price">R$ 45,00</div>
+                <div class="price">R$ 25,00</div>
+                <button class="buy" onclick="adicionar('Plano Premium',25)">
+                    Comprar
+                </button>
+            </div>
+        </div>
+
+
+        <div class="product">
+            <div class="product-img"
+            style="background-image:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80')">
+                <span class="tag">ESPECIAL</span>
+            </div>
+
+            <div class="product-info">
+                <h3>Plano Família</h3>
+                <div class="stock">12 em estoque</div>
+                <div class="old-price">R$ 60,00</div>
+                <div class="price">R$ 35,00</div>
+                <button class="buy" onclick="adicionar('Plano Família',35)">
+                    Comprar
+                </button>
+            </div>
+        </div>
+
+
+        <div class="product">
+            <div class="product-img"
+            style="background-image:url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80')">
+                <span class="tag">OFERTA</span>
+            </div>
+
+            <div class="product-info">
+                <h3>Pacote Filmes</h3>
+                <div class="stock">20 em estoque</div>
+                <div class="old-price">R$ 40,00</div>
+                <div class="price">R$ 20,00</div>
+                <button class="buy" onclick="adicionar('Pacote Filmes',20)">
+                    Comprar
+                </button>
+            </div>
+        </div>
+
+
+        <div class="product">
+            <div class="product-img"
+            style="background-image:url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=600&q=80')">
+            </div>
+
+            <div class="product-info">
+                <h3>Pacote Esportes</h3>
+                <div class="stock">15 em estoque</div>
+                <div class="old-price">R$ 55,00</div>
+                <div class="price">R$ 30,00</div>
+                <button class="buy" onclick="adicionar('Pacote Esportes',30)">
+                    Comprar
+                </button>
+            </div>
+        </div>
+
+
+        <div class="product">
+            <div class="product-img"
+            style="background-image:url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=600&q=80')">
+                <span class="tag">NOVO</span>
+            </div>
+
+            <div class="product-info">
+                <h3>Pacote Infantil</h3>
+                <div class="stock">22 em estoque</div>
+                <div class="old-price">R$ 35,00</div>
+                <div class="price">R$ 18,00</div>
+                <button class="buy" onclick="adicionar('Pacote Infantil',18)">
+                    Comprar
+                </button>
+            </div>
         </div>
 
     </div>
 
-</section>
+
+    <div class="info-boxes">
+
+        <div class="info-box">
+            <div class="ico">◉</div>
+            <b>Interface moderna</b>
+            <p>Fácil e intuitiva</p>
+        </div>
+
+        <div class="info-box">
+            <div class="ico">▣</div>
+            <b>Totalmente responsivo</b>
+            <p>Celular, tablet e PC</p>
+        </div>
+
+        <div class="info-box">
+            <div class="ico">🛒</div>
+            <b>Sistema de pedidos</b>
+            <p>Carrinho completo</p>
+        </div>
+
+        <div class="info-box">
+            <div class="ico">♧</div>
+            <b>Suporte rápido</b>
+            <p>Atendimento via WhatsApp</p>
+        </div>
+
+    </div>
+
+</main>
 
 
 <footer>
-
-    <p>Poderoso Streaming © 2026</p>
-
-    <p style="margin-top:8px">
-        Atendimento e suporte pelo WhatsApp
-    </p>
-
+    © 2026 Alfa Streaming — Seu entretenimento em um só lugar.
 </footer>
 
 
-<!-- ======================================================
-     MODAL DE COMPRA
-====================================================== -->
+<!-- ================= MENU ================= -->
 
-<div class="modal" id="buyModal">
+<div class="modal" id="menuModal">
 
-<div class="modal-box">
+    <div class="modal-box">
 
-    <div class="modal-header">
+        <div class="modal-header">
+            <h2>Menu</h2>
+            <button class="close" onclick="fechar('menuModal')">×</button>
+        </div>
 
-        <h2>🛒 Finalizar compra</h2>
+        <div class="menu-list">
 
-        <button class="close" onclick="closeModal('buyModal')">
-            ×
-        </button>
-
-    </div>
-
-    <div id="buyProductInfo"></div>
-
-    <h3 style="margin:22px 0 12px">
-        Escolha o tipo de tela
-    </h3>
-
-    <div class="choice-grid">
-
-        <button
-            class="choice"
-            id="sharedChoice"
-            onclick="selectPurchaseType('Compartilhada')"
-        >
-            <strong>👥 Compartilhada</strong>
-            <span>Conta/tela compartilhada</span>
-        </button>
-
-        <button
-            class="choice"
-            id="privateChoice"
-            onclick="selectPurchaseType('Privada')"
-        >
-            <strong>🔒 Privada</strong>
-            <span>Conta/tela privada</span>
-        </button>
-
-    </div>
-
-    <div class="form" style="margin-top:20px">
-
-        <label>Seu nome</label>
-
-        <input
-            id="purchaseName"
-            placeholder="Digite seu nome"
-        >
-
-        <button
-            class="primary"
-            onclick="sendPurchaseWhatsApp()"
-        >
-            Continuar pelo WhatsApp
-        </button>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- ======================================================
-     LOGIN
-====================================================== -->
-
-<div class="modal" id="loginModal">
-
-<div class="modal-box">
-
-    <div class="modal-header">
-
-        <h2>👤 Entrar ou se cadastrar</h2>
-
-        <button class="close" onclick="closeModal('loginModal')">
-            ×
-        </button>
-
-    </div>
-
-    <form class="form" onsubmit="loginCustomer(event)">
-
-        <label>Nome</label>
-
-        <input
-            id="customerName"
-            required
-            placeholder="Seu nome"
-        >
-
-        <label>E-mail</label>
-
-        <input
-            id="customerEmail"
-            type="email"
-            required
-            placeholder="seu@email.com"
-        >
-
-        <button class="primary" type="submit">
-            Entrar
-        </button>
-
-        <button
-            class="secondary"
-            type="button"
-            onclick="registerCustomer()"
-        >
-            Criar minha conta
-        </button>
-
-    </form>
-
-</div>
-
-</div>
-
-
-<!-- ======================================================
-     ÁREA DO CLIENTE
-====================================================== -->
-
-<div class="modal" id="customerModal">
-
-<div class="modal-box">
-
-    <div class="modal-header">
-
-        <h2>👤 Minhas Telas</h2>
-
-        <button class="close" onclick="closeModal('customerModal')">
-            ×
-        </button>
-
-    </div>
-
-    <div id="customerContent"></div>
-
-</div>
-
-</div>
-
-
-<!-- ======================================================
-     ÁREA DO PROPRIETÁRIO
-====================================================== -->
-
-<div class="modal" id="ownerModal">
-
-<div class="modal-box">
-
-    <div class="modal-header">
-
-        <h2>🔐 Área do Proprietário</h2>
-
-        <button class="close" onclick="closeModal('ownerModal')">
-            ×
-        </button>
-
-    </div>
-
-
-    <div id="ownerLogin">
-
-        <form class="form" onsubmit="ownerLogin(event)">
-
-            <label>Senha do proprietário</label>
-
-            <input
-                id="ownerPassword"
-                type="password"
-                required
-                placeholder="Digite a senha"
-            >
-
-            <button class="primary" type="submit">
-                Entrar no painel
+            <button class="menu-item" onclick="abrirLoginProprietario()">
+                🔐 Área do Proprietário
+                <br>
+                <small style="color:#888">
+                    Acesso administrativo
+                </small>
             </button>
 
-        </form>
+            <button class="menu-item" onclick="abrir('loginModal');fechar('menuModal')">
+                👤 Entrar / Cadastrar
+            </button>
 
-    </div>
+            <button class="menu-item" onclick="abrirCarrinho();fechar('menuModal')">
+                🛒 Meu carrinho
+            </button>
 
-
-    <div id="ownerPanel" style="display:none">
-
-        <div class="admin-grid">
-
-            <div class="stat">
-                Produtos
-                <strong id="statProducts">0</strong>
-            </div>
-
-            <div class="stat">
-                Clientes
-                <strong id="statCustomers">0</strong>
-            </div>
-
-            <div class="stat">
-                Telas ativas
-                <strong id="statScreens">0</strong>
-            </div>
+            <button class="menu-item" onclick="abrirWhatsApp()">
+                💬 Falar com suporte
+            </button>
 
         </div>
 
+    </div>
 
-        <button
-            class="primary"
-            style="width:100%;margin-bottom:20px"
-            onclick="openProductEditor()"
-        >
+</div>
+
+
+<!-- ================= LOGIN ================= -->
+
+<div class="modal" id="loginModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>Entrar / Cadastrar</h2>
+            <button class="close" onclick="fechar('loginModal')">×</button>
+        </div>
+
+        <label>Nome</label>
+        <input class="input" id="clienteNome" placeholder="Digite seu nome">
+
+        <label>E-mail</label>
+        <input class="input" id="clienteEmail" type="email" placeholder="Digite seu e-mail">
+
+        <label>Senha</label>
+        <input class="input" type="password" placeholder="Digite sua senha">
+
+        <button class="primary" style="width:100%"
+        onclick="cadastrarCliente()">
+            Entrar / Cadastrar
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= LOGIN PROPRIETÁRIO ================= -->
+
+<div class="modal" id="ownerLoginModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>Área do Proprietário</h2>
+            <button class="close" onclick="fechar('ownerLoginModal')">×</button>
+        </div>
+
+        <p style="color:#999;margin-bottom:15px">
+            Digite a senha para acessar o painel administrativo.
+        </p>
+
+        <input
+            class="input"
+            id="ownerPassword"
+            type="password"
+            placeholder="Senha do proprietário">
+
+        <button class="primary"
+        style="width:100%"
+        onclick="entrarProprietario()">
+            Entrar
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PAINEL ================= -->
+
+<div class="modal" id="adminModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>⚡ Painel Administrativo</h2>
+            <button class="close" onclick="fechar('adminModal')">×</button>
+        </div>
+
+        <p style="color:#999;margin-bottom:18px">
+            Bem-vindo, proprietário!
+        </p>
+
+        <div class="admin-tabs">
+            <button class="active">Produtos</button>
+            <button>Vendas</button>
+            <button>Configurações</button>
+        </div>
+
+        <div class="admin-product">
+            <div>
+                <b>Plano Streaming</b>
+                <br>
+                <small>R$ 15,00</small>
+            </div>
+            <button>Editar</button>
+        </div>
+
+        <div class="admin-product">
+            <div>
+                <b>Plano Premium</b>
+                <br>
+                <small>R$ 25,00</small>
+            </div>
+            <button>Editar</button>
+        </div>
+
+        <div class="admin-product">
+            <div>
+                <b>Plano Família</b>
+                <br>
+                <small>R$ 35,00</small>
+            </div>
+            <button>Editar</button>
+        </div>
+
+        <div class="admin-product">
+            <div>
+                <b>Pacote Filmes</b>
+                <br>
+                <small>R$ 20,00</small>
+            </div>
+            <button>Editar</button>
+        </div>
+
+        <button class="primary"
+        style="width:100%;margin-top:10px"
+        onclick="mostrarAviso('Função de adicionar produto pronta para conectar ao banco de dados.')">
             + Adicionar produto
         </button>
 
-
-        <h3 style="margin-bottom:12px">
-            📺 Produtos e preços
-        </h3>
-
-        <div id="adminProducts"></div>
-
-
-        <hr style="border-color:#292936;margin:25px 0">
-
-
-        <h3 style="margin-bottom:12px">
-            ⏱️ Cronômetros de renovação
-        </h3>
-
-        <button
-            class="secondary"
-            style="width:100%;margin-bottom:15px"
-            onclick="openScreenForProduct()"
-        >
-            + Adicionar tela para cliente
-        </button>
-
-        <div id="adminScreens"></div>
-
     </div>
 
 </div>
 
-</div>
 
+<!-- ================= CARRINHO ================= -->
 
-<!-- ======================================================
-     EDITAR PRODUTO
-====================================================== -->
+<div class="modal" id="cartModal">
 
-<div class="modal" id="productModal">
+    <div class="modal-box">
 
-<div class="modal-box">
+        <div class="modal-header">
+            <h2>Meu carrinho</h2>
+            <button class="close" onclick="fechar('cartModal')">×</button>
+        </div>
 
-    <div class="modal-header">
+        <div id="cartItems"></div>
 
-        <h2 id="productModalTitle">
-            Adicionar produto
-        </h2>
+        <div class="total">
+            <span>Total</span>
+            <span id="cartTotal">R$ 0,00</span>
+        </div>
 
-        <button class="close" onclick="closeModal('productModal')">
-            ×
+        <button class="primary"
+        style="width:100%"
+        onclick="finalizarPedido()">
+            Continuar pedido
         </button>
+
+        <p style="color:#777;text-align:center;font-size:11px;margin-top:12px">
+            Após finalizar, você será direcionado ao WhatsApp
+            para concluir seu pedido.
+        </p>
 
     </div>
-
-    <form class="form" onsubmit="saveProduct(event)">
-
-        <input type="hidden" id="editProductId">
-
-        <label>Nome do produto</label>
-
-        <input
-            id="productName"
-            required
-            placeholder="Ex.: Netflix"
-        >
-
-        <label>Preço</label>
-
-        <input
-            id="productPrice"
-            type="number"
-            min="0"
-            step="0.01"
-            required
-        >
-
-        <label>Tipo</label>
-
-        <select id="productType">
-
-            <option value="Compartilhada">
-                Tela Compartilhada
-            </option>
-
-            <option value="Privada">
-                Tela Privada
-            </option>
-
-            <option value="Compartilhada / Privada">
-                Compartilhada / Privada
-            </option>
-
-        </select>
-
-        <label>Categoria</label>
-
-        <select id="productCategory">
-
-            <option value="streaming">
-                Streaming
-            </option>
-
-            <option value="combos">
-                Combos
-            </option>
-
-            <option value="contas">
-                Contas
-            </option>
-
-            <option value="ofertas">
-                Ofertas
-            </option>
-
-            <option value="mais">
-                Mais vendidos
-            </option>
-
-        </select>
-
-        <label>Ícone</label>
-
-        <input
-            id="productIcon"
-            placeholder="📺"
-        >
-
-        <button class="primary" type="submit">
-            Salvar produto
-        </button>
-
-    </form>
-
-</div>
-
-</div>
-
-
-<!-- ======================================================
-     ADICIONAR TELA
-====================================================== -->
-
-<div class="modal" id="screenModal">
-
-<div class="modal-box">
-
-    <div class="modal-header">
-
-        <h2>⏱️ Adicionar tela</h2>
-
-        <button class="close" onclick="closeModal('screenModal')">
-            ×
-        </button>
-
-    </div>
-
-    <form class="form" onsubmit="saveScreen(event)">
-
-        <label>Nome do cliente</label>
-
-        <input
-            id="screenCustomer"
-            required
-            placeholder="Nome do cliente"
-        >
-
-        <label>Produto</label>
-
-        <select id="screenProduct"></select>
-
-        <label>Data e hora de vencimento</label>
-
-        <input
-            id="screenExpiration"
-            type="datetime-local"
-            required
-        >
-
-        <button class="primary" type="submit">
-            Criar cronômetro
-        </button>
-
-    </form>
-
-</div>
 
 </div>
 
@@ -1282,1812 +985,312 @@ footer{
 
 <script>
 
-/* =========================================================
-   CONFIGURAÇÃO
-========================================================= */
+/* ==========================================
+   CONFIGURAÇÕES PRINCIPAIS
+========================================== */
 
-const OWNER_PASSWORD = "32942186";
+const SENHA_PROPRIETARIO = "32942186";
 
-const WHATSAPP_NUMBER = "5527992410060";
+const WHATSAPP = "5527992410060";
 
-
-/* =========================================================
-   PRODUTOS INICIAIS
-========================================================= */
-
-const defaultProducts = [
-
-    {
-        id:"netflix",
-        name:"Netflix",
-        price:20,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"🎬"
-    },
-
-    {
-        id:"hbo",
-        name:"HBO Max",
-        price:20,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"🎞️"
-    },
-
-    {
-        id:"premiere",
-        name:"Premiere",
-        price:20,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"⚽"
-    },
-
-    {
-        id:"paramount",
-        name:"Paramount+",
-        price:20,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"⭐"
-    },
-
-    {
-        id:"youtube",
-        name:"YouTube Premium",
-        price:20,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"▶️"
-    },
-
-    {
-        id:"crunchyroll",
-        name:"Crunchyroll",
-        price:20,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"🍥"
-    },
-
-    {
-        id:"globoplay",
-        name:"Globoplay",
-        price:16,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"📺"
-    },
-
-    {
-        id:"claro",
-        name:"Claro TV Mais",
-        price:16,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"📡"
-    },
-
-    {
-        id:"sky",
-        name:"Sky Mais",
-        price:26,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"📡"
-    },
-
-    {
-        id:"apple",
-        name:"Apple TV",
-        price:18,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"🍎"
-    },
-
-    {
-        id:"yocinema",
-        name:"Yo Cinema",
-        price:16,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"🎥"
-    },
-
-    {
-        id:"telecine",
-        name:"Telecine",
-        price:16,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"🍿"
-    },
-
-    {
-        id:"look",
-        name:"Look",
-        price:16,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"📺"
-    },
-
-    {
-        id:"combate",
-        name:"Combate",
-        price:16,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"🥊"
-    },
-
-    {
-        id:"xaxerol",
-        name:"Xaxerol",
-        price:20,
-        type:"Compartilhada / Privada",
-        category:"streaming",
-        icon:"📺"
-    },
-
-    {
-        id:"spotify",
-        name:"Spotify",
-        price:20,
-        type:"Privada",
-        category:"contas",
-        icon:"🎵"
-    },
-
-    {
-        id:"canva",
-        name:"Canva",
-        price:20,
-        type:"Privada",
-        category:"contas",
-        icon:"🎨"
-    },
-
-    {
-        id:"picsart",
-        name:"Picsart",
-        price:20,
-        type:"Privada",
-        category:"contas",
-        icon:"🖼️"
-    },
-
-    {
-        id:"combo-globo-telecine",
-        name:"Globoplay + Telecine",
-        price:20,
-        type:"Combo",
-        category:"combos",
-        icon:"🍿"
-    },
-
-    {
-        id:"combo-premiere-combate",
-        name:"Premiere + Combate",
-        price:20,
-        type:"Combo",
-        category:"combos",
-        icon:"⚽"
-    },
-
-    {
-        id:"combo-prime-crunchyroll",
-        name:"Prime Video + Crunchyroll",
-        price:18,
-        type:"Combo",
-        category:"combos",
-        icon:"🎬"
-    },
-
-    {
-        id:"combo-hbo-paramount",
-        name:"HBO Max + Paramount+",
-        price:30,
-        type:"Combo",
-        category:"combos",
-        icon:"⭐"
-    },
-
-    {
-        id:"combo-prime-hbo",
-        name:"Prime Video + HBO Max",
-        price:18,
-        type:"Combo",
-        category:"combos",
-        icon:"🎞️"
-    },
-
-    {
-        id:"combo-prime-paramount",
-        name:"Prime Video + Paramount+",
-        price:19,
-        type:"Combo",
-        category:"combos",
-        icon:"⭐"
-    },
-
-    {
-        id:"combo-hbo-crunchyroll",
-        name:"HBO Max + Crunchyroll",
-        price:18,
-        type:"Combo",
-        category:"combos",
-        icon:"🍥"
-    },
-
-    {
-        id:"combo-crunchyroll-paramount",
-        name:"Crunchyroll + Paramount+",
-        price:18,
-        type:"Combo",
-        category:"combos",
-        icon:"⭐"
-    },
-
-    {
-        id:"prime-completa",
-        name:"Prime Video Conta Completa",
-        price:26,
-        type:"Privada",
-        category:"combos",
-        icon:"📺"
-    },
-
-    {
-        id:"combo-claro-sky",
-        name:"Claro Mais + Sky",
-        price:30,
-        type:"Combo",
-        category:"combos",
-        icon:"📡"
-    }
-
-];
+let carrinho = [];
 
 
-let products = loadProducts();
+/* ==========================================
+   MODAIS
+========================================== */
 
-let customers =
-    JSON.parse(localStorage.getItem("ps_customers") || "[]");
-
-let screens =
-    JSON.parse(localStorage.getItem("ps_screens") || "[]");
-
-let currentCategory = "todos";
-
-let currentCustomer = null;
-
-let selectedPurchase = null;
-
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-function loadProducts(){
-
-    const saved =
-        JSON.parse(localStorage.getItem("ps_products") || "null");
-
-    if(!Array.isArray(saved) || saved.length === 0){
-
-        localStorage.setItem(
-            "ps_products",
-            JSON.stringify(defaultProducts)
-        );
-
-        return [...defaultProducts];
-    }
-
-    return saved;
+function abrir(id){
+    document.getElementById(id).classList.add("active");
 }
 
-function saveProducts(){
-
-    localStorage.setItem(
-        "ps_products",
-        JSON.stringify(products)
-    );
-}
-
-function saveCustomers(){
-
-    localStorage.setItem(
-        "ps_customers",
-        JSON.stringify(customers)
-    );
-}
-
-function saveScreens(){
-
-    localStorage.setItem(
-        "ps_screens",
-        JSON.stringify(screens)
-    );
+function fechar(id){
+    document.getElementById(id).classList.remove("active");
 }
 
 
-/* =========================================================
-   PRODUTOS
-========================================================= */
+/* ==========================================
+   MENU PROPRIETÁRIO
+========================================== */
 
-function renderProducts(list=null){
+function abrirLoginProprietario(){
 
-    const container =
-        document.getElementById("products");
+    fechar("menuModal");
 
-    let data;
+    document.getElementById("ownerPassword").value = "";
 
-    if(list !== null){
+    abrir("ownerLoginModal");
+}
 
-        data = list;
+
+function entrarProprietario(){
+
+    const senha =
+        document.getElementById("ownerPassword").value;
+
+    if(senha === SENHA_PROPRIETARIO){
+
+        fechar("ownerLoginModal");
+
+        abrir("adminModal");
+
+        mostrarAviso("Acesso autorizado!");
 
     }else{
 
-        if(currentCategory === "todos"){
+        mostrarAviso("Senha incorreta.");
 
-            data = products;
-
-        }else{
-
-            data =
-                products.filter(
-                    p => p.category === currentCategory
-                );
-        }
     }
+}
 
-    if(!data.length){
 
-        container.innerHTML =
-            '<div class="empty">Nenhum produto encontrado.</div>';
+/* ==========================================
+   CLIENTE
+========================================== */
+
+function cadastrarCliente(){
+
+    const nome =
+        document.getElementById("clienteNome").value.trim();
+
+    const email =
+        document.getElementById("clienteEmail").value.trim();
+
+    if(!nome || !email){
+
+        mostrarAviso("Preencha nome e e-mail.");
 
         return;
     }
 
-    container.innerHTML =
-        data.map(product => `
+    localStorage.setItem("clienteNome",nome);
+    localStorage.setItem("clienteEmail",email);
 
-        <article class="product">
+    fechar("loginModal");
 
-            <div class="product-logo">
-                ${escapeHTML(product.icon || "📺")}
-            </div>
+    mostrarAviso("Cadastro realizado com sucesso!");
 
-            <h3>
-                ${escapeHTML(product.name)}
-            </h3>
+}
 
-            <div class="type">
-                ${escapeHTML(product.type)}
-            </div>
 
-            <div class="price">
-                R$ ${money(product.price)}
-                <small>/tela</small>
+/* ==========================================
+   CARRINHO
+========================================== */
+
+function adicionar(nome,preco){
+
+    carrinho.push({
+        nome:nome,
+        preco:preco
+    });
+
+    atualizarCarrinho();
+
+    mostrarAviso(nome + " adicionado ao carrinho!");
+}
+
+
+function remover(index){
+
+    carrinho.splice(index,1);
+
+    atualizarCarrinho();
+}
+
+
+function atualizarCarrinho(){
+
+    document.getElementById("cartCount").innerText =
+        carrinho.length;
+
+    const container =
+        document.getElementById("cartItems");
+
+    if(carrinho.length === 0){
+
+        container.innerHTML =
+            `<p style="color:#777;text-align:center;padding:30px">
+                Seu carrinho está vazio.
+            </p>`;
+
+        document.getElementById("cartTotal").innerText =
+            "R$ 0,00";
+
+        return;
+    }
+
+    let total = 0;
+
+    container.innerHTML = "";
+
+    carrinho.forEach((item,index)=>{
+
+        total += item.preco;
+
+        container.innerHTML += `
+
+        <div class="cart-item">
+
+            <div>
+                <b>${item.nome}</b>
+                <br>
+                <small>R$ ${item.preco.toFixed(2).replace(".",",")}</small>
             </div>
 
             <button
-                class="buy"
-                onclick="buyProduct('${product.id}')"
-            >
-                Comprar
+            onclick="remover(${index})"
+            style="
+                background:none;
+                border:0;
+                color:#ff426d;
+                font-size:20px;
+            ">
+                🗑
             </button>
 
-        </article>
-
-    `).join("");
-}
-
-
-/* =========================================================
-   COMPRA
-========================================================= */
-
-function buyProduct(id){
-
-    const product =
-        products.find(p => p.id === id);
-
-    if(!product){
-
-        showToast("Produto não encontrado.");
-
-        return;
-    }
-
-    selectedPurchase = {
-        product:product,
-        type:null
-    };
-
-    document.getElementById("buyProductInfo").innerHTML = `
-
-        <div style="
-            background:#0e0e15;
-            border:1px solid #292936;
-            padding:16px;
-            border-radius:13px;
-        ">
-
-            <strong style="font-size:19px">
-                ${escapeHTML(product.name)}
-            </strong>
-
-            <div style="color:#aaa;margin-top:7px">
-                R$ ${money(product.price)}
-            </div>
-
         </div>
-
-    `;
-
-    document.getElementById("purchaseName").value = "";
-
-    document
-        .getElementById("sharedChoice")
-        .classList.remove("selected");
-
-    document
-        .getElementById("privateChoice")
-        .classList.remove("selected");
-
-    openModal("buyModal");
-}
-
-
-function selectPurchaseType(type){
-
-    if(!selectedPurchase) return;
-
-    selectedPurchase.type = type;
-
-    document
-        .getElementById("sharedChoice")
-        .classList.toggle(
-            "selected",
-            type === "Compartilhada"
-        );
-
-    document
-        .getElementById("privateChoice")
-        .classList.toggle(
-            "selected",
-            type === "Privada"
-        );
-}
-
-
-function sendPurchaseWhatsApp(){
-
-    if(!selectedPurchase){
-
-        showToast("Escolha um produto.");
-
-        return;
-    }
-
-    if(!selectedPurchase.type){
-
-        showToast("Escolha compartilhada ou privada.");
-
-        return;
-    }
-
-    const name =
-        document
-            .getElementById("purchaseName")
-            .value
-            .trim();
-
-    if(!name){
-
-        showToast("Digite seu nome.");
-
-        return;
-    }
-
-    const product =
-        selectedPurchase.product;
-
-    const message =
-        `Olá! Meu nome é ${name}. Quero comprar ${product.name}. Tipo escolhido: ${selectedPurchase.type}. Valor informado no site: R$ ${money(product.price)}.`;
-
-    const url =
-        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
-    window.open(url,"_blank");
-
-    closeModal("buyModal");
-}
-
-
-/* =========================================================
-   CATEGORIAS
-========================================================= */
-
-function setCategory(category,button=null){
-
-    currentCategory = category;
-
-    document
-        .querySelectorAll(".tabs button")
-        .forEach(btn => btn.classList.remove("active"));
-
-    if(button){
-
-        button.classList.add("active");
-
-    }else{
-
-        document
-            .querySelectorAll(".tabs button")
-            .forEach(btn => {
-
-                const text =
-                    btn.textContent
-                    .trim()
-                    .toLowerCase();
-
-                const names = {
-                    todos:"todos",
-                    streaming:"streaming",
-                    combos:"combos",
-                    contas:"contas",
-                    ofertas:"ofertas",
-                    "mais vendidos":"mais"
-                };
-
-                if(names[text] === category){
-
-                    btn.classList.add("active");
-
-                }
-
-            });
-    }
-
-    renderProducts();
-
-    window.scrollTo({
-        top:document.querySelector(".tabs").offsetTop - 90,
-        behavior:"smooth"
-    });
-}
-
-
-/* =========================================================
-   PESQUISA
-========================================================= */
-
-function searchProducts(){
-
-    const input =
-        document.getElementById("search");
-
-    const query =
-        input.value
-        .trim()
-        .toLowerCase();
-
-    if(!query){
-
-        renderProducts();
-
-        showToast("Digite algo para pesquisar.");
-
-        return;
-    }
-
-    const result =
-        products.filter(product =>
-
-            product.name
-                .toLowerCase()
-                .includes(query)
-
-            ||
-
-            product.type
-                .toLowerCase()
-                .includes(query)
-
-            ||
-
-            product.category
-                .toLowerCase()
-                .includes(query)
-
-        );
-
-    renderProducts(result);
-
-    window.scrollTo({
-        top:document.getElementById("products").offsetTop - 100,
-        behavior:"smooth"
-    });
-
-    if(!result.length){
-
-        showToast("Nenhum produto encontrado.");
-
-    }else{
-
-        showToast(
-            `${result.length} produto(s) encontrado(s).`
-        );
-    }
-}
-
-
-document
-    .getElementById("search")
-    .addEventListener("keydown",function(event){
-
-        if(event.key === "Enter"){
-
-            event.preventDefault();
-
-            searchProducts();
-        }
-
-    });
-
-
-/* =========================================================
-   MENU
-========================================================= */
-
-function toggleMenu(event){
-
-    if(event){
-
-        event.stopPropagation();
-
-    }
-
-    document
-        .getElementById("moreMenu")
-        .classList.toggle("show");
-}
-
-
-function closeMenu(){
-
-    document
-        .getElementById("moreMenu")
-        .classList.remove("show");
-}
-
-
-document.addEventListener("click",function(event){
-
-    const wrapper =
-        document.querySelector(".more-wrapper");
-
-    if(wrapper && !wrapper.contains(event.target)){
-
-        closeMenu();
-
-    }
-
-});
-
-
-/* =========================================================
-   MODAIS
-========================================================= */
-
-function openModal(id){
-
-    const modal =
-        document.getElementById(id);
-
-    if(modal){
-
-        modal.classList.add("show");
-
-    }
-}
-
-
-function closeModal(id){
-
-    const modal =
-        document.getElementById(id);
-
-    if(modal){
-
-        modal.classList.remove("show");
-
-    }
-}
-
-
-document
-    .querySelectorAll(".modal")
-    .forEach(modal => {
-
-        modal.addEventListener("click",function(event){
-
-            if(event.target === modal){
-
-                modal.classList.remove("show");
-
-            }
-
-        });
-
-    });
-
-
-/* =========================================================
-   CLIENTE
-========================================================= */
-
-function openLogin(){
-
-    const saved =
-        localStorage.getItem("ps_current_customer");
-
-    if(saved){
-
-        try{
-
-            currentCustomer =
-                JSON.parse(saved);
-
-            renderCustomer();
-
-            openModal("customerModal");
-
-        }catch(error){
-
-            localStorage.removeItem(
-                "ps_current_customer"
-            );
-
-            openModal("loginModal");
-
-        }
-
-    }else{
-
-        openModal("loginModal");
-
-    }
-}
-
-
-function registerCustomer(){
-
-    const name =
-        document
-            .getElementById("customerName")
-            .value
-            .trim();
-
-    const email =
-        document
-            .getElementById("customerEmail")
-            .value
-            .trim();
-
-    if(!name || !email){
-
-        showToast("Preencha nome e e-mail.");
-
-        return;
-    }
-
-    let existing =
-        customers.find(
-            c =>
-                c.email &&
-                c.email.toLowerCase() ===
-                email.toLowerCase()
-        );
-
-    if(existing){
-
-        existing.name = name;
-
-        currentCustomer = existing;
-
-    }else{
-
-        currentCustomer = {
-
-            id:createId(),
-
-            name:name,
-
-            email:email
-
-        };
-
-        customers.push(currentCustomer);
-
-        saveCustomers();
-
-    }
-
-    localStorage.setItem(
-        "ps_current_customer",
-        JSON.stringify(currentCustomer)
-    );
-
-    closeModal("loginModal");
-
-    renderCustomer();
-
-    openModal("customerModal");
-
-    showToast("Conta criada com sucesso!");
-}
-
-
-function loginCustomer(event){
-
-    event.preventDefault();
-
-    const name =
-        document
-            .getElementById("customerName")
-            .value
-            .trim();
-
-    const email =
-        document
-            .getElementById("customerEmail")
-            .value
-            .trim();
-
-    let existing =
-        customers.find(
-            c =>
-                c.email &&
-                c.email.toLowerCase() ===
-                email.toLowerCase()
-        );
-
-    if(existing){
-
-        existing.name = name;
-
-        currentCustomer = existing;
-
-    }else{
-
-        currentCustomer = {
-
-            id:createId(),
-
-            name:name,
-
-            email:email
-
-        };
-
-        customers.push(currentCustomer);
-
-        saveCustomers();
-
-    }
-
-    localStorage.setItem(
-        "ps_current_customer",
-        JSON.stringify(currentCustomer)
-    );
-
-    closeModal("loginModal");
-
-    renderCustomer();
-
-    openModal("customerModal");
-
-    showToast("Login realizado!");
-}
-
-
-function logoutCustomer(){
-
-    localStorage.removeItem(
-        "ps_current_customer"
-    );
-
-    currentCustomer = null;
-
-    closeModal("customerModal");
-
-    showToast("Você saiu da conta.");
-}
-
-
-/* =========================================================
-   MINHAS TELAS
-========================================================= */
-
-function renderCustomer(){
-
-    const container =
-        document.getElementById("customerContent");
-
-    if(!currentCustomer){
-
-        container.innerHTML = `
-            <p style="color:#aaa">
-                Faça login para visualizar suas telas.
-            </p>
-        `;
-
-        return;
-    }
-
-    const myScreens =
-        screens.filter(
-            screen =>
-                screen.customerId ===
-                currentCustomer.id
-        );
-
-    let html = `
-
-        <p style="color:#aaa;margin-bottom:20px">
-            Olá, ${escapeHTML(currentCustomer.name)}!
-        </p>
-
-    `;
-
-    if(!myScreens.length){
-
-        html += `
-
-            <div class="empty">
-                Você ainda não possui telas cadastradas.
-            </div>
 
         `;
 
-    }else{
+    });
 
-        html += myScreens.map(screen => {
-
-            const product =
-                products.find(
-                    p =>
-                        p.id ===
-                        screen.productId
-                );
-
-            return `
-
-                <div class="customer-screen">
-
-                    <h3>
-                        ${escapeHTML(
-                            product
-                            ? product.name
-                            : "Tela"
-                        )}
-                    </h3>
-
-                    <p style="color:#aaa;margin-top:6px">
-                        ${
-                            product
-                            ? escapeHTML(product.type)
-                            : ""
-                        }
-                    </p>
-
-                    <div
-                        class="timer"
-                        data-expiration="${screen.expiration}"
-                    >
-                        Calculando...
-                    </div>
-
-                    <span class="status">
-                        ● Ativa
-                    </span>
-
-                </div>
-
-            `;
-
-        }).join("");
-
-    }
-
-    html += `
-
-        <button
-            class="secondary logout"
-            onclick="logoutCustomer()"
-        >
-            Sair da conta
-        </button>
-
-    `;
-
-    container.innerHTML = html;
-
-    updateTimers();
+    document.getElementById("cartTotal").innerText =
+        "R$ " + total.toFixed(2).replace(".",",");
 }
 
 
-/* =========================================================
-   PROPRIETÁRIO
-========================================================= */
+function abrirCarrinho(){
 
-function openOwner(){
+    atualizarCarrinho();
 
-    document
-        .getElementById("ownerLogin")
-        .style.display = "block";
+    abrir("cartModal");
 
-    document
-        .getElementById("ownerPanel")
-        .style.display = "none";
-
-    document
-        .getElementById("ownerPassword")
-        .value = "";
-
-    openModal("ownerModal");
 }
 
 
-function ownerLogin(event){
+/* ==========================================
+   FINALIZAÇÃO WHATSAPP
+========================================== */
 
-    event.preventDefault();
+function finalizarPedido(){
 
-    const password =
-        document
-            .getElementById("ownerPassword")
-            .value;
+    if(carrinho.length === 0){
 
-    if(password !== OWNER_PASSWORD){
-
-        showToast("Senha incorreta.");
+        mostrarAviso("Seu carrinho está vazio.");
 
         return;
     }
 
-    document
-        .getElementById("ownerLogin")
-        .style.display = "none";
+    let mensagem =
+        "Olá! Quero fazer um pedido na Alfa Streaming.%0A%0A";
 
-    document
-        .getElementById("ownerPanel")
-        .style.display = "block";
+    let total = 0;
 
-    renderAdmin();
+    carrinho.forEach(item=>{
 
-    showToast("Painel do proprietário aberto.");
-}
+        mensagem +=
+            "• " +
+            item.nome +
+            " — R$ " +
+            item.preco.toFixed(2).replace(".",",") +
+            "%0A";
 
-
-/* =========================================================
-   PAINEL
-========================================================= */
-
-function renderAdmin(){
-
-    document
-        .getElementById("statProducts")
-        .textContent =
-        products.length;
-
-    document
-        .getElementById("statCustomers")
-        .textContent =
-        customers.length;
-
-    document
-        .getElementById("statScreens")
-        .textContent =
-        screens.length;
-
-    renderAdminProducts();
-
-    renderAdminScreens();
-
-    fillScreenProducts();
-}
-
-
-function renderAdminProducts(){
-
-    const container =
-        document.getElementById("adminProducts");
-
-    if(!products.length){
-
-        container.innerHTML =
-            '<div class="empty">Nenhum produto.</div>';
-
-        return;
-    }
-
-    container.innerHTML =
-        products.map(product => `
-
-        <div class="admin-product">
-
-            <div class="admin-product-top">
-
-                <div>
-
-                    <strong>
-                        ${escapeHTML(product.name)}
-                    </strong>
-
-                    <div style="color:#999;margin-top:5px">
-                        ${escapeHTML(product.category)}
-                        · ${escapeHTML(product.type)}
-                        · R$ ${money(product.price)}
-                    </div>
-
-                </div>
-
-                <div>
-                    ${escapeHTML(product.icon || "📺")}
-                </div>
-
-            </div>
-
-            <div class="actions">
-
-                <button
-                    class="secondary"
-                    onclick="editProduct('${product.id}')"
-                >
-                    ✏️ Editar
-                </button>
-
-                <button
-                    class="secondary"
-                    onclick="openScreenForProduct('${product.id}')"
-                >
-                    ⏱️ Criar tela
-                </button>
-
-                <button
-                    class="danger"
-                    onclick="deleteProduct('${product.id}')"
-                >
-                    Excluir
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
-}
-
-
-/* =========================================================
-   EDITOR
-========================================================= */
-
-function openProductEditor(){
-
-    document
-        .getElementById("productModalTitle")
-        .textContent =
-        "Adicionar produto";
-
-    document
-        .getElementById("editProductId")
-        .value = "";
-
-    document
-        .getElementById("productName")
-        .value = "";
-
-    document
-        .getElementById("productPrice")
-        .value = "";
-
-    document
-        .getElementById("productType")
-        .value =
-        "Compartilhada / Privada";
-
-    document
-        .getElementById("productCategory")
-        .value =
-        "streaming";
-
-    document
-        .getElementById("productIcon")
-        .value =
-        "📺";
-
-    openModal("productModal");
-}
-
-
-function editProduct(id){
-
-    const product =
-        products.find(
-            p => p.id === id
-        );
-
-    if(!product) return;
-
-    document
-        .getElementById("productModalTitle")
-        .textContent =
-        "Editar produto";
-
-    document
-        .getElementById("editProductId")
-        .value =
-        product.id;
-
-    document
-        .getElementById("productName")
-        .value =
-        product.name;
-
-    document
-        .getElementById("productPrice")
-        .value =
-        product.price;
-
-    document
-        .getElementById("productType")
-        .value =
-        product.type;
-
-    document
-        .getElementById("productCategory")
-        .value =
-        product.category;
-
-    document
-        .getElementById("productIcon")
-        .value =
-        product.icon || "📺";
-
-    openModal("productModal");
-}
-
-
-function saveProduct(event){
-
-    event.preventDefault();
-
-    const id =
-        document
-            .getElementById("editProductId")
-            .value;
-
-    const data = {
-
-        name:
-            document
-                .getElementById("productName")
-                .value
-                .trim(),
-
-        price:
-            Number(
-                document
-                    .getElementById("productPrice")
-                    .value
-            ),
-
-        type:
-            document
-                .getElementById("productType")
-                .value,
-
-        category:
-            document
-                .getElementById("productCategory")
-                .value,
-
-        icon:
-            document
-                .getElementById("productIcon")
-                .value
-                .trim() || "📺"
-
-    };
-
-    if(!data.name){
-
-        showToast("Digite o nome do produto.");
-
-        return;
-    }
-
-    if(id){
-
-        const index =
-            products.findIndex(
-                p => p.id === id
-            );
-
-        if(index !== -1){
-
-            products[index] = {
-                ...products[index],
-                ...data
-            };
-
-        }
-
-    }else{
-
-        products.push({
-
-            id:createId(),
-
-            ...data
-
-        });
-
-    }
-
-    saveProducts();
-
-    closeModal("productModal");
-
-    renderProducts();
-
-    renderAdmin();
-
-    showToast("Produto salvo com sucesso!");
-}
-
-
-function deleteProduct(id){
-
-    if(!confirm("Excluir este produto?")){
-
-        return;
-    }
-
-    products =
-        products.filter(
-            p => p.id !== id
-        );
-
-    saveProducts();
-
-    renderProducts();
-
-    renderAdmin();
-
-    showToast("Produto excluído.");
-}
-
-
-/* =========================================================
-   TELAS
-========================================================= */
-
-function fillScreenProducts(){
-
-    const select =
-        document.getElementById("screenProduct");
-
-    select.innerHTML =
-        products.map(product => `
-
-            <option value="${product.id}">
-                ${escapeHTML(product.name)}
-                - ${escapeHTML(product.type)}
-            </option>
-
-        `).join("");
-}
-
-
-function openScreenForProduct(productId=null){
-
-    fillScreenProducts();
-
-    if(productId){
-
-        document
-            .getElementById("screenProduct")
-            .value =
-            productId;
-
-    }
-
-    document
-        .getElementById("screenCustomer")
-        .value = "";
-
-    const future =
-        new Date(
-            Date.now() +
-            30 * 24 * 60 * 60 * 1000
-        );
-
-    document
-        .getElementById("screenExpiration")
-        .value =
-        formatDateTimeLocal(future);
-
-    openModal("screenModal");
-}
-
-
-function saveScreen(event){
-
-    event.preventDefault();
-
-    const customerName =
-        document
-            .getElementById("screenCustomer")
-            .value
-            .trim();
-
-    const productId =
-        document
-            .getElementById("screenProduct")
-            .value;
-
-    const expiration =
-        document
-            .getElementById("screenExpiration")
-            .value;
-
-    if(
-        !customerName ||
-        !productId ||
-        !expiration
-    ){
-
-        showToast("Preencha todos os campos.");
-
-        return;
-    }
-
-    let customer =
-        customers.find(
-            c =>
-                c.name &&
-                c.name.toLowerCase() ===
-                customerName.toLowerCase()
-        );
-
-    if(!customer){
-
-        customer = {
-
-            id:createId(),
-
-            name:customerName,
-
-            email:""
-
-        };
-
-        customers.push(customer);
-
-        saveCustomers();
-
-    }
-
-    screens.push({
-
-        id:createId(),
-
-        customerId:customer.id,
-
-        productId:productId,
-
-        expiration:
-            new Date(expiration).getTime()
+        total += item.preco;
 
     });
 
-    saveScreens();
-
-    closeModal("screenModal");
-
-    renderAdmin();
-
-    if(currentCustomer){
-
-        renderCustomer();
-
-    }
-
-    showToast("Tela e cronômetro criados!");
-}
-
-
-function renderAdminScreens(){
-
-    const container =
-        document.getElementById("adminScreens");
-
-    if(!screens.length){
-
-        container.innerHTML =
-            '<div class="empty">Nenhuma tela cadastrada.</div>';
-
-        return;
-    }
-
-    container.innerHTML =
-        screens.map(screen => {
-
-            const customer =
-                customers.find(
-                    c =>
-                        c.id ===
-                        screen.customerId
-                );
-
-            const product =
-                products.find(
-                    p =>
-                        p.id ===
-                        screen.productId
-                );
-
-            return `
-
-                <div class="admin-product">
-
-                    <strong>
-                        ${escapeHTML(
-                            customer
-                            ? customer.name
-                            : "Cliente"
-                        )}
-                    </strong>
-
-                    <div style="color:#aaa;margin-top:5px">
-                        ${
-                            product
-                            ? escapeHTML(product.name)
-                            : "Produto removido"
-                        }
-                    </div>
-
-                    <div
-                        class="timer"
-                        data-expiration="${screen.expiration}"
-                    >
-                        Calculando...
-                    </div>
-
-                    <button
-                        class="danger"
-                        onclick="deleteScreen('${screen.id}')"
-                    >
-                        Excluir tela
-                    </button>
-
-                </div>
-
-            `;
-
-        }).join("");
-
-    updateTimers();
-}
-
-
-function deleteScreen(id){
-
-    if(!confirm("Excluir esta tela?")){
-
-        return;
-    }
-
-    screens =
-        screens.filter(
-            s => s.id !== id
-        );
-
-    saveScreens();
-
-    renderAdmin();
-
-    if(currentCustomer){
-
-        renderCustomer();
-
-    }
-
-    showToast("Tela excluída.");
-}
-
-
-/* =========================================================
-   CRONÔMETROS
-========================================================= */
-
-function updateTimers(){
-
-    document
-        .querySelectorAll("[data-expiration]")
-        .forEach(element => {
-
-            const expiration =
-                Number(
-                    element.dataset.expiration
-                );
-
-            const difference =
-                expiration - Date.now();
-
-            if(difference <= 0){
-
-                element.textContent =
-                    "Vencida";
-
-                element.style.color =
-                    "#ff6262";
-
-                return;
-            }
-
-            const totalSeconds =
-                Math.floor(
-                    difference / 1000
-                );
-
-            const days =
-                Math.floor(
-                    totalSeconds / 86400
-                );
-
-            const hours =
-                Math.floor(
-                    (totalSeconds % 86400) /
-                    3600
-                );
-
-            const minutes =
-                Math.floor(
-                    (totalSeconds % 3600) /
-                    60
-                );
-
-            const seconds =
-                totalSeconds % 60;
-
-            element.textContent =
-                `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
-
-        });
-}
-
-
-setInterval(function(){
-
-    updateTimers();
-
-},1000);
-
-
-/* =========================================================
-   UTILITÁRIOS
-========================================================= */
-
-function createId(){
-
-    if(
-        window.crypto &&
-        typeof window.crypto.randomUUID === "function"
-    ){
-
-        return window.crypto.randomUUID();
-
-    }
-
-    return (
-        Date.now().toString(36) +
-        Math.random().toString(36).substring(2)
+    mensagem +=
+        "%0ATotal: R$ " +
+        total.toFixed(2).replace(".",",");
+
+    window.open(
+        "https://wa.me/" +
+        WHATSAPP +
+        "?text=" +
+        mensagem,
+        "_blank"
     );
 }
 
 
-function pad(number){
+/* ==========================================
+   SUPORTE
+========================================== */
 
-    return String(number)
-        .padStart(2,"0");
+function abrirWhatsApp(){
+
+    const mensagem =
+        "Olá! Vim pelo site da Alfa Streaming e preciso de atendimento.";
+
+    window.open(
+        "https://wa.me/" +
+        WHATSAPP +
+        "?text=" +
+        encodeURIComponent(mensagem),
+        "_blank"
+    );
 }
 
 
-function money(value){
+/* ==========================================
+   SCROLL
+========================================== */
 
-    return Number(value || 0)
-        .toFixed(2)
-        .replace(".",",");
+function scrollProdutos(){
+
+    document
+        .getElementById("produtos")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
 }
 
 
-function formatDateTimeLocal(date){
+/* ==========================================
+   AVISOS
+========================================== */
 
-    const year =
-        date.getFullYear();
-
-    const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(2,"0");
-
-    const day =
-        String(
-            date.getDate()
-        ).padStart(2,"0");
-
-    const hours =
-        String(
-            date.getHours()
-        ).padStart(2,"0");
-
-    const minutes =
-        String(
-            date.getMinutes()
-        ).padStart(2,"0");
-
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-}
-
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-}
-
-
-function showToast(message){
+function mostrarAviso(texto){
 
     const toast =
         document.getElementById("toast");
 
-    toast.textContent =
-        message;
+    toast.innerText = texto;
 
     toast.classList.add("show");
 
-    clearTimeout(
-        window.toastTimer
-    );
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },2500);
 
-    window.toastTimer =
-        setTimeout(function(){
-
-            toast.classList.remove("show");
-
-        },2500);
 }
 
 
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
+/* ==========================================
+   FECHAR MODAL CLICANDO FORA
+========================================== */
 
-renderProducts();
+document.querySelectorAll(".modal").forEach(modal=>{
+
+    modal.addEventListener("click",function(e){
+
+        if(e.target === modal){
+
+            modal.classList.remove("active");
+
+        }
+
+    });
+
+});
+
+
+/* ==========================================
+   CARREGAR CARRINHO
+========================================== */
+
+atualizarCarrinho();
 
 </script>
 
